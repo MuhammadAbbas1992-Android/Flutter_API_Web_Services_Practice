@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../custom_widgets/custom_api_category_widget.dart';
 import '../custom_widgets/custom_text_widget.dart';
@@ -8,6 +11,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ApiController());
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -20,65 +24,66 @@ class HomeView extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: const Column(
+            child: Column(
               children: [
                 CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'List Users',
+                  controller: controller,
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'Single user',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'Single user not found',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'List <resource>',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'Single <resource>',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'Single <resource> not found',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'POST',
                   categoryText: 'Create',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'PUT',
                   categoryText: 'Update',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'PATCH',
                   categoryText: 'Update',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'DELETE',
                   categoryText: 'Delete',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'POST',
                   categoryText: 'Register - successful',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'POST',
                   categoryText: 'Register - unsuccessful',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'POST',
                   categoryText: 'Login - successful',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'POST',
                   categoryText: 'Login - unsuccessful',
                 ),
-                CustomAPICategoryWidget(
+                const CustomAPICategoryWidget(
                   btnText: 'GET',
                   categoryText: 'Delayed response',
                 ),
