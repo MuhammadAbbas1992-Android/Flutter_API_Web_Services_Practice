@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/custom_list_tile_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_colors_list_tile_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
+import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -20,7 +22,7 @@ class _GetListUsersState extends State<GetListUsers> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    apiController.getUserList();
+    apiController.getAllList();
   }
 
   @override
@@ -36,14 +38,19 @@ class _GetListUsersState extends State<GetListUsers> {
             ),
             body: Obx(() => apiController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
-                : Column(children: [
-                    apiController.userList.isNotEmpty
-                        ? Expanded(
-                            child: CustomListTileWidget(
-                              controller: apiController,
-                            ),
-                          )
-                        : const Center(child: Text('No users data available'))
-                  ]))));
+                : apiController.userList.isNotEmpty ||
+                        apiController.colorList.isNotEmpty
+                    ? Column(children: [
+                        Expanded(
+                          child: AppConstants.caseNo == 1
+                              ? CustomUsersListTileWidget(
+                                  controller: apiController,
+                                )
+                              : CustomColorsListTileWidget(
+                                  controller: apiController,
+                                ),
+                        )
+                      ])
+                    : const Center(child: Text('No data found')))));
   }
 }

@@ -24,6 +24,11 @@ class AppRouts {
         name: RoutNames.getSingleUser,
         page: () => const GetSingleUser(),
         transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade)
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.getSingleUserNotFound,
+        page: () => const GetSingleUser(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
   ];
 }

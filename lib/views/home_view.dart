@@ -41,20 +41,23 @@ class HomeView extends StatelessWidget {
                   categoryText: 'Single user',
                   controller: controller,
                 ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 3,
                   btnText: 'GET',
                   categoryText: 'Single user not found',
+                  controller: controller,
                 ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 4,
                   btnText: 'GET',
                   categoryText: 'List <resource>',
+                  controller: controller,
                 ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 5,
                   btnText: 'GET',
                   categoryText: 'Single <resource>',
+                  controller: controller,
                 ),
                 const CustomAPICategoryWidget(
                   caseNo: 6,

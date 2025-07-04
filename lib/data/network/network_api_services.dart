@@ -51,11 +51,20 @@ class NetworkApiServices extends BaseApiServices {
     switch (response.statusCode) {
       case 200:
         dynamic responseJson = jsonDecode(response.body);
+        print('${response.statusCode}');
         return responseJson;
       case 400:
-        throw InvalidUrlException;
+        print('${response.statusCode}');
+        throw FetchDataException('No user data found ${response.statusCode}');
+      case 401:
+        print('${response.statusCode}');
+        throw FetchDataException('Missing API key ${response.statusCode}');
+      case 404:
+        print('${response.statusCode}');
+        throw InvalidUrlException(
+            'The requested URL or resource was not found ${response.statusCode}');
       default:
-        throw FetchDataException(
+        throw RequestTimeOutException(
             'Error occurred while communicating server ${response.statusCode}');
     }
   }

@@ -10,23 +10,24 @@ class AppExceptions implements Exception {
 }
 
 class InternetException extends AppExceptions {
-  InternetException([String? message]) : super('No internet', message);
+  InternetException([String? message]) : super('InternetException: ', message);
 }
 
 class RequestTimeOutException extends AppExceptions {
   RequestTimeOutException([String? message])
-      : super('Request Time Out', message);
+      : super('RequestTimeOutException', message);
 }
 
 class ServerException extends AppExceptions {
-  ServerException([String? message]) : super('Internal Server Error', message);
+  ServerException([String? message]) : super('ServerException: ', message);
 }
 
 class FetchDataException extends AppExceptions {
   FetchDataException([String? message])
-      : super('Error while Communication', message);
+      : super('FetchDataException: ', message);
 }
 
 class InvalidUrlException extends AppExceptions {
-  InvalidUrlException([String? message]) : super('Invalid Url', message);
+  InvalidUrlException([String? message])
+      : super('InvalidUrlException: ', message);
 }

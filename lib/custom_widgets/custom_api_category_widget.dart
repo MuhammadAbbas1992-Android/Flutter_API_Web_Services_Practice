@@ -27,10 +27,19 @@ class CustomAPICategoryWidget extends StatelessWidget {
             onPressed: () {
               switch (caseNo) {
                 case 1:
-                  controller?.showGetAllUsersScreen();
+                  controller?.showGetAllUsersScreen(1);
                   break;
                 case 2:
-                  controller?.showGetSingleUserScreen();
+                  controller?.showGetSingleUserScreen(2);
+                  break;
+                case 3:
+                  controller?.showGetSingleUserScreen(3);
+                  break;
+                case 4:
+                  controller?.showGetAllUsersScreen(4);
+                  break;
+                case 5:
+                  controller?.showGetSingleUserScreen(5);
                   break;
               }
             },

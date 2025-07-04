@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
 
-class CustomListTileWidget extends StatelessWidget {
-  const CustomListTileWidget({
+class CustomUsersListTileWidget extends StatelessWidget {
+  const CustomUsersListTileWidget({
     super.key,
     required this.controller,
   });
