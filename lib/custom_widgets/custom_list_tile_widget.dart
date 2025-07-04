@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/get_list_users_controller.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
 
 class CustomListTileWidget extends StatelessWidget {
   const CustomListTileWidget({
     super.key,
     required this.controller,
   });
-  final GetListUsersController controller;
+  final ApiController controller;
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,26 @@ import 'package:http/http.dart' as http;
 
 class NetworkApiServices extends BaseApiServices {
   @override
-  Future<dynamic> getListUsers(String url) async {
+  Future<dynamic> getListUsersApi(String url) async {
+    if (kDebugMode) {
+      print(url);
+    }
+    dynamic responseJSON;
+
+    try {
+      final response =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+      responseJSON = returnResponse(response);
+    } on InternetException {
+      throw InternetException('');
+    } on RequestTimeOutException {
+      throw RequestTimeOutException('');
+    }
+    return responseJSON;
+  }
+
+  @override
+  Future<dynamic> getSingleUserApi(String url) async {
     if (kDebugMode) {
       print(url);
     }

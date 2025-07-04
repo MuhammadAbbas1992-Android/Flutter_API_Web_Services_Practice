@@ -1,4 +1,5 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
+import 'package:flutter_api_web_services_practice/views/get_single_user.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
@@ -17,6 +18,11 @@ class AppRouts {
     GetPage(
         name: RoutNames.getListUsers,
         page: () => const GetListUsers(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.getSingleUser,
+        page: () => const GetSingleUser(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade)
   ];
