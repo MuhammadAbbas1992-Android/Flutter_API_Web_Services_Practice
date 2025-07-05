@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class NetworkApiServices extends BaseApiServices {
   @override
-  Future<dynamic> getListUsersApi(String url) async {
+  Future<dynamic> getListScreenApi(String url) async {
     if (kDebugMode) {
       print(url);
     }
@@ -29,7 +29,7 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   @override
-  Future<dynamic> getSingleUserApi(String url) async {
+  Future<dynamic> getSingleScreenApi(String url) async {
     if (kDebugMode) {
       print(url);
     }
@@ -50,8 +50,8 @@ class NetworkApiServices extends BaseApiServices {
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        dynamic responseJson = jsonDecode(response.body);
         print('${response.statusCode}');
+        dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:
         print('${response.statusCode}');
@@ -64,6 +64,7 @@ class NetworkApiServices extends BaseApiServices {
         throw InvalidUrlException(
             'The requested URL or resource was not found ${response.statusCode}');
       default:
+        print('${response.statusCode}');
         throw RequestTimeOutException(
             'Error occurred while communicating server ${response.statusCode}');
     }

@@ -23,7 +23,7 @@ class ApiController extends GetxController {
     userList = [];
     colorList = [];
     isLoading.value = true;
-    await _api.getListUsersRepository().then((value) {
+    await _api.getListScreenRepository().then((value) {
       isLoading.value = false;
 
       switch (AppConstants.caseNo) {
@@ -48,14 +48,23 @@ class ApiController extends GetxController {
     singleUser = null;
     singleColor = null;
     isLoading.value = true;
-    await _api.getSingleUserRepository().then((value) {
+    await _api.getSingleScreenRepository().then((value) {
       isLoading.value = false;
       switch (AppConstants.caseNo) {
         case 2:
           singleUser = SingleUserResponseModel.fromJson(value).data;
           break;
+        case 3:
+          singleUser = SingleUserResponseModel.fromJson(value).data;
+          break;
         case 5:
           singleColor = SingleColorResponseModel.fromJson(value).data;
+          break;
+        case 6:
+          singleColor = SingleColorResponseModel.fromJson(value).data;
+          break;
+        case 7:
+          singleUser = SingleUserResponseModel.fromJson(value).data;
           break;
       }
       Get.snackbar('Success', 'Data Fetched Successfully');

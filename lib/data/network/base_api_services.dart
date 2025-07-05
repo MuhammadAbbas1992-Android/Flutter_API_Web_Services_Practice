@@ -1,4 +1,4 @@
 abstract class BaseApiServices {
-  Future<dynamic> getListUsersApi(String url);
-  Future<dynamic> getSingleUserApi(String url);
+  Future<dynamic> getListScreenApi(String url);
+  Future<dynamic> getSingleScreenApi(String url);
 }

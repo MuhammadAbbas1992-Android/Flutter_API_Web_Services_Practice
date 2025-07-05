@@ -6,28 +6,40 @@ import 'package:flutter_api_web_services_practice/res/constants/app_constants.da
 class GetRepository {
   final _apiServices = NetworkApiServices();
 
-  Future<dynamic> getListUsersRepository() async {
+  Future<dynamic> getListScreenRepository() async {
     dynamic response;
     switch (AppConstants.caseNo) {
       case 1:
-        response = _apiServices.getListUsersApi(AppUrl.getListUsersApi);
+        response = _apiServices.getListScreenApi(AppUrl.getListUsersApi);
         break;
       case 4:
-        response = _apiServices.getListUsersApi(AppUrl.getListResourceApi);
+        response = _apiServices.getListScreenApi(AppUrl.getListResourceApi);
         break;
     }
 
     return response;
   }
 
-  Future<dynamic> getSingleUserRepository() async {
+  Future<dynamic> getSingleScreenRepository() async {
     dynamic response;
     switch (AppConstants.caseNo) {
       case 2:
-        response = _apiServices.getSingleUserApi(AppUrl.getSingleApi);
+        response = _apiServices.getSingleScreenApi(AppUrl.getSingleApi);
+        break;
+      case 3:
+        response =
+            _apiServices.getSingleScreenApi(AppUrl.getSingleDataNotFoundApi);
         break;
       case 5:
-        response = _apiServices.getSingleUserApi(AppUrl.getSingleResourceApi);
+        response = _apiServices.getSingleScreenApi(AppUrl.getSingleResourceApi);
+        break;
+      case 6:
+        response = _apiServices
+            .getSingleScreenApi(AppUrl.getSingleResourceNotFoundApi);
+        break;
+      case 7:
+        response =
+            _apiServices.getSingleScreenApi(AppUrl.getDelayedResponseApi);
         break;
     }
     return response;

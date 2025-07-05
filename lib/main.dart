@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/res/routs/app_routs.dart';
-import 'package:flutter_api_web_services_practice/views/get_list_users.dart';
+import 'package:flutter_api_web_services_practice/views/get_list_screen.dart';
 import 'package:flutter_api_web_services_practice/views/home_view.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
