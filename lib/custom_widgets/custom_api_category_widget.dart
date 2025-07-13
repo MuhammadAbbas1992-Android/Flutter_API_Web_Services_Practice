@@ -28,27 +28,36 @@ class CustomAPICategoryWidget extends StatelessWidget {
               switch (caseNo) {
                 //BaseURL 'https://reqres.in'
                 case 1:
-                  controller?.showGetAllDataScreen(1);
+                  controller?.showGetAllDataScreen(caseNo);
                   break;
                 case 2:
-                  controller?.showGetSingleDataScreen(2);
+                  controller?.showGetSingleDataScreen(caseNo);
                   break;
                 case 3:
-                  controller?.showGetSingleDataNotFoundScreen(3);
+                  controller?.showGetSingleDataNotFoundScreen(caseNo);
                   break;
                 case 4:
-                  controller?.showGetAllSourceScreen(4);
+                  controller?.showGetAllSourceScreen(caseNo);
                   break;
                 case 5:
-                  controller?.showGetSingleSourceScreen(5);
+                  controller?.showGetSingleSourceScreen(caseNo);
                   break;
                 case 6:
-                  controller?.showGetSingleSourceNotFoundScreen(6);
+                  controller?.showGetSingleSourceNotFoundScreen(caseNo);
                   break;
                 case 7:
-                  controller?.showGetDelayedResponseScreen(7);
+                  controller?.showGetDelayedResponseScreen(caseNo);
                   break;
                 //BaseAPI 'https://api.restful-api.dev'
+                case 8:
+                  controller?.showGetListAllObjectsScreen(caseNo);
+                  break;
+                case 9:
+                  controller?.showGetListObjectsByIdsScreen(caseNo);
+                  break;
+                case 10:
+                  controller?.showGetSingleObjectByIdScreen(caseNo);
+                  break;
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

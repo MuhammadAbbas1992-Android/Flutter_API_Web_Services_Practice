@@ -77,6 +77,18 @@ class HomeView extends StatelessWidget {
                   categoryText: 'List of all objects',
                   controller: controller,
                 ),
+                CustomAPICategoryWidget(
+                  caseNo: 9,
+                  btnText: 'GET',
+                  categoryText: 'List of objects by Ids',
+                  controller: controller,
+                ),
+                CustomAPICategoryWidget(
+                  caseNo: 10,
+                  btnText: 'GET',
+                  categoryText: 'Single object by Id',
+                  controller: controller,
+                ),
                 const CustomAPICategoryWidget(
                   caseNo: 9,
                   btnText: 'PUT',

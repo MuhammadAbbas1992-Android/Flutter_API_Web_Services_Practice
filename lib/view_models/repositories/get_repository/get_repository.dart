@@ -15,6 +15,12 @@ class GetRepository {
       case 4:
         response = _apiServices.getListScreenApi(AppUrl.getListResourceApi);
         break;
+      case 8:
+        response = _apiServices.getListScreenApi(AppUrl.getListAllObjectsApi);
+        break;
+      case 9:
+        response = _apiServices.getListScreenApi(AppUrl.getListObjectsByIdsApi);
+        break;
     }
 
     return response;
@@ -40,6 +46,10 @@ class GetRepository {
       case 7:
         response =
             _apiServices.getSingleScreenApi(AppUrl.getDelayedResponseApi);
+        break;
+      case 10:
+        response =
+            _apiServices.getSingleScreenApi(AppUrl.getSingleObjectByIdApi);
         break;
     }
     return response;

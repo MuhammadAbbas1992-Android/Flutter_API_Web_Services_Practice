@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_colors_list_tile_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_object_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
@@ -32,25 +33,34 @@ class _GetListScreenState extends State<GetListScreen> {
             appBar: AppBar(
               title: const Center(
                   child: CustomTextWidget(
-                text: 'Get All Users',
+                text: 'Get All List',
               )),
               backgroundColor: Colors.blue.shade500,
             ),
             body: Obx(() => apiController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
                 : apiController.userList.isNotEmpty ||
-                        apiController.colorList.isNotEmpty
+                        apiController.colorList.isNotEmpty ||
+                        apiController.objectList.isNotEmpty
                     ? Column(children: [
                         Expanded(
                           child: AppConstants.caseNo == 1
                               ? CustomUsersListTileWidget(
                                   controller: apiController,
                                 )
-                              : CustomColorsListTileWidget(
-                                  controller: apiController,
-                                ),
+                              : AppConstants.caseNo == 4
+                                  ? CustomColorsListTileWidget(
+                                      controller: apiController,
+                                    )
+                                  : AppConstants.caseNo == 8 ||
+                                          AppConstants.caseNo == 9
+                                      ? CustomObjectListTileWidget(
+                                          controller: apiController,
+                                        )
+                                      : const Center(
+                                          child: Text('No data found')),
                         )
                       ])
-                    : const Center(child: Text('No data found')))));
+                    : const Center(child: Text('No data available')))));
   }
 }

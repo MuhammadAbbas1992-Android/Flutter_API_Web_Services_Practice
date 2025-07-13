@@ -1,5 +1,6 @@
 import 'package:flutter_api_web_services_practice/models/color_model.dart';
 import 'package:flutter_api_web_services_practice/models/colors_response_model.dart';
+import 'package:flutter_api_web_services_practice/models/object_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/single_color_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/single_user_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/user_model.dart';
@@ -13,8 +14,10 @@ class ApiController extends GetxController {
   RxBool isLoading = false.obs;
   List<UserModel> userList = [];
   List<ColorModel> colorList = [];
+  List<ObjectResponseModel> objectList = [];
   UserModel? singleUser;
   ColorModel? singleColor;
+  ObjectResponseModel? singleObject;
   final _api = GetRepository();
 
   ApiController();
@@ -22,6 +25,7 @@ class ApiController extends GetxController {
   void getAllList() async {
     userList = [];
     colorList = [];
+    objectList = [];
     isLoading.value = true;
     await _api.getListScreenRepository().then((value) {
       isLoading.value = false;
@@ -32,6 +36,16 @@ class ApiController extends GetxController {
           break;
         case 4:
           colorList = ColorsResponseModel.fromJson(value).data;
+          break;
+        case 8:
+          List<dynamic> list = value as List<dynamic>;
+          objectList =
+              list.map((e) => ObjectResponseModel.fromJson(e)).toList();
+          break;
+        case 9:
+          List<dynamic> list = value as List<dynamic>;
+          objectList =
+              list.map((e) => ObjectResponseModel.fromJson(e)).toList();
           break;
       }
 
@@ -47,6 +61,7 @@ class ApiController extends GetxController {
   void getSingleModel() async {
     singleUser = null;
     singleColor = null;
+    singleObject = null;
     isLoading.value = true;
     await _api.getSingleScreenRepository().then((value) {
       isLoading.value = false;
@@ -65,6 +80,11 @@ class ApiController extends GetxController {
           break;
         case 7:
           singleUser = SingleUserResponseModel.fromJson(value).data;
+          break;
+        case 10:
+          print('ABC Single Object $value');
+          singleObject = ObjectResponseModel.fromJson(value);
+          print('ABC Single Object $singleObject');
           break;
       }
       Get.snackbar('Success', 'Data Fetched Successfully');

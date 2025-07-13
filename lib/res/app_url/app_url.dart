@@ -9,4 +9,7 @@ class AppUrl {
   static const String getSingleResourceNotFoundApi = '$baseUrl/api/unknown/23';
   static const String getDelayedResponseApi = '$baseUrl/api/users?delay=3';
   static const String getListAllObjectsApi = '$baseApi/objects';
+  static const String getListObjectsByIdsApi =
+      '$baseApi/objects?id=3&id=5&id=11';
+  static const String getSingleObjectByIdApi = '$baseApi/objects/7';
 }

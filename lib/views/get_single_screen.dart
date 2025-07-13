@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_single_color_tile_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_single_object_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_single_user_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
@@ -33,17 +34,24 @@ class _GetSingleUser extends State<GetSingleScreen> {
             appBar: AppBar(
               title: const Center(
                   child: CustomTextWidget(
-                text: 'Get Single User',
+                text: 'Get Single Model',
               )),
               backgroundColor: Colors.blue.shade500,
             ),
             body: Obx(() => apiController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
                 : apiController.singleUser != null ||
-                        apiController.singleColor != null
+                        apiController.singleColor != null ||
+                        apiController.singleObject != null
                     ? AppConstants.caseNo == 2
                         ? CustomSingleUserTileWidget(controller: apiController)
-                        : CustomSingleColorTileWidget(controller: apiController)
-                    : const Center(child: Text('No data found')))));
+                        : AppConstants.caseNo == 5
+                            ? CustomSingleColorTileWidget(
+                                controller: apiController)
+                            : AppConstants.caseNo == 10
+                                ? CustomSingleObjectTileWidget(
+                                    controller: apiController)
+                                : const Center(child: Text('No data found'))
+                    : const Center(child: Text('No data available')))));
   }
 }
