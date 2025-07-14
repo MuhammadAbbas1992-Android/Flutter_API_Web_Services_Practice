@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
 
 import '../models/object_response_model.dart';
 
 class CustomSingleObjectTileWidget extends StatelessWidget {
   const CustomSingleObjectTileWidget({super.key, required this.controller});
 
-  final ApiController controller;
+  final GetApiController controller;
 
   @override
   Widget build(BuildContext context) {

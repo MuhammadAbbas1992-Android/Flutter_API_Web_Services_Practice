@@ -3,7 +3,7 @@ import 'package:flutter_api_web_services_practice/custom_widgets/custom_colors_l
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_object_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,12 +18,12 @@ class GetListScreen extends StatefulWidget {
 }
 
 class _GetListScreenState extends State<GetListScreen> {
-  final apiController = Get.find<ApiController>();
+  final getApiController = Get.find<GetApiController>();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    apiController.getAllList();
+    getApiController.getAllList();
   }
 
   @override
@@ -37,25 +37,25 @@ class _GetListScreenState extends State<GetListScreen> {
               )),
               backgroundColor: Colors.blue.shade500,
             ),
-            body: Obx(() => apiController.isLoading.value
+            body: Obx(() => getApiController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
-                : apiController.userList.isNotEmpty ||
-                        apiController.colorList.isNotEmpty ||
-                        apiController.objectList.isNotEmpty
+                : getApiController.userList.isNotEmpty ||
+                        getApiController.colorList.isNotEmpty ||
+                        getApiController.objectList.isNotEmpty
                     ? Column(children: [
                         Expanded(
                           child: AppConstants.caseNo == 1
                               ? CustomUsersListTileWidget(
-                                  controller: apiController,
+                                  controller: getApiController,
                                 )
                               : AppConstants.caseNo == 4
                                   ? CustomColorsListTileWidget(
-                                      controller: apiController,
+                                      controller: getApiController,
                                     )
                                   : AppConstants.caseNo == 8 ||
                                           AppConstants.caseNo == 9
                                       ? CustomObjectListTileWidget(
-                                          controller: apiController,
+                                          controller: getApiController,
                                         )
                                       : const Center(
                                           child: Text('No data found')),

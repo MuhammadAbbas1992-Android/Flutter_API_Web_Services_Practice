@@ -1,5 +1,6 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:flutter_api_web_services_practice/views/get_single_screen.dart';
+import 'package:flutter_api_web_services_practice/views/post_put_patch_delete_single_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
@@ -23,6 +24,11 @@ class AppRouts {
     GetPage(
         name: RoutNames.getSingleScreen,
         page: () => const GetSingleScreen(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.postPutPatchDeleteSingleScreen,
+        page: () => const PostPutPatchDeleteSingleScreen(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
   ];

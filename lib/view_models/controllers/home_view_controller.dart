@@ -52,4 +52,24 @@ class HomeViewController extends GetxController {
     AppConstants.caseNo = caseNo;
     Get.toNamed(RoutNames.getSingleScreen);
   }
+
+  void showPostSingleObjectScreen(int caseNo) {
+    AppConstants.caseNo = caseNo;
+    Get.toNamed(RoutNames.postPutPatchDeleteSingleScreen);
+  }
+
+  void showPutSingleObjectScreen(int caseNo) {
+    AppConstants.caseNo = caseNo;
+    Get.toNamed(RoutNames.postPutPatchDeleteSingleScreen);
+  }
+
+  void showPatchSingleObjectScreen(int caseNo) {
+    AppConstants.caseNo = caseNo;
+    Get.toNamed(RoutNames.postPutPatchDeleteSingleScreen);
+  }
+
+  void showDeleteSingleObjectScreen(int caseNo) {
+    AppConstants.caseNo = caseNo;
+    Get.toNamed(RoutNames.postPutPatchDeleteSingleScreen);
+  }
 }

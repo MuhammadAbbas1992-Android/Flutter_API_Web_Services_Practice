@@ -4,7 +4,7 @@ import 'package:flutter_api_web_services_practice/custom_widgets/custom_single_o
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_single_user_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -19,12 +19,12 @@ class GetSingleScreen extends StatefulWidget {
 }
 
 class _GetSingleUser extends State<GetSingleScreen> {
-  final apiController = Get.find<ApiController>();
+  final getApiController = Get.find<GetApiController>();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    apiController.getSingleModel();
+    getApiController.getSingleModel();
   }
 
   @override
@@ -38,19 +38,20 @@ class _GetSingleUser extends State<GetSingleScreen> {
               )),
               backgroundColor: Colors.blue.shade500,
             ),
-            body: Obx(() => apiController.isLoading.value
+            body: Obx(() => getApiController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
-                : apiController.singleUser != null ||
-                        apiController.singleColor != null ||
-                        apiController.singleObject != null
+                : getApiController.singleUser != null ||
+                        getApiController.singleColor != null ||
+                        getApiController.singleObject != null
                     ? AppConstants.caseNo == 2
-                        ? CustomSingleUserTileWidget(controller: apiController)
+                        ? CustomSingleUserTileWidget(
+                            controller: getApiController)
                         : AppConstants.caseNo == 5
                             ? CustomSingleColorTileWidget(
-                                controller: apiController)
+                                controller: getApiController)
                             : AppConstants.caseNo == 10
                                 ? CustomSingleObjectTileWidget(
-                                    controller: apiController)
+                                    controller: getApiController)
                                 : const Center(child: Text('No data found'))
                     : const Center(child: Text('No data available')))));
   }

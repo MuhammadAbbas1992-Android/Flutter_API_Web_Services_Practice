@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/models/object_response_model.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
 
 class CustomObjectListTileWidget extends StatelessWidget {
   const CustomObjectListTileWidget({
     super.key,
     required this.controller,
   });
-  final ApiController controller;
+  final GetApiController controller;
 
   @override
   Widget build(BuildContext context) {

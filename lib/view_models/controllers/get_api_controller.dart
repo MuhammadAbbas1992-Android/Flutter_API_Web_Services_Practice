@@ -1,6 +1,8 @@
 import 'package:flutter_api_web_services_practice/models/color_model.dart';
 import 'package:flutter_api_web_services_practice/models/colors_response_model.dart';
+import 'package:flutter_api_web_services_practice/models/delete_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/object_response_model.dart';
+import 'package:flutter_api_web_services_practice/models/post_put_patch_object_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/single_color_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/single_user_response_model.dart';
 import 'package:flutter_api_web_services_practice/models/user_model.dart';
@@ -8,9 +10,9 @@ import 'package:flutter_api_web_services_practice/res/constants/app_constants.da
 import 'package:get/get.dart';
 
 import '../../models/users_response_model.dart';
-import '../repositories/get_repository/get_repository.dart';
+import '../repositories/get_repository.dart';
 
-class ApiController extends GetxController {
+class GetApiController extends GetxController {
   RxBool isLoading = false.obs;
   List<UserModel> userList = [];
   List<ColorModel> colorList = [];
@@ -18,16 +20,17 @@ class ApiController extends GetxController {
   UserModel? singleUser;
   ColorModel? singleColor;
   ObjectResponseModel? singleObject;
-  final _api = GetRepository();
 
-  ApiController();
+  final _apiGet = GetRepository();
+
+  GetApiController();
 
   void getAllList() async {
     userList = [];
     colorList = [];
     objectList = [];
     isLoading.value = true;
-    await _api.getListScreenRepository().then((value) {
+    await _apiGet.getListScreenRepository().then((value) {
       isLoading.value = false;
 
       switch (AppConstants.caseNo) {
@@ -63,7 +66,7 @@ class ApiController extends GetxController {
     singleColor = null;
     singleObject = null;
     isLoading.value = true;
-    await _api.getSingleScreenRepository().then((value) {
+    await _apiGet.getSingleScreenRepository().then((value) {
       isLoading.value = false;
       switch (AppConstants.caseNo) {
         case 2:

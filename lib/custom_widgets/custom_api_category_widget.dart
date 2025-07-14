@@ -58,6 +58,18 @@ class CustomAPICategoryWidget extends StatelessWidget {
                 case 10:
                   controller?.showGetSingleObjectByIdScreen(caseNo);
                   break;
+                case 11:
+                  controller?.showPostSingleObjectScreen(caseNo);
+                  break;
+                case 12:
+                  controller?.showPutSingleObjectScreen(caseNo);
+                  break;
+                case 13:
+                  controller?.showPatchSingleObjectScreen(caseNo);
+                  break;
+                case 14:
+                  controller?.showDeleteSingleObjectScreen(caseNo);
+                  break;
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

@@ -10,16 +10,19 @@ class GetRepository {
     dynamic response;
     switch (AppConstants.caseNo) {
       case 1:
-        response = _apiServices.getListScreenApi(AppUrl.getListUsersApi);
+        response = await _apiServices.getListScreenApi(AppUrl.getListUsersApi);
         break;
       case 4:
-        response = _apiServices.getListScreenApi(AppUrl.getListResourceApi);
+        response =
+            await _apiServices.getListScreenApi(AppUrl.getListResourceApi);
         break;
       case 8:
-        response = _apiServices.getListScreenApi(AppUrl.getListAllObjectsApi);
+        response =
+            await _apiServices.getListScreenApi(AppUrl.getListAllObjectsApi);
         break;
       case 9:
-        response = _apiServices.getListScreenApi(AppUrl.getListObjectsByIdsApi);
+        response =
+            await _apiServices.getListScreenApi(AppUrl.getListObjectsByIdsApi);
         break;
     }
 
@@ -30,26 +33,27 @@ class GetRepository {
     dynamic response;
     switch (AppConstants.caseNo) {
       case 2:
-        response = _apiServices.getSingleScreenApi(AppUrl.getSingleApi);
+        response = await _apiServices.getSingleScreenApi(AppUrl.getSingleApi);
         break;
       case 3:
-        response =
-            _apiServices.getSingleScreenApi(AppUrl.getSingleDataNotFoundApi);
+        response = await _apiServices
+            .getSingleScreenApi(AppUrl.getSingleDataNotFoundApi);
         break;
       case 5:
-        response = _apiServices.getSingleScreenApi(AppUrl.getSingleResourceApi);
+        response =
+            await _apiServices.getSingleScreenApi(AppUrl.getSingleResourceApi);
         break;
       case 6:
-        response = _apiServices
+        response = await _apiServices
             .getSingleScreenApi(AppUrl.getSingleResourceNotFoundApi);
         break;
       case 7:
         response =
-            _apiServices.getSingleScreenApi(AppUrl.getDelayedResponseApi);
+            await _apiServices.getSingleScreenApi(AppUrl.getDelayedResponseApi);
         break;
       case 10:
-        response =
-            _apiServices.getSingleScreenApi(AppUrl.getSingleObjectByIdApi);
+        response = await _apiServices
+            .getSingleScreenApi(AppUrl.getSingleObjectByIdApi);
         break;
     }
     return response;

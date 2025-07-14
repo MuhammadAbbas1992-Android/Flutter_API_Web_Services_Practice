@@ -1,4 +1,7 @@
+import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
+
 class AppUrl {
+  //APis
   static const String baseUrl = 'https://reqres.in';
   static const String baseApi = 'https://api.restful-api.dev';
   static const String getListUsersApi = '$baseUrl/api/users?page=2';
@@ -12,4 +15,13 @@ class AppUrl {
   static const String getListObjectsByIdsApi =
       '$baseApi/objects?id=3&id=5&id=11';
   static const String getSingleObjectByIdApi = '$baseApi/objects/7';
+  static const String postSingleObject = '$baseApi/objects';
+  static String putSingleObject = '$baseApi/objects/${AppConstants.objectId}';
+  static String patchSingleObject = '$baseApi/objects/${AppConstants.objectId}';
+  static String deleteSingleObject =
+      '$baseApi/objects/${AppConstants.objectId}';
+  //Headers
+  static const Map<String, String> header = {
+    'Content-Type': 'application/json',
+  };
 }

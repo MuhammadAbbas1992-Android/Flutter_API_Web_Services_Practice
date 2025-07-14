@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/api_controller.dart';
+import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/home_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../custom_widgets/custom_api_category_widget.dart';
 import '../custom_widgets/custom_text_widget.dart';
+import '../view_models/controllers/post_put_patch_delete_api_controller.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -13,7 +15,10 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeViewController());
-    final apiController = Get.put(ApiController());
+    final getApiController = Get.put(GetApiController());
+    final postPutPatchDeleteApiController =
+        Get.put(PostPutPatchDeleteApiController());
+    AppConstants.objectId = '';
 
     return SafeArea(
       child: Scaffold(
@@ -89,40 +94,29 @@ class HomeView extends StatelessWidget {
                   categoryText: 'Single object by Id',
                   controller: controller,
                 ),
-                const CustomAPICategoryWidget(
-                  caseNo: 9,
-                  btnText: 'PUT',
-                  categoryText: 'Update',
-                ),
-                const CustomAPICategoryWidget(
-                  caseNo: 10,
-                  btnText: 'PATCH',
-                  categoryText: 'Update',
-                ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 11,
-                  btnText: 'DELETE',
-                  categoryText: 'Delete',
+                  btnText: 'POST',
+                  categoryText: 'Add object',
+                  controller: controller,
                 ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 12,
-                  btnText: 'POST',
-                  categoryText: 'Register - successful',
+                  btnText: 'PUT',
+                  categoryText: 'Update Object',
+                  controller: controller,
                 ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 13,
-                  btnText: 'POST',
-                  categoryText: 'Register - unsuccessful',
+                  btnText: 'PATCH',
+                  categoryText: 'Partially Update Object',
+                  controller: controller,
                 ),
-                const CustomAPICategoryWidget(
+                CustomAPICategoryWidget(
                   caseNo: 14,
-                  btnText: 'POST',
-                  categoryText: 'Login - successful',
-                ),
-                const CustomAPICategoryWidget(
-                  caseNo: 15,
-                  btnText: 'POST',
-                  categoryText: 'Login - unsuccessful',
+                  btnText: 'DELETE',
+                  categoryText: 'Delete Object',
+                  controller: controller,
                 ),
               ],
             ),
