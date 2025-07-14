@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/home_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/rest_api_integration_view_controller.dart';
 
 import 'custom_text_widget.dart';
 
-class CustomAPICategoryWidget extends StatelessWidget {
-  const CustomAPICategoryWidget({
+class RestApiWidget extends StatelessWidget {
+  const RestApiWidget({
     super.key,
     required this.caseNo,
     required this.btnText,
@@ -16,7 +16,7 @@ class CustomAPICategoryWidget extends StatelessWidget {
   final int caseNo;
   final String btnText;
   final String categoryText;
-  final HomeViewController? controller;
+  final RestApiIntegrationViewController? controller;
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter_api_web_services_practice/res/constants/app_constants.da
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:get/get.dart';
 
-class HomeViewController extends GetxController {
+class RestApiIntegrationViewController extends GetxController {
   void showGetAllDataScreen(int caseNo) {
     AppConstants.caseNo = caseNo;
     Get.toNamed(RoutNames.getListScreen);
