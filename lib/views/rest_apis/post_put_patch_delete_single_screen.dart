@@ -10,10 +10,8 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/get_ap
 import 'package:flutter_api_web_services_practice/view_models/controllers/post_put_patch_delete_api_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../custom_widgets/custom_text_widget.dart';
-import '../models/post_put_patch_object_response_model.dart';
+import '../../custom_widgets/custom_text_widget.dart';
 
 class PostPutPatchDeleteSingleScreen extends StatefulWidget {
   const PostPutPatchDeleteSingleScreen({super.key});

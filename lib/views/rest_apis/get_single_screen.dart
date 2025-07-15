@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../custom_widgets/custom_text_widget.dart';
+import '../../custom_widgets/custom_text_widget.dart';
 
 class GetSingleScreen extends StatefulWidget {
   const GetSingleScreen({super.key});

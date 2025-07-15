@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "663533064281",
+    "firebase_url": "https://electrohub-6dfeb-default-rtdb.firebaseio.com",
+    "project_id": "electrohub-6dfeb",
+    "storage_bucket": "electrohub-6dfeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663533064281:android:f5a3a66bf0173d7d682148",
+        "android_client_info": {
+          "package_name": "com.example.electrohub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnUzkerYuOoJzy1h0QOMO9_hJFmdenCYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663533064281:android:f75820476ee49d5f682148",
+        "android_client_info": {
+          "package_name": "com.example.flutter_api_web_services_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnUzkerYuOoJzy1h0QOMO9_hJFmdenCYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663533064281:android:a1225e79cbfde5f1682148",
+        "android_client_info": {
+          "package_name": "com.example.flutter_orixon_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnUzkerYuOoJzy1h0QOMO9_hJFmdenCYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663533064281:android:44a0a18d5286d789682148",
+        "android_client_info": {
+          "package_name": "com.example.flutter_pet_adoption"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnUzkerYuOoJzy1h0QOMO9_hJFmdenCYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663533064281:android:56033ae060af4352682148",
+        "android_client_info": {
+          "package_name": "com.example.flutter_pharmacy_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnUzkerYuOoJzy1h0QOMO9_hJFmdenCYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,12 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
-import 'package:flutter_api_web_services_practice/views/get_single_screen.dart';
+import 'package:flutter_api_web_services_practice/views/rest_apis/get_single_screen.dart';
 import 'package:flutter_api_web_services_practice/views/home_screen.dart';
-import 'package:flutter_api_web_services_practice/views/post_put_patch_delete_single_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
-import '../../views/get_list_screen.dart';
-import '../../views/rest_api_integration_view.dart';
+import '../../views/rest_apis/get_list_screen.dart';
+import '../../views/rest_apis/post_put_patch_delete_single_screen.dart';
+import '../../views/rest_apis/rest_api_integration_view.dart';
 
 class AppRouts {
   AppRouts._();

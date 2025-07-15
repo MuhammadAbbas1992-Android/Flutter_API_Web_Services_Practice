@@ -4,11 +4,9 @@ import 'package:flutter_api_web_services_practice/custom_widgets/custom_object_l
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../custom_widgets/custom_text_widget.dart';
+import '../../custom_widgets/custom_text_widget.dart';
 
 class GetListScreen extends StatefulWidget {
   const GetListScreen({super.key});

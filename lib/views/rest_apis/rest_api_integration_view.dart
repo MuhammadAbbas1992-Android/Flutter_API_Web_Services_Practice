@@ -4,9 +4,9 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/get_ap
 import 'package:flutter_api_web_services_practice/view_models/controllers/rest_api_integration_view_controller.dart';
 import 'package:get/get.dart';
 
-import '../custom_widgets/rest_api_widget.dart';
-import '../custom_widgets/custom_text_widget.dart';
-import '../view_models/controllers/post_put_patch_delete_api_controller.dart';
+import '../../custom_widgets/rest_api_widget.dart';
+import '../../custom_widgets/custom_text_widget.dart';
+import '../../view_models/controllers/post_put_patch_delete_api_controller.dart';
 
 class RestApiIntegrationView extends StatelessWidget {
   const RestApiIntegrationView({super.key});
