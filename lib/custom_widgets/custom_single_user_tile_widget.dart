@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
+
+import '../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 
 class CustomSingleUserTileWidget extends StatelessWidget {
   const CustomSingleUserTileWidget({super.key, required this.controller});

@@ -3,7 +3,7 @@ import 'package:flutter_api_web_services_practice/custom_widgets/custom_colors_l
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_object_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';

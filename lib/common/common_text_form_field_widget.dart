@@ -60,7 +60,7 @@ class CommonTextFormFieldWidget extends StatelessWidget {
           contentPadding: const EdgeInsets.only(),
           hintStyle: TextStyle(
               color: AppColors.grey,
-              fontFamily: AppFonts.interRegular,
+              fontFamily: AppFonts.poppinsRegular,
               fontSize: size),
           label: Text(customLabel!),
           enabledBorder: OutlineInputBorder(

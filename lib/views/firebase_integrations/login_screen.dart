@@ -1,6 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/common/common_row_account_widget.dart';
+import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/login_screen_controller.dart';
+import 'package:get/get.dart';
 
+import '../../common/common_button_widget.dart';
+import '../../common/common_header_widget.dart';
 import '../../common/common_text_form_field_widget.dart';
 import '../../res/app_utils.dart';
 
@@ -12,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginScreen> {
-  final loginController = Get.put(Login());
+  final loginController = Get.put(LoginScreenController());
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -39,6 +44,7 @@ class _LoginViewState extends State<LoginScreen> {
                   size: 33,
                   width: 35,
                   height: 25,
+                  headerText: 'Login',
                 ),
                 const SizedBox(
                   height: 100.0,
@@ -81,10 +87,10 @@ class _LoginViewState extends State<LoginScreen> {
                 const SizedBox(
                   height: 10.0,
                 ),
-                CommonAccountRowWidget(
+                CommonRowAccountWidget(
                   textMessage: 'Don’t have an account?',
                   textScreen: 'Sign Up',
-                  onTap: () => Get.offNamed(RoutsName.signUpView),
+                  onTap: () => Get.offNamed(RoutNames.signUpScreen),
                 ),
               ],
             ),

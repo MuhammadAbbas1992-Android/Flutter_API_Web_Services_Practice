@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
+import '../../../res/app_utils.dart';
 
 class LoginScreenController extends GetxController {
   final emailController = TextEditingController(text: 'abc123@gmail.com').obs;
@@ -9,7 +11,7 @@ class LoginScreenController extends GetxController {
   bool showSpinner = false;
   late FirebaseAuth _auth;
 
-  LoginController() {
+  LoginScreenController() {
     // print('yes called LoginController Constructor');
     _auth = FirebaseAuth.instance;
   }
@@ -29,7 +31,7 @@ class LoginScreenController extends GetxController {
           title: 'Response',
           message: 'Login successfully',
         );
-        AppUtils.toggleUserLoginStatus(emailController.value.text);
+        // AppUtils.toggleUserLoginStatus(emailController.value.text);
       }
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';

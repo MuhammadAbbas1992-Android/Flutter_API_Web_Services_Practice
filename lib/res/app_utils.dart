@@ -1,3 +1,6 @@
+import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
+import 'package:get/get.dart';
+
 class AppUtils {
   static String userEmailKey = '';
   static bool isUserLogin = false;
@@ -10,34 +13,11 @@ class AppUtils {
     print("ABC User Email Username: $userEmailKey");
   }
 
-  static toggleUserLoginStatus(String user) async {
-    if (user == 'admin@gmail.com') {
-      isUserLogin = false;
-      await SharedPreferenceServices.saveToSharedPref(userKey, user);
-      Get.offNamed(RoutsName.homeAdminView);
-    } else {
-      isUserLogin = true;
-      AppUtils.extractEmailPart(user);
-      await SharedPreferenceServices.saveToSharedPref(userKey, user);
-      Get.offNamed(RoutsName.homeView);
-    }
-  }
-
-  static selectedProduct(int index) {
-    productIndex = index;
-    Get.offNamed(RoutsName.addProductView);
-  }
-
-  static selectedProductDetail(int index) {
-    productIndex = index;
-    Get.toNamed(RoutsName.productsDetailView);
-  }
-
   static String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
       return 'Please enter email';
     } else {
-      email = email!.trim();
+      email = email.trim();
       final emailRegex = RegExp(
         r"^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})+$",
       );
@@ -92,7 +72,7 @@ class AppUtils {
   static void logout() {
     userEmailKey = '';
     isUserLogin = false;
-    SharedPreferenceServices.clearFromSharedPref(userKey);
-    navigatePage(RoutsName.loginView);
+    // SharedPreferenceServices.clearFromSharedPref(userKey);
+    navigatePage(RoutNames.loginScreen);
   }
 }

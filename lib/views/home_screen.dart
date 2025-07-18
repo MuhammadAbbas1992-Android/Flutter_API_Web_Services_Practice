@@ -5,12 +5,31 @@ import 'package:get/get.dart';
 
 import '../custom_widgets/custom_text_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final HomeScreenController homeScreenController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeScreenController = Get.put(HomeScreenController());
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    homeScreenController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final homeScreenController = Get.put(HomeScreenController());
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -22,11 +41,22 @@ class HomeScreen extends StatelessWidget {
             ),
             body: SingleChildScrollView(
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           CustomElevatedButtonWidget(
+                            btnText: 'REST API Integration',
+                            integrationType: 1,
+                            homeScreenController: homeScreenController,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomElevatedButtonWidget(
+                            btnText: 'Firebase Integration',
+                            integrationType: 2,
                             homeScreenController: homeScreenController,
                           )
                         ])))));

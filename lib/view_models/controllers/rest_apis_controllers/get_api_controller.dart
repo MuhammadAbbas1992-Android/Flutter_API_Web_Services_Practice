@@ -9,8 +9,8 @@ import 'package:flutter_api_web_services_practice/models/user_model.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:get/get.dart';
 
-import '../../models/users_response_model.dart';
-import '../repositories/get_repository.dart';
+import '../../../models/users_response_model.dart';
+import '../../repositories/get_repository.dart';
 
 class GetApiController extends GetxController {
   RxBool isLoading = false.obs;

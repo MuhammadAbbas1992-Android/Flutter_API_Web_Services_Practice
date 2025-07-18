@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {
   openRestApiIntegrationView() {
-    Get.toNamed(RoutNames.restApiIntegrationView);
+    Get.toNamed(RoutNames.restApiIntegrationScreen);
+  }
+
+  openFirebaseIntegrationView() {
+    Get.toNamed(RoutNames.firebaseIntegrationScreen);
   }
 }

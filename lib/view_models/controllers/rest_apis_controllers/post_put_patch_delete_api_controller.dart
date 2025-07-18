@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
-import '../../models/delete_response_model.dart';
-import '../../models/post_put_patch_object_response_model.dart';
-import '../../res/constants/app_constants.dart';
-import '../repositories/delete_repository.dart';
-import '../repositories/patch_repository.dart';
-import '../repositories/post_repository.dart';
-import '../repositories/put_repository.dart';
+import '../../../models/delete_response_model.dart';
+import '../../../models/post_put_patch_object_response_model.dart';
+import '../../../res/constants/app_constants.dart';
+import '../../repositories/delete_repository.dart';
+import '../../repositories/patch_repository.dart';
+import '../../repositories/post_repository.dart';
+import '../../repositories/put_repository.dart';
 
 class PostPutPatchDeleteApiController extends GetxController {
   RxBool isLoading = false.obs;
@@ -34,19 +34,15 @@ class PostPutPatchDeleteApiController extends GetxController {
       isLoading.value = false;
       switch (AppConstants.caseNo) {
         case 11:
-          print('ABC POST $value');
           postPutPatchResponse =
               PostPutPatchObjectResponseModel.fromJson(value);
           AppConstants.objectId = postPutPatchResponse!.id;
-          print('ABC POST $postPutPatchResponse');
           break;
       }
-      print('ABC POST ${AppConstants.objectId}');
       Get.snackbar('Success', 'Data posted Successfully');
     }).onError(
       (error, stackTrace) {
         isLoading.value = false;
-        print('ABC POST ${error.toString()}');
         Get.snackbar('Error', error.toString());
       },
     );
@@ -69,18 +65,14 @@ class PostPutPatchDeleteApiController extends GetxController {
       isLoading.value = false;
       switch (AppConstants.caseNo) {
         case 12:
-          print('ABC PUT $value');
           postPutPatchResponse =
               PostPutPatchObjectResponseModel.fromJson(value);
-          print('ABC PUT $postPutPatchResponse');
           break;
       }
-      print('ABC PUT ${AppConstants.objectId}');
       Get.snackbar('Success', 'Data updated Successfully');
     }).onError(
       (error, stackTrace) {
         isLoading.value = false;
-        print('ABC PUT ${error.toString()}');
         Get.snackbar('Error', error.toString());
       },
     );
@@ -98,18 +90,14 @@ class PostPutPatchDeleteApiController extends GetxController {
       isLoading.value = false;
       switch (AppConstants.caseNo) {
         case 13:
-          print('ABC PATCH $value');
           postPutPatchResponse =
               PostPutPatchObjectResponseModel.fromJson(value);
-          print('ABC PATCH $postPutPatchResponse');
           break;
       }
-      print('ABC PATCH ${AppConstants.objectId}');
       Get.snackbar('Success', 'Data partially updated Successfully');
     }).onError(
       (error, stackTrace) {
         isLoading.value = false;
-        print('ABC PATCH ${error.toString()}');
         Get.snackbar('Error', error.toString());
       },
     );
@@ -123,9 +111,7 @@ class PostPutPatchDeleteApiController extends GetxController {
       isLoading.value = false;
       switch (AppConstants.caseNo) {
         case 14:
-          print('ABC DELETE $deleteResponse');
           deleteResponse = DeleteResponseModel.fromJson(value);
-          print('ABC DELETE $deleteResponse');
           AppConstants.objectId = '';
           break;
       }
@@ -133,7 +119,6 @@ class PostPutPatchDeleteApiController extends GetxController {
     }).onError(
       (error, stackTrace) {
         isLoading.value = false;
-        print('ABC DELETE ${error.toString()}');
         Get.snackbar('Error', error.toString());
       },
     );

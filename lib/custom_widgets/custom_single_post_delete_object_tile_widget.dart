@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/get_api_controller.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/post_put_patch_delete_api_controller.dart';
 
-import '../models/object_response_model.dart';
+import '../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 
 class CustomSinglePostDeleteObjectTileWidget extends StatelessWidget {
   const CustomSinglePostDeleteObjectTileWidget(

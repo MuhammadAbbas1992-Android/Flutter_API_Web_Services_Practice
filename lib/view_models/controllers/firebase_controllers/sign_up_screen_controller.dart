@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
+import '../../../res/app_utils.dart';
+import '../../../res/routs/rout_names.dart';
 
 class SignUpScreenController extends GetxController {
   final emailController = TextEditingController(text: 'admin123@gmail.com').obs;
@@ -29,7 +32,7 @@ class SignUpScreenController extends GetxController {
         AppUtils.mySnackBar(
             title: 'Response', message: 'New user created successfully');
         AppUtils.extractEmailPart(emailController.value.text);
-        Get.offNamed(RoutsName.homeView);
+        Get.offNamed(RoutNames.homeScreen);
       } else {
         AppUtils.mySnackBar(
             title: 'Response', message: 'Error occurred for creating new user');

@@ -1,9 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/common/common_row_account_widget.dart';
+import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../../view_models/controllers/sign_up_screen_controller.dart';
+import '../../common/common_button_widget.dart';
+import '../../common/common_header_widget.dart';
+import '../../common/common_text_form_field_widget.dart';
+import '../../res/app_utils.dart';
+import '../../view_models/controllers/firebase_controllers/sign_up_screen_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -35,10 +39,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 150.0,
                 ),
-                CustomHeaderWidget(
+                const CustomHeaderWidget(
                   size: 33,
                   width: 35,
                   height: 25,
+                  headerText: 'Sign Up',
                 ),
                 const SizedBox(
                   height: 100.0,
@@ -97,10 +102,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 10.0,
                 ),
-                CommonAccountRowWidget(
+                CommonRowAccountWidget(
                   textMessage: 'Already have an account? ',
                   textScreen: 'Sign In',
-                  onTap: () => Get.offNamed(RoutsName.loginView),
+                  onTap: () => Get.offNamed(RoutNames.loginScreen),
                 ),
               ],
             ),

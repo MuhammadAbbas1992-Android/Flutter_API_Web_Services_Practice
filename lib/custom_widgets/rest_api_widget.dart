@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/rest_api_integration_view_controller.dart';
-
+import '../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
 import 'custom_text_widget.dart';
 
 class RestApiWidget extends StatelessWidget {
