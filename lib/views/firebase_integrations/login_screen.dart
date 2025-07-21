@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/common/common_row_account_widget.dart';
+import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/login_screen_controller.dart';
 import 'package:get/get.dart';
@@ -17,14 +18,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginScreen> {
-  final loginController = Get.put(LoginScreenController());
+  late final LoginScreenController loginScreenController;
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginScreenController = Get.put(LoginScreenController());
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    loginController.dispose();
     super.dispose();
+    loginScreenController.dispose();
   }
 
   @override
@@ -57,7 +65,7 @@ class _LoginViewState extends State<LoginScreen> {
                         hint: 'Email Address',
                         customLabel: 'Email',
                         prefixIcon: 'assets/icons/ic_email.svg',
-                        controller: loginController.emailController.value,
+                        controller: loginScreenController.emailController.value,
                         validator: (value) => AppUtils.validateEmail(value),
                         keyboardType: TextInputType.emailAddress,
                       ),
@@ -68,7 +76,8 @@ class _LoginViewState extends State<LoginScreen> {
                         hint: 'Password',
                         customLabel: 'Password',
                         prefixIcon: 'assets/icons/ic_password.svg',
-                        controller: loginController.passwordController.value,
+                        controller:
+                            loginScreenController.passwordController.value,
                         validator: (value) => AppUtils.validatePassword(value),
                         obscure: true,
                       ),
@@ -78,11 +87,18 @@ class _LoginViewState extends State<LoginScreen> {
                 const SizedBox(
                   height: 40.0,
                 ),
-                CommonButtonWidget(
-                  text: 'Sign In',
-                  onTap: () => _formKey.currentState!.validate()
-                      ? loginController.loginUser()
-                      : null,
+                Obx(
+                  () => loginScreenController.isLogining.value
+                      ? const CircularProgressIndicator(
+                          color: AppColors.pink,
+                          strokeWidth: 6,
+                        )
+                      : CommonButtonWidget(
+                          text: 'Sign In',
+                          onTap: () => _formKey.currentState!.validate()
+                              ? loginScreenController.loginUser()
+                              : null,
+                        ),
                 ),
                 const SizedBox(
                   height: 10.0,

@@ -10,34 +10,31 @@ class SignUpScreenController extends GetxController {
   final passwordController = TextEditingController(text: '123456').obs;
   final confirmPasswordController = TextEditingController(text: '123456').obs;
 
-  bool showSpinner = false;
   late FirebaseAuth _auth;
+  RxBool isSigning = false.obs;
 
   SignUpScreenController() {
     // print('yes called SignUpController Constructor');
     _auth = FirebaseAuth.instance;
   }
 
-  RxBool loading = false.obs;
-
-  void validateEmail() {}
-
   void signUpUser() async {
+    isSigning.value = true;
     try {
       UserCredential newUser = await _auth.createUserWithEmailAndPassword(
           email: emailController.value.text,
           password: passwordController.value.text);
-      if (newUser != null) {
-        print('NewUser $newUser');
+
+      isSigning.value = false;
+      if (newUser.user != null) {
         AppUtils.mySnackBar(
             title: 'Response', message: 'New user created successfully');
-        AppUtils.extractEmailPart(emailController.value.text);
-        Get.offNamed(RoutNames.homeScreen);
       } else {
         AppUtils.mySnackBar(
             title: 'Response', message: 'Error occurred for creating new user');
       }
     } on FirebaseAuthException catch (e) {
+      isSigning.value = false;
       String errorMessage = '';
 
       // Check the error code and set specific messages
@@ -62,12 +59,6 @@ class SignUpScreenController extends GetxController {
       AppUtils.mySnackBar(
         title: 'Error',
         message: errorMessage,
-      );
-    } catch (e) {
-      // Catch any other errors that are not FirebaseAuthException
-      AppUtils.mySnackBar(
-        title: 'Error',
-        message: 'An error occurred: ${e.toString()}',
       );
     }
   }

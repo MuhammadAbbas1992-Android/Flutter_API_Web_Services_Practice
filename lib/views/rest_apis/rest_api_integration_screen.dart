@@ -17,15 +17,18 @@ class RestApiIntegrationScreen extends StatefulWidget {
 }
 
 class _RestApiIntegrationScreenState extends State<RestApiIntegrationScreen> {
-  late final RestApiIntegrationViewController controller;
+  late final RestApiIntegrationViewController restApiIntegrationController;
+  late final GetApiController getApiController;
+  late final PostPutPatchDeleteApiController postPutPatchDeleteApiController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = Get.put(RestApiIntegrationViewController());
-    Get.put(GetApiController());
-    Get.put(PostPutPatchDeleteApiController());
+    restApiIntegrationController = Get.put(RestApiIntegrationViewController());
+    getApiController = Get.put(GetApiController());
+    postPutPatchDeleteApiController =
+        Get.put(PostPutPatchDeleteApiController());
     AppConstants.objectId = '';
   }
 
@@ -33,6 +36,9 @@ class _RestApiIntegrationScreenState extends State<RestApiIntegrationScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    restApiIntegrationController.dispose();
+    getApiController.dispose();
+    postPutPatchDeleteApiController.dispose();
   }
 
   @override
@@ -55,85 +61,85 @@ class _RestApiIntegrationScreenState extends State<RestApiIntegrationScreen> {
                   caseNo: 1,
                   btnText: 'GET',
                   categoryText: 'List Users',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 2,
                   btnText: 'GET',
                   categoryText: 'Single user',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 3,
                   btnText: 'GET',
                   categoryText: 'Single user not found',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 4,
                   btnText: 'GET',
                   categoryText: 'List <resource>',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 5,
                   btnText: 'GET',
                   categoryText: 'Single <resource>',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 6,
                   btnText: 'GET',
                   categoryText: 'Single <resource> not found',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 7,
                   btnText: 'GET',
                   categoryText: 'Delayed response',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 8,
                   btnText: 'GET',
                   categoryText: 'List of all objects',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 9,
                   btnText: 'GET',
                   categoryText: 'List of objects by Ids',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 10,
                   btnText: 'GET',
                   categoryText: 'Single object by Id',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 11,
                   btnText: 'POST',
                   categoryText: 'Add object',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 12,
                   btnText: 'PUT',
                   categoryText: 'Update Object',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 13,
                   btnText: 'PATCH',
                   categoryText: 'Partially Update Object',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
                 RestApiWidget(
                   caseNo: 14,
                   btnText: 'DELETE',
                   categoryText: 'Delete Object',
-                  controller: controller,
+                  controller: restApiIntegrationController,
                 ),
               ],
             ),

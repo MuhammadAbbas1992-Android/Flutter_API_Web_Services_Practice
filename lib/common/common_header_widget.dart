@@ -18,24 +18,11 @@ class CustomHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          'assets/icons/ic_laptop.svg',
-          width: width,
-          height: height,
-        ),
-        const SizedBox(
-          width: 5.0,
-        ),
-        CommonTextWidget(
-          text: headerText,
-          size: size,
-          fontWeight: FontWeight.bold,
-          fontFamily: AppFonts.poppinsRegular,
-        ),
-      ],
+    return CommonTextWidget(
+      text: headerText,
+      size: size,
+      fontWeight: FontWeight.bold,
+      fontFamily: AppFonts.poppinsRegular,
     );
   }
 }

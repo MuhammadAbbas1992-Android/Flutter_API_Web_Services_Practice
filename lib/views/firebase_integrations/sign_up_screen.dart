@@ -7,6 +7,7 @@ import '../../common/common_button_widget.dart';
 import '../../common/common_header_widget.dart';
 import '../../common/common_text_form_field_widget.dart';
 import '../../res/app_utils.dart';
+import '../../res/constants/app_colors.dart';
 import '../../view_models/controllers/firebase_controllers/sign_up_screen_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -17,13 +18,21 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final signUpController = Get.put(SignUpScreenController());
+  late final SignUpScreenController signUpScreenController;
   final _formKeys = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    signUpScreenController = Get.put(SignUpScreenController());
+  }
+
+  @override
   void dispose() {
-    signUpController.dispose();
+    // TODO: implement dispose
     super.dispose();
+    signUpScreenController.dispose();
   }
 
   @override
@@ -56,7 +65,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           hint: 'Email Address',
                           customLabel: 'Email',
                           prefixIcon: 'assets/icons/ic_email.svg',
-                          controller: signUpController.emailController.value,
+                          controller:
+                              signUpScreenController.emailController.value,
                           validator: (value) => AppUtils.validateEmail(value),
                           keyboardType: TextInputType.emailAddress,
                         ),
@@ -67,7 +77,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           hint: 'Password',
                           customLabel: 'Password',
                           prefixIcon: 'assets/icons/ic_password.svg',
-                          controller: signUpController.passwordController.value,
+                          controller:
+                              signUpScreenController.passwordController.value,
                           validator: (value) =>
                               AppUtils.validatePassword(value),
                           obscure: true,
@@ -79,12 +90,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           hint: 'Confirm Password',
                           customLabel: 'Confirm Password',
                           prefixIcon: 'assets/icons/ic_password.svg',
-                          controller:
-                              signUpController.confirmPasswordController.value,
+                          controller: signUpScreenController
+                              .confirmPasswordController.value,
                           validator: (value) =>
                               AppUtils.validateConfirmPassword(
                                   value,
-                                  signUpController
+                                  signUpScreenController
                                       .passwordController.value.text),
                           obscure: true,
                         ),
@@ -93,11 +104,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 40.0,
                 ),
-                CommonButtonWidget(
-                  text: 'Sign Up',
-                  onTap: () => _formKeys.currentState!.validate()
-                      ? signUpController.signUpUser()
-                      : null,
+                Obx(
+                  () => signUpScreenController.isSigning.value
+                      ? const CircularProgressIndicator(
+                          color: AppColors.pink,
+                          strokeWidth: 6,
+                        )
+                      : CommonButtonWidget(
+                          text: 'Sign Up',
+                          onTap: () => _formKeys.currentState!.validate()
+                              ? signUpScreenController.signUpUser()
+                              : null,
+                        ),
                 ),
                 const SizedBox(
                   height: 10.0,

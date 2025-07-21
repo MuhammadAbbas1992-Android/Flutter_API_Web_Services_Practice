@@ -8,24 +8,22 @@ class LoginScreenController extends GetxController {
   final emailController = TextEditingController(text: 'abc123@gmail.com').obs;
   final passwordController = TextEditingController(text: '123456').obs;
 
-  bool showSpinner = false;
   late FirebaseAuth _auth;
+  RxBool isLogining = false.obs;
 
   LoginScreenController() {
     // print('yes called LoginController Constructor');
     _auth = FirebaseAuth.instance;
   }
 
-  RxBool loading = false.obs;
-
-  void validateEmail() {}
-
   void loginUser() async {
+    isLogining.value = true;
     try {
       UserCredential newUser = await _auth.signInWithEmailAndPassword(
         email: emailController.value.text,
         password: passwordController.value.text,
       );
+      isLogining.value = false;
       if (newUser.user != null) {
         AppUtils.mySnackBar(
           title: 'Response',
@@ -34,6 +32,7 @@ class LoginScreenController extends GetxController {
         // AppUtils.toggleUserLoginStatus(emailController.value.text);
       }
     } on FirebaseAuthException catch (e) {
+      isLogining.value = false;
       String errorMessage = '';
 
       // Check the error code and set specific messages
@@ -60,12 +59,6 @@ class LoginScreenController extends GetxController {
       AppUtils.mySnackBar(
         title: 'Error',
         message: errorMessage,
-      );
-    } catch (e) {
-      // Catch any other errors that are not FirebaseAuthException
-      AppUtils.mySnackBar(
-        title: 'Error',
-        message: 'An error occurred: ${e.toString()}',
       );
     }
   }
