@@ -32,6 +32,9 @@ class FirebaseIntegrationWidget extends StatelessWidget {
                 case 2:
                   controller?.showSignUpScreen(caseNo);
                   break;
+                case 3:
+                  controller?.showSigninEmailLinkScreen(caseNo);
+                  break;
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

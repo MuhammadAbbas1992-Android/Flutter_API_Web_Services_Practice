@@ -5,20 +5,21 @@ import 'package:get/get.dart';
 import '../../../res/app_utils.dart';
 
 class LoginScreenController extends GetxController {
-  final emailController = TextEditingController(text: 'abc123@gmail.com').obs;
+  final emailController =
+      TextEditingController(text: 'g.abbas1992developer@gmail.com').obs;
   final passwordController = TextEditingController(text: '123456').obs;
 
   late FirebaseAuth _auth;
   RxBool isLogining = false.obs;
 
   LoginScreenController() {
-    // print('yes called LoginController Constructor');
     _auth = FirebaseAuth.instance;
   }
 
   void loginUser() async {
     isLogining.value = true;
     try {
+      // electrohub.page.link
       UserCredential newUser = await _auth.signInWithEmailAndPassword(
         email: emailController.value.text,
         password: passwordController.value.text,

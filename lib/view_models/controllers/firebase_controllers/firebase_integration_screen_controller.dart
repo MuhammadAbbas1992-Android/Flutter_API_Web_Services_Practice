@@ -13,4 +13,9 @@ class FirebaseIntegrationScreenController extends GetxController {
     AppConstants.caseNo = caseNo;
     Get.toNamed(RoutNames.signUpScreen);
   }
+
+  void showSigninEmailLinkScreen(int caseNo) {
+    AppConstants.caseNo = caseNo;
+    Get.toNamed(RoutNames.signinWithEmailLinkScreen);
+  }
 }

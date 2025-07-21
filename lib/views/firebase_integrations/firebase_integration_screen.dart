@@ -61,6 +61,12 @@ class _FirebaseIntegrationScreenState extends State<FirebaseIntegrationScreen> {
                   categoryText: 'Sing up user',
                   controller: firebaseIntegrationScreenController,
                 ),
+                FirebaseIntegrationWidget(
+                  caseNo: 3,
+                  btnText: 'Sing in with email link',
+                  categoryText: 'Sing in with email link',
+                  controller: firebaseIntegrationScreenController,
+                ),
               ],
             ),
           ),

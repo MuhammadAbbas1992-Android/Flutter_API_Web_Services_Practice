@@ -13,4 +13,6 @@ class RoutNames {
       '/firebase_integration_screen';
   static const String loginScreen = '/login_screen';
   static const String signUpScreen = '/sign_up_screen';
+  static const String signinWithEmailLinkScreen =
+      '/signin_with_email_link_screen';
 }
