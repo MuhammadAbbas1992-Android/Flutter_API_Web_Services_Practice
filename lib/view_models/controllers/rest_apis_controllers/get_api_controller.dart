@@ -85,9 +85,7 @@ class GetApiController extends GetxController {
           singleUser = SingleUserResponseModel.fromJson(value).data;
           break;
         case 10:
-          print('ABC Single Object $value');
           singleObject = ObjectResponseModel.fromJson(value);
-          print('ABC Single Object $singleObject');
           break;
       }
       Get.snackbar('Success', 'Data Fetched Successfully');

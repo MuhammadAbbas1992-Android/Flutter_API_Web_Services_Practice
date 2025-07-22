@@ -1,5 +1,6 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_integrations/signin_with_email_link_screen.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_integrations/welcome_screen.dart';
 import 'package:flutter_api_web_services_practice/views/rest_apis/get_single_screen.dart';
 import 'package:flutter_api_web_services_practice/views/home_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -61,6 +62,11 @@ class AppRouts {
     GetPage(
         name: RoutNames.signinWithEmailLinkScreen,
         page: () => const SigninWithEmailLinkScreen(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.welcomeScreen,
+        page: () => const WelcomeScreen(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
   ];

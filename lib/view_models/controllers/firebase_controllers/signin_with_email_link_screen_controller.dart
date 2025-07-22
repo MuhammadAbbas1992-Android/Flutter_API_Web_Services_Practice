@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:get/get.dart';
 
 import '../../../res/app_utils.dart';
@@ -36,9 +38,11 @@ class SigninWithEmailLinkScreenController extends GetxController {
 
       isLogining.value = false;
       AppUtils.mySnackBar(title: 'Message', message: 'Link sent to your email');
+      Get.offNamed(RoutNames.welcomeScreen);
     } catch (e) {
       isLogining.value = false;
       AppUtils.mySnackBar(title: 'Error', message: 'sending sign-in link: $e');
+      Get.offNamed(RoutNames.welcomeScreen);
     }
   }
 }

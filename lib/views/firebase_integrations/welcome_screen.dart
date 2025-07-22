@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/welcome_screen_controller.dart';
+import 'package:get/get.dart';
+
+import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/app_utils.dart';
+
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with WidgetsBindingObserver {
+  late final WelcomeScreenController welcomeScreenController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addObserver(this); // Register lifecycle observer
+    welcomeScreenController = Get.put(WelcomeScreenController());
+    /*print("ABC in initState");
+    welcomeScreenController.handleDynamicLink(
+        context: context, fromColdState: false);*/
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        AppUtils.mySnackBar(
+            title: 'LifeCycleStatus', message: 'WelcomeController resumed');
+        welcomeScreenController.handleDynamicLink(
+            context: context, fromColdState: false);
+        break;
+      case AppLifecycleState.inactive:
+        AppUtils.mySnackBar(
+            title: 'LifeCycleStatus', message: 'WelcomeController inactive');
+        break;
+      case AppLifecycleState.paused:
+        AppUtils.mySnackBar(
+            title: 'LifeCycleStatus', message: 'WelcomeController paused');
+        break;
+      case AppLifecycleState.detached:
+        AppUtils.mySnackBar(
+            title: 'LifeCycleStatus', message: 'WelcomeController detached');
+        break;
+      case AppLifecycleState.hidden:
+        AppUtils.mySnackBar(
+            title: 'LifeCycleStatus', message: 'WelcomeController hidden');
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    welcomeScreenController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+              child: CustomTextWidget(
+            text: 'Welcome Screen',
+          )),
+          backgroundColor: Colors.blue.shade500,
+        ),
+        body: const SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Center(
+              child: CustomTextWidget(
+                text: 'Welcome Screen',
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

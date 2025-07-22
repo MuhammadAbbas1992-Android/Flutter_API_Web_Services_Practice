@@ -9,8 +9,7 @@ class AppUtils {
   static extractEmailPart(String email) {
     // Split the email using '@' as the delimiter
     userEmailKey = email.split('@')[0];
-
-    print("ABC User Email Username: $userEmailKey");
+    // print("ABC User Email Username: $userEmailKey");
   }
 
   static String? validateEmail(String? email) {

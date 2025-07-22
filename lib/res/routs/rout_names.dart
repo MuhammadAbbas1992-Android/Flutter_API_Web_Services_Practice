@@ -15,4 +15,5 @@ class RoutNames {
   static const String signUpScreen = '/sign_up_screen';
   static const String signinWithEmailLinkScreen =
       '/signin_with_email_link_screen';
+  static const String welcomeScreen = '/welcome_screen';
 }

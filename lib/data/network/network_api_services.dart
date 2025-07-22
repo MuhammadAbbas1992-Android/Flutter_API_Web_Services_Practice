@@ -141,14 +141,14 @@ class NetworkApiServices extends BaseApiServices {
       case 200:
         print('${response.statusCode}');
         dynamic responseJson = jsonDecode(response.body);
-        debugPrint('ABC Success: $responseJson');
-        debugPrint('ABC Response: ${response.body}');
+        // debugPrint('ABC Success: $responseJson');
+        // debugPrint('ABC Response: ${response.body}');
         return responseJson;
       case 404:
         print('${response.statusCode}');
         dynamic responseJson = jsonDecode(response.body);
-        debugPrint('ABC Error: $responseJson');
-        debugPrint('ABC Error: ${response.body}');
+        // debugPrint('ABC Error: $responseJson');
+        // debugPrint('ABC Error: ${response.body}');
         return responseJson;
       case 400:
         print('${response.statusCode}');
