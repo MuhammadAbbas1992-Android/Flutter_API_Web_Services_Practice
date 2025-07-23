@@ -50,8 +50,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const CustomHeaderWidget(
                   size: 33,
-                  width: 35,
-                  height: 25,
                   headerText: 'Sign Up',
                 ),
                 const SizedBox(

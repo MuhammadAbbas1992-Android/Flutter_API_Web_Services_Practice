@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../res/app_utils.dart';
+import '../../../res/routs/rout_names.dart';
 
 class LoginScreenController extends GetxController {
   final emailController =
@@ -30,6 +31,7 @@ class LoginScreenController extends GetxController {
           title: 'Response',
           message: 'Login successfully',
         );
+        Get.offNamed(RoutNames.welcomeScreen);
         // AppUtils.toggleUserLoginStatus(emailController.value.text);
       }
     } on FirebaseAuthException catch (e) {
@@ -61,6 +63,15 @@ class LoginScreenController extends GetxController {
         title: 'Error',
         message: errorMessage,
       );
+    }
+  }
+
+  Future<void> forgotOrResetPassword() async {
+    if (await Get.toNamed(RoutNames.forgotResetPasswordScreen)) {
+      AppUtils.mySnackBar(
+          title: 'Message',
+          message:
+              'Password rest Link sent to your provided email address, Please check your email');
     }
   }
 }

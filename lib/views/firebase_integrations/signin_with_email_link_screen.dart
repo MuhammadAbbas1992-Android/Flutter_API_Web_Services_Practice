@@ -52,9 +52,7 @@ class _SigninWithEmailLinkScreenState extends State<SigninWithEmailLinkScreen> {
                   height: 150.0,
                 ),
                 const CustomHeaderWidget(
-                  size: 33,
-                  width: 35,
-                  height: 25,
+                  size: 25,
                   headerText: 'Send signin link to email',
                 ),
                 const SizedBox(

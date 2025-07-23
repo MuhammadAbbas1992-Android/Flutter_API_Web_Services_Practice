@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/welcome_screen_controller.dart';
 import 'package:get/get.dart';
 
+import '../../common/common_header_widget.dart';
 import '../../custom_widgets/custom_text_widget.dart';
 import '../../res/app_utils.dart';
 
@@ -80,9 +81,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Center(
-              child: CustomTextWidget(
-                text: 'Welcome Screen',
-                color: Colors.black,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomHeaderWidget(
+                    size: 33,
+                    headerText: 'Welcome Screen',
+                  ),
+                ],
               ),
             ),
           ),

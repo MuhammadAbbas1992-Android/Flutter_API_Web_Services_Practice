@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/common/common_row_account_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/login_screen_controller.dart';
@@ -50,8 +51,6 @@ class _LoginViewState extends State<LoginScreen> {
                 ),
                 const CustomHeaderWidget(
                   size: 33,
-                  width: 35,
-                  height: 25,
                   headerText: 'Login',
                 ),
                 const SizedBox(
@@ -82,6 +81,19 @@ class _LoginViewState extends State<LoginScreen> {
                         obscure: true,
                       ),
                     ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                InkWell(
+                  onTap: () => loginScreenController.forgotOrResetPassword(),
+                  child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: CustomTextWidget(
+                      text: 'Forgot/Reset Password',
+                      color: AppColors.pink,
+                    ),
                   ),
                 ),
                 const SizedBox(

@@ -6,15 +6,9 @@ import 'common_text_widget.dart';
 
 class CustomHeaderWidget extends StatelessWidget {
   final double? size;
-  final double? height;
-  final double? width;
   final String headerText;
   const CustomHeaderWidget(
-      {super.key,
-      this.size = 16,
-      this.height = 17,
-      this.width = 24,
-      required this.headerText});
+      {super.key, this.size = 16, required this.headerText});
 
   @override
   Widget build(BuildContext context) {
