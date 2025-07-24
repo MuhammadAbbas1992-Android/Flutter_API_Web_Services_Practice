@@ -1,5 +1,6 @@
 import '../../data/network/network_api_services.dart';
 import '../../res/app_url/app_url.dart';
+import '../../res/app_utils.dart';
 import '../../res/constants/app_constants.dart';
 
 class PostRepository {
@@ -8,7 +9,7 @@ class PostRepository {
   Future<dynamic> postSingleScreenRepository(
       Map<String, dynamic> requestBody) async {
     dynamic response;
-    switch (AppConstants.caseNo) {
+    switch (AppUtils.caseNo) {
       case 11:
         response = await _apiServices.postSingleScreenApi(
             AppUrl.postSingleObject, AppUrl.header, requestBody);

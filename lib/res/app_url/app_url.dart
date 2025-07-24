@@ -1,3 +1,4 @@
+import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 
 class AppUrl {
@@ -16,10 +17,9 @@ class AppUrl {
       '$baseApi/objects?id=3&id=5&id=11';
   static const String getSingleObjectByIdApi = '$baseApi/objects/7';
   static const String postSingleObject = '$baseApi/objects';
-  static String putSingleObject = '$baseApi/objects/${AppConstants.objectId}';
-  static String patchSingleObject = '$baseApi/objects/${AppConstants.objectId}';
-  static String deleteSingleObject =
-      '$baseApi/objects/${AppConstants.objectId}';
+  static String putSingleObject = '$baseApi/objects/${AppUtils.objectId}';
+  static String patchSingleObject = '$baseApi/objects/${AppUtils.objectId}';
+  static String deleteSingleObject = '$baseApi/objects/${AppUtils.objectId}';
   //Headers
   static const Map<String, String> header = {
     'Content-Type': 'application/json',

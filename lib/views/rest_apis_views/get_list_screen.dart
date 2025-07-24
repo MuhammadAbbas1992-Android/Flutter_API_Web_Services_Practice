@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_colors_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_object_list_tile_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_users_list_tile_widget.dart';
-import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/app_utils.dart';
 
 class GetListScreen extends StatefulWidget {
   const GetListScreen({super.key});
@@ -42,16 +42,15 @@ class _GetListScreenState extends State<GetListScreen> {
                         getApiController.objectList.isNotEmpty
                     ? Column(children: [
                         Expanded(
-                          child: AppConstants.caseNo == 1
+                          child: AppUtils.caseNo == 1
                               ? CustomUsersListTileWidget(
                                   controller: getApiController,
                                 )
-                              : AppConstants.caseNo == 4
+                              : AppUtils.caseNo == 4
                                   ? CustomColorsListTileWidget(
                                       controller: getApiController,
                                     )
-                                  : AppConstants.caseNo == 8 ||
-                                          AppConstants.caseNo == 9
+                                  : AppUtils.caseNo == 8 || AppUtils.caseNo == 9
                                       ? CustomObjectListTileWidget(
                                           controller: getApiController,
                                         )

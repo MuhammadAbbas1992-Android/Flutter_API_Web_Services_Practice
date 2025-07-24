@@ -1,5 +1,6 @@
 import '../../data/network/network_api_services.dart';
 import '../../res/app_url/app_url.dart';
+import '../../res/app_utils.dart';
 import '../../res/constants/app_constants.dart';
 
 class PatchRepository {
@@ -8,7 +9,7 @@ class PatchRepository {
   Future<dynamic> patchSingleScreenRepository(
       Map<String, dynamic> requestBody) async {
     dynamic response;
-    switch (AppConstants.caseNo) {
+    switch (AppUtils.caseNo) {
       case 13:
         response = await _apiServices.patchSingleScreenApi(
             AppUrl.patchSingleObject, AppUrl.header, requestBody);

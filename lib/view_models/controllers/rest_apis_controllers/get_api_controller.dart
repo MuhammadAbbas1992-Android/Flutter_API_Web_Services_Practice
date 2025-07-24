@@ -10,6 +10,7 @@ import 'package:flutter_api_web_services_practice/res/constants/app_constants.da
 import 'package:get/get.dart';
 
 import '../../../models/users_response_model.dart';
+import '../../../res/app_utils.dart';
 import '../../repositories/get_repository.dart';
 
 class GetApiController extends GetxController {
@@ -33,7 +34,7 @@ class GetApiController extends GetxController {
     await _apiGet.getListScreenRepository().then((value) {
       isLoading.value = false;
 
-      switch (AppConstants.caseNo) {
+      switch (AppUtils.caseNo) {
         case 1:
           userList = UsersResponseModel.fromJson(value).data;
           break;
@@ -68,7 +69,7 @@ class GetApiController extends GetxController {
     isLoading.value = true;
     await _apiGet.getSingleScreenRepository().then((value) {
       isLoading.value = false;
-      switch (AppConstants.caseNo) {
+      switch (AppUtils.caseNo) {
         case 2:
           singleUser = SingleUserResponseModel.fromJson(value).data;
           break;

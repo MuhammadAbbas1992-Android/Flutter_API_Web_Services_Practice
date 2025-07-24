@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 
-import '../../../utils/app_utils.dart';
+import '../../../models/picture_model.dart';
+import '../../../res/app_utils.dart';
 
 class FirebaseServices {
   // Add a new Picture items into Firebase
@@ -11,7 +13,8 @@ class FirebaseServices {
     final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
 
     try {
-      final petRef = databaseReference.child(AppUtils.DATABASE_NAME).push();
+      final petRef =
+          databaseReference.child(AppConstants.firebaseDBName).push();
       pictureModel.id = petRef.key!;
       await petRef.set(pictureModel.toMap());
       return true;
@@ -25,7 +28,7 @@ class FirebaseServices {
     final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
     List<PictureModel> pictureList = <PictureModel>[];
     try {
-      await databaseReference.child(AppUtils.DATABASE_NAME).get().then(
+      await databaseReference.child(AppConstants.firebaseDBName).get().then(
         (value) {
           if (value.exists) {
             for (var childSnapshot in value.children) {
@@ -48,7 +51,7 @@ class FirebaseServices {
 
     try {
       await databaseReference
-          .child(AppUtils.DATABASE_NAME)
+          .child(AppConstants.firebaseDBName)
           .child(pictureModel.id!)
           .update(pictureModel.toMap());
       return true;
@@ -62,7 +65,7 @@ class FirebaseServices {
     final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
     try {
       await databaseReference
-          .child(AppUtils.DATABASE_NAME)
+          .child(AppConstants.firebaseDBName)
           .child(AppUtils.picturesList[index].id!)
           .remove();
       return true;
@@ -80,7 +83,7 @@ class FirebaseServices {
     try {
       // Create a new reference to Firebase Storage
       final storageRef = FirebaseStorage.instance.ref().child(
-          '${AppUtils.DATABASE_NAME}/Images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+          '${AppConstants.firebaseDBName}/Images/${DateTime.now().millisecondsSinceEpoch}.jpg');
 
       // Upload the image file
       await storageRef.putFile(File(imagePath));

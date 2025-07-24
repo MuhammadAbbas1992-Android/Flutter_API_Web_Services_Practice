@@ -6,6 +6,7 @@ import 'package:flutter_api_web_services_practice/res/constants/app_constants.da
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/app_utils.dart';
 import '../../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 
 class GetSingleScreen extends StatefulWidget {
@@ -40,13 +41,13 @@ class _GetSingleUser extends State<GetSingleScreen> {
                 : getApiController.singleUser != null ||
                         getApiController.singleColor != null ||
                         getApiController.singleObject != null
-                    ? AppConstants.caseNo == 2
+                    ? AppUtils.caseNo == 2
                         ? CustomSingleUserTileWidget(
                             controller: getApiController)
-                        : AppConstants.caseNo == 5
+                        : AppUtils.caseNo == 5
                             ? CustomSingleColorTileWidget(
                                 controller: getApiController)
-                            : AppConstants.caseNo == 10
+                            : AppUtils.caseNo == 10
                                 ? CustomSingleObjectTileWidget(
                                     controller: getApiController)
                                 : const Center(child: Text('No data found'))

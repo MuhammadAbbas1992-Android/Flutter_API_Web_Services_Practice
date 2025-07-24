@@ -4,6 +4,7 @@ import 'package:flutter_api_web_services_practice/res/constants/app_constants.da
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/app_utils.dart';
 import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 
 class PostPutPatchDeleteSingleScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _PostPutPatchDeleteSingleScreen
   void initState() {
     // TODO: implement initState
     super.initState();
-    switch (AppConstants.caseNo) {
+    switch (AppUtils.caseNo) {
       case 11:
         postPutPatchDeleteApiController.postSingleModel();
         break;

@@ -3,12 +3,14 @@ import 'package:flutter_api_web_services_practice/data/network/network_api_servi
 import 'package:flutter_api_web_services_practice/res/app_url/app_url.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 
+import '../../res/app_utils.dart';
+
 class GetRepository {
   final _apiServices = NetworkApiServices();
 
   Future<dynamic> getListScreenRepository() async {
     dynamic response;
-    switch (AppConstants.caseNo) {
+    switch (AppUtils.caseNo) {
       case 1:
         response = await _apiServices.getListScreenApi(AppUrl.getListUsersApi);
         break;
@@ -31,7 +33,7 @@ class GetRepository {
 
   Future<dynamic> getSingleScreenRepository() async {
     dynamic response;
-    switch (AppConstants.caseNo) {
+    switch (AppUtils.caseNo) {
       case 2:
         response = await _apiServices.getSingleScreenApi(AppUrl.getSingleApi);
         break;

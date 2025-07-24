@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../models/delete_response_model.dart';
 import '../../../models/post_put_patch_object_response_model.dart';
+import '../../../res/app_utils.dart';
 import '../../../res/constants/app_constants.dart';
 import '../../repositories/delete_repository.dart';
 import '../../repositories/patch_repository.dart';
@@ -32,11 +33,11 @@ class PostPutPatchDeleteApiController extends GetxController {
     isLoading.value = true;
     await _apiPost.postSingleScreenRepository(requestBody).then((value) {
       isLoading.value = false;
-      switch (AppConstants.caseNo) {
+      switch (AppUtils.caseNo) {
         case 11:
           postPutPatchResponse =
               PostPutPatchObjectResponseModel.fromJson(value);
-          AppConstants.objectId = postPutPatchResponse!.id;
+          AppUtils.objectId = postPutPatchResponse!.id;
           break;
       }
       Get.snackbar('Success', 'Data posted Successfully');
@@ -63,7 +64,7 @@ class PostPutPatchDeleteApiController extends GetxController {
     isLoading.value = true;
     await _apiPut.putSingleScreenRepository(requestBody).then((value) {
       isLoading.value = false;
-      switch (AppConstants.caseNo) {
+      switch (AppUtils.caseNo) {
         case 12:
           postPutPatchResponse =
               PostPutPatchObjectResponseModel.fromJson(value);
@@ -88,7 +89,7 @@ class PostPutPatchDeleteApiController extends GetxController {
     isLoading.value = true;
     await _apiPatch.patchSingleScreenRepository(requestBody).then((value) {
       isLoading.value = false;
-      switch (AppConstants.caseNo) {
+      switch (AppUtils.caseNo) {
         case 13:
           postPutPatchResponse =
               PostPutPatchObjectResponseModel.fromJson(value);
@@ -109,10 +110,10 @@ class PostPutPatchDeleteApiController extends GetxController {
     isLoading.value = true;
     await _apiDelete.deleteSingleScreenRepository().then((value) {
       isLoading.value = false;
-      switch (AppConstants.caseNo) {
+      switch (AppUtils.caseNo) {
         case 14:
           deleteResponse = DeleteResponseModel.fromJson(value);
-          AppConstants.objectId = '';
+          AppUtils.objectId = '';
           break;
       }
       Get.snackbar('Success', 'Data deleted successfully');

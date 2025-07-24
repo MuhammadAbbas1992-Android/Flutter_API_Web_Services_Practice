@@ -1,16 +1,13 @@
-import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:get/get.dart';
 
-class AppUtils {
-  static String userEmailKey = '';
-  static bool isUserLogin = false;
-  static int productIndex = -1;
+import '../models/picture_model.dart';
 
-  static extractEmailPart(String email) {
-    // Split the email using '@' as the delimiter
-    userEmailKey = email.split('@')[0];
-    // print("ABC User Email Username: $userEmailKey");
-  }
+class AppUtils {
+  static int caseNo = 1;
+  //Ids It will be updated on RunTime
+  static String objectId = '';
+
+  static List<PictureModel> picturesList = <PictureModel>[];
 
   static String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
@@ -61,17 +58,5 @@ class AppUtils {
 
   static void mySnackBar({required String title, required String message}) {
     Get.snackbar(title, message);
-  }
-
-  static void navigatePage(String pageName) {
-    Get.back();
-    Get.offNamed(pageName);
-  }
-
-  static void logout() {
-    userEmailKey = '';
-    isUserLogin = false;
-    // SharedPreferenceServices.clearFromSharedPref(userKey);
-    navigatePage(RoutNames.loginScreen);
   }
 }

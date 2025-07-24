@@ -1,5 +1,6 @@
 import '../../data/network/network_api_services.dart';
 import '../../res/app_url/app_url.dart';
+import '../../res/app_utils.dart';
 import '../../res/constants/app_constants.dart';
 
 class DeleteRepository {
@@ -7,7 +8,7 @@ class DeleteRepository {
 
   Future<dynamic> deleteSingleScreenRepository() async {
     dynamic response;
-    switch (AppConstants.caseNo) {
+    switch (AppUtils.caseNo) {
       case 14:
         response = await _apiServices.deleteSingleScreenApi(
             AppUrl.deleteSingleObject, AppUrl.header, null);
