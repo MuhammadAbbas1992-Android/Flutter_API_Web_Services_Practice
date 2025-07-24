@@ -1,5 +1,5 @@
 class RoutNames {
-  static const String homeScreen = '/home_screen';
+  static const String dashboardScreen = '/dashboard_screen';
 
   //REST APIs Integration RoutNames
   static const String restApiIntegrationScreen = '/rest_api_integration_screen';
@@ -8,7 +8,7 @@ class RoutNames {
   static const String postPutPatchDeleteSingleScreen =
       '/post_put_patch_delete_single_screen';
 
-  //Firebase Integration RoutNames
+  //Firebase Authentication RoutNames
   static const String firebaseIntegrationScreen =
       '/firebase_integration_screen';
   static const String loginScreen = '/login_screen';
@@ -18,4 +18,8 @@ class RoutNames {
   static const String welcomeScreen = '/welcome_screen';
   static const String forgotResetPasswordScreen =
       '/forgot_reset_password_screen';
+
+  //Firebase Database or Realtime Database RoutNames
+  static const String homeDatabaseSteamBuilderWithListViewBuilderScreen =
+      '/home_database_steam_builder_with_list_view_builder_screen';
 }

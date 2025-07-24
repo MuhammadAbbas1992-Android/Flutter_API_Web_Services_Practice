@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/welcome_screen_controller.dart';
 import 'package:get/get.dart';
 
-import '../../common/common_header_widget.dart';
-import '../../custom_widgets/custom_text_widget.dart';
-import '../../res/app_utils.dart';
+import '../../../common/common_header_widget.dart';
+import '../../../custom_widgets/custom_text_widget.dart';
+import '../../../res/app_utils.dart';
+import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/welcome_screen_controller.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

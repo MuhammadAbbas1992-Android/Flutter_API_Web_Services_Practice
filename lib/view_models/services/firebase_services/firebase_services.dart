@@ -1,0 +1,108 @@
+import 'dart:io';
+
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import '../../../utils/app_utils.dart';
+
+class FirebaseServices {
+  // Add a new Picture items into Firebase
+  static Future<bool> addPicture(PictureModel pictureModel) async {
+    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+
+    try {
+      final petRef = databaseReference.child(AppUtils.DATABASE_NAME).push();
+      pictureModel.id = petRef.key!;
+      await petRef.set(pictureModel.toMap());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Retrieve all Picture items from Firebase
+  static Future<List<PictureModel>?> getPictureData() async {
+    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    List<PictureModel> pictureList = <PictureModel>[];
+    try {
+      await databaseReference.child(AppUtils.DATABASE_NAME).get().then(
+        (value) {
+          if (value.exists) {
+            for (var childSnapshot in value.children) {
+              final petModel = PictureModel.fromMap(
+                  Map<String, dynamic>.from(childSnapshot.value as Map));
+              pictureList.add(petModel);
+            }
+          }
+        },
+      );
+      return pictureList;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Update Picture item into Firebase
+  static Future<bool> updatePicture(PictureModel pictureModel) async {
+    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+
+    try {
+      await databaseReference
+          .child(AppUtils.DATABASE_NAME)
+          .child(pictureModel.id!)
+          .update(pictureModel.toMap());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Delete Picture item from Firebase
+  static Future<bool> deletePicture(int index) async {
+    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+    try {
+      await databaseReference
+          .child(AppUtils.DATABASE_NAME)
+          .child(AppUtils.picturesList[index].id!)
+          .remove();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  //Upload Image on Firebase Storage
+  static Future<String?> uploadImage(String imagePath, String imageUrl) async {
+    //Replace with new image , need to delete old image
+    if (imageUrl.isNotEmpty) {
+      deleteImage(imageUrl);
+    }
+    try {
+      // Create a new reference to Firebase Storage
+      final storageRef = FirebaseStorage.instance.ref().child(
+          '${AppUtils.DATABASE_NAME}/Images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+      // Upload the image file
+      await storageRef.putFile(File(imagePath));
+      // Get the download URL
+      String imageUrl = await storageRef.getDownloadURL();
+      return imageUrl;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Delete Picture image from Firebase Storage
+  static Future<bool> deleteImage(String imageUrl) async {
+    try {
+      // Extract the reference path from the URL
+      Reference ref = FirebaseStorage.instance.refFromURL(imageUrl);
+
+      // Delete the file
+      await ref.delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}

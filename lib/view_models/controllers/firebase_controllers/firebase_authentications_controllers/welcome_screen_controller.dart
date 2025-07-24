@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:get/get.dart';
 
-import '../../../res/routs/rout_names.dart';
+import '../../../../res/routs/rout_names.dart';
 
 class WelcomeScreenController extends GetxController {
   void showFirebaseIntegrationScreen() {
@@ -53,7 +53,7 @@ class WelcomeScreenController extends GetxController {
           AppUtils.mySnackBar(
               title: 'HandleLinkData',
               message: '✅ Signed in as: ${userCredential.user?.email}');
-          Get.offNamed(RoutNames.homeScreen);
+          Get.offNamed(RoutNames.dashboardScreen);
         } catch (e) {
           AppUtils.mySnackBar(
               title: 'HandleLinkData', message: '❌ Failed to sign in: $e');

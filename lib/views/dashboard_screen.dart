@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_elevated_button_widget.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/home_screen_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_screen_controller.dart';
 import 'package:get/get.dart';
 
 import '../custom_widgets/custom_text_widget.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  late final HomeScreenController homeScreenController;
+class _DashboardScreenState extends State<DashboardScreen> {
+  late final DashboardScreenController homeScreenController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeScreenController = Get.put(HomeScreenController());
+    homeScreenController = Get.put(DashboardScreenController());
   }
 
   @override

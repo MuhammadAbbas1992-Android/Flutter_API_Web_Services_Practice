@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../res/app_utils.dart';
-import '../../../res/routs/rout_names.dart';
+import '../../../../res/app_utils.dart';
+import '../../../../res/routs/rout_names.dart';
 
 class LoginScreenController extends GetxController {
   final emailController =

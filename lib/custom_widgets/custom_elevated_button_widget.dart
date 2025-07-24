@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/home_screen_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_screen_controller.dart';
 
 class CustomElevatedButtonWidget extends StatelessWidget {
   const CustomElevatedButtonWidget(
@@ -10,7 +10,7 @@ class CustomElevatedButtonWidget extends StatelessWidget {
 
   final int integrationType;
   final String btnText;
-  final HomeScreenController homeScreenController;
+  final DashboardScreenController homeScreenController;
 
   @override
   Widget build(BuildContext context) {

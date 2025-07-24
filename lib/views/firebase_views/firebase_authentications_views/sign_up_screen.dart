@@ -3,12 +3,12 @@ import 'package:flutter_api_web_services_practice/common/common_row_account_widg
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:get/get.dart';
 
-import '../../common/common_button_widget.dart';
-import '../../common/common_header_widget.dart';
-import '../../common/common_text_form_field_widget.dart';
-import '../../res/app_utils.dart';
-import '../../res/constants/app_colors.dart';
-import '../../view_models/controllers/firebase_controllers/sign_up_screen_controller.dart';
+import '../../../common/common_button_widget.dart';
+import '../../../common/common_header_widget.dart';
+import '../../../common/common_text_form_field_widget.dart';
+import '../../../res/app_utils.dart';
+import '../../../res/constants/app_colors.dart';
+import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/sign_up_screen_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

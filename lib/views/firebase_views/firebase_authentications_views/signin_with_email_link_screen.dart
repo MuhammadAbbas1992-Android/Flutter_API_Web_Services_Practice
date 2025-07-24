@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/signin_with_email_link_screen_controller.dart';
 import 'package:get/get.dart';
 
-import '../../common/common_button_widget.dart';
-import '../../common/common_header_widget.dart';
-import '../../common/common_row_account_widget.dart';
-import '../../common/common_text_form_field_widget.dart';
-import '../../res/app_utils.dart';
-import '../../res/constants/app_colors.dart';
-import '../../res/routs/rout_names.dart';
+import '../../../common/common_button_widget.dart';
+import '../../../common/common_header_widget.dart';
+import '../../../common/common_row_account_widget.dart';
+import '../../../common/common_text_form_field_widget.dart';
+import '../../../res/app_utils.dart';
+import '../../../res/constants/app_colors.dart';
+import '../../../res/routs/rout_names.dart';
+import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/signin_with_email_link_screen_controller.dart';
 
 class SigninWithEmailLinkScreen extends StatefulWidget {
   const SigninWithEmailLinkScreen({super.key});
