@@ -6,15 +6,14 @@ import '../../../custom_widgets/custom_text_widget.dart';
 import '../../../res/app_utils.dart';
 import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/welcome_screen_controller.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
+class WelcomeView extends StatefulWidget {
+  const WelcomeView({super.key});
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  State<WelcomeView> createState() => _WelcomeViewState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen>
-    with WidgetsBindingObserver {
+class _WelcomeViewState extends State<WelcomeView> with WidgetsBindingObserver {
   late final WelcomeScreenController welcomeScreenController;
 
   @override

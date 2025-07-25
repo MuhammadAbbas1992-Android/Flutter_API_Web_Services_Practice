@@ -12,4 +12,5 @@ class AppColors {
   static const Color mediumGrey = Color(0xFFA6A4A4);
   static const Color lightGrey = Color(0xFFCBCBCB);
   static const Color tinGrey = Color(0xffE9E9E9);
+  static const Color light = Color(0xFFF8F8F8);
 }

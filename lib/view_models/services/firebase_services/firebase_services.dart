@@ -13,10 +13,10 @@ class FirebaseServices {
     final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
 
     try {
-      final petRef =
+      final pictureModelRef =
           databaseReference.child(AppConstants.firebaseDBName).push();
-      pictureModel.id = petRef.key!;
-      await petRef.set(pictureModel.toMap());
+      pictureModel.id = pictureModelRef.key!;
+      await pictureModelRef.set(pictureModel.toMap());
       return true;
     } catch (e) {
       return false;
@@ -32,9 +32,9 @@ class FirebaseServices {
         (value) {
           if (value.exists) {
             for (var childSnapshot in value.children) {
-              final petModel = PictureModel.fromMap(
+              final pictureModel = PictureModel.fromMap(
                   Map<String, dynamic>.from(childSnapshot.value as Map));
-              pictureList.add(petModel);
+              pictureList.add(pictureModel);
             }
           }
         },

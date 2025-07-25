@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_single_post_delete_object_tile_widget.dart';
-import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
 import '../../res/app_utils.dart';
 import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 
-class PostPutPatchDeleteSingleScreen extends StatefulWidget {
-  const PostPutPatchDeleteSingleScreen({super.key});
+class PostPutPatchDeleteSingleView extends StatefulWidget {
+  const PostPutPatchDeleteSingleView({super.key});
 
   @override
-  State<PostPutPatchDeleteSingleScreen> createState() =>
+  State<PostPutPatchDeleteSingleView> createState() =>
       _PostPutPatchDeleteSingleScreen();
 }
 
 class _PostPutPatchDeleteSingleScreen
-    extends State<PostPutPatchDeleteSingleScreen> {
+    extends State<PostPutPatchDeleteSingleView> {
   final postPutPatchDeleteApiController =
       Get.find<PostPutPatchDeleteApiController>();
   @override

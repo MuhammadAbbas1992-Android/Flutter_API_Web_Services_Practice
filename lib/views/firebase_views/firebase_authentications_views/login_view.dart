@@ -1,41 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/common/common_row_account_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_text_widget.dart';
+import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
+import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_button_widget.dart';
 import '../../../common/common_header_widget.dart';
-import '../../../common/common_row_account_widget.dart';
 import '../../../common/common_text_form_field_widget.dart';
 import '../../../res/app_utils.dart';
-import '../../../res/constants/app_colors.dart';
-import '../../../res/routs/rout_names.dart';
-import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/signin_with_email_link_screen_controller.dart';
+import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/login_screen_controller.dart';
 
-class SigninWithEmailLinkScreen extends StatefulWidget {
-  const SigninWithEmailLinkScreen({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<SigninWithEmailLinkScreen> createState() =>
-      _SigninWithEmailLinkScreenState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _SigninWithEmailLinkScreenState extends State<SigninWithEmailLinkScreen> {
-  late final SigninWithEmailLinkScreenController
-      signinWithEmailLinkScreenController;
+class _LoginViewState extends State<LoginView> {
+  late final LoginScreenController loginScreenController;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    signinWithEmailLinkScreenController =
-        Get.put(SigninWithEmailLinkScreenController());
+    loginScreenController = Get.put(LoginScreenController());
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    signinWithEmailLinkScreenController.dispose();
+    loginScreenController.dispose();
   }
 
   @override
@@ -52,8 +50,8 @@ class _SigninWithEmailLinkScreenState extends State<SigninWithEmailLinkScreen> {
                   height: 150.0,
                 ),
                 const CustomHeaderWidget(
-                  size: 25,
-                  headerText: 'Send signin link to email',
+                  size: 33,
+                  headerText: 'Login',
                 ),
                 const SizedBox(
                   height: 100.0,
@@ -66,31 +64,51 @@ class _SigninWithEmailLinkScreenState extends State<SigninWithEmailLinkScreen> {
                         hint: 'Email Address',
                         customLabel: 'Email',
                         prefixIcon: 'assets/icons/ic_email.svg',
-                        controller: signinWithEmailLinkScreenController
-                            .emailController.value,
+                        controller: loginScreenController.emailController.value,
                         validator: (value) => AppUtils.validateEmail(value),
                         keyboardType: TextInputType.emailAddress,
                       ),
                       const SizedBox(
                         height: 15.0,
                       ),
+                      CommonTextFormFieldWidget(
+                        hint: 'Password',
+                        customLabel: 'Password',
+                        prefixIcon: 'assets/icons/ic_password.svg',
+                        controller:
+                            loginScreenController.passwordController.value,
+                        validator: (value) => AppUtils.validatePassword(value),
+                        obscure: true,
+                      ),
                     ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                InkWell(
+                  onTap: () => loginScreenController.forgotOrResetPassword(),
+                  child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: CustomTextWidget(
+                      text: 'Forgot/Reset Password',
+                      color: AppColors.pink,
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 40.0,
                 ),
                 Obx(
-                  () => signinWithEmailLinkScreenController.isLogining.value
+                  () => loginScreenController.isLogining.value
                       ? const CircularProgressIndicator(
                           color: AppColors.pink,
                           strokeWidth: 6,
                         )
                       : CommonButtonWidget(
-                          text: 'Send link',
+                          text: 'Sign In',
                           onTap: () => _formKey.currentState!.validate()
-                              ? signinWithEmailLinkScreenController
-                                  .sendEmailLink()
+                              ? loginScreenController.loginUser()
                               : null,
                         ),
                 ),
@@ -98,9 +116,9 @@ class _SigninWithEmailLinkScreenState extends State<SigninWithEmailLinkScreen> {
                   height: 10.0,
                 ),
                 CommonRowAccountWidget(
-                  textMessage: 'Login with email and password',
-                  textScreen: 'Login',
-                  onTap: () => Get.offNamed(RoutNames.loginScreen),
+                  textMessage: 'Don’t have an account?',
+                  textScreen: 'Sign Up',
+                  onTap: () => Get.offNamed(RoutNames.signUpScreen),
                 ),
               ],
             ),

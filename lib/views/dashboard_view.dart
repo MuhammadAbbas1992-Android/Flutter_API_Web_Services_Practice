@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 
 import '../custom_widgets/custom_text_widget.dart';
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+class DashboardView extends StatefulWidget {
+  const DashboardView({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<DashboardView> createState() => _DashboardViewState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardViewState extends State<DashboardView> {
   late final DashboardScreenController homeScreenController;
   @override
   void initState() {

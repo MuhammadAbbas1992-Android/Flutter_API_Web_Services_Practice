@@ -10,14 +10,14 @@ import '../../../res/app_utils.dart';
 import '../../../res/constants/app_colors.dart';
 import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/sign_up_screen_controller.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpViewState extends State<SignUpView> {
   late final SignUpScreenController signUpScreenController;
   final _formKeys = GlobalKey<FormState>();
 

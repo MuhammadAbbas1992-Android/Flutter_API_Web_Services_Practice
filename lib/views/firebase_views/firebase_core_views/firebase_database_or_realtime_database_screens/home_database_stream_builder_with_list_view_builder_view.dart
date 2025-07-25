@@ -1,22 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../custom_widgets/custom_elevated_button_widget.dart';
 import '../../../../custom_widgets/custom_text_widget.dart';
 import '../../../../view_models/controllers/dashboard_screen_controller.dart';
 
-class HomeDatabaseSteamBuilderWithListViewBuilderScreen extends StatefulWidget {
-  const HomeDatabaseSteamBuilderWithListViewBuilderScreen({super.key});
+class HomeDatabaseStreamBuilderWithListViewBuilderView extends StatefulWidget {
+  const HomeDatabaseStreamBuilderWithListViewBuilderView({super.key});
 
   @override
-  State<HomeDatabaseSteamBuilderWithListViewBuilderScreen> createState() =>
-      _HomeDatabaseSteamBuilderWithListViewBuilderScreenState();
+  State<HomeDatabaseStreamBuilderWithListViewBuilderView> createState() =>
+      _HomeDatabaseStreamBuilderWithListViewBuilderViewState();
 }
 
-class _HomeDatabaseSteamBuilderWithListViewBuilderScreenState
-    extends State<HomeDatabaseSteamBuilderWithListViewBuilderScreen> {
+class _HomeDatabaseStreamBuilderWithListViewBuilderViewState
+    extends State<HomeDatabaseStreamBuilderWithListViewBuilderView> {
   late final DashboardScreenController homeScreenController;
   @override
   void initState() {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../view_models/controllers/firebase_controllers/firebase_integration_screen_controller.dart';
 import 'custom_text_widget.dart';
 
-class FirebaseIntegrationWidget extends StatelessWidget {
-  const FirebaseIntegrationWidget({
+class CustomIntegrationButtonWidget extends StatelessWidget {
+  const CustomIntegrationButtonWidget({
     super.key,
     required this.caseNo,
     required this.btnText,

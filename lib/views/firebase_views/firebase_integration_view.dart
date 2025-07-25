@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/firebase_integration_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_integration_button_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_fonts.dart';
 import 'package:get/get.dart';
@@ -7,15 +7,15 @@ import 'package:get/get.dart';
 import '../../custom_widgets/custom_text_widget.dart';
 import '../../view_models/controllers/firebase_controllers/firebase_integration_screen_controller.dart';
 
-class FirebaseIntegrationScreen extends StatefulWidget {
-  const FirebaseIntegrationScreen({super.key});
+class FirebaseIntegrationView extends StatefulWidget {
+  const FirebaseIntegrationView({super.key});
 
   @override
-  State<FirebaseIntegrationScreen> createState() =>
-      _FirebaseIntegrationScreenState();
+  State<FirebaseIntegrationView> createState() =>
+      _FirebaseIntegrationViewState();
 }
 
-class _FirebaseIntegrationScreenState extends State<FirebaseIntegrationScreen> {
+class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
   late final FirebaseIntegrationScreenController
       firebaseIntegrationScreenController;
 
@@ -63,19 +63,19 @@ class _FirebaseIntegrationScreenState extends State<FirebaseIntegrationScreen> {
                           fontFamily: AppFonts.poppinsBold,
                         ),
                         const SizedBox(height: 10),
-                        FirebaseIntegrationWidget(
+                        CustomIntegrationButtonWidget(
                           caseNo: 1,
                           btnText: 'Login',
                           categoryText: 'Login User',
                           controller: firebaseIntegrationScreenController,
                         ),
-                        FirebaseIntegrationWidget(
+                        CustomIntegrationButtonWidget(
                           caseNo: 2,
                           btnText: 'Sing up',
                           categoryText: 'Sign up user',
                           controller: firebaseIntegrationScreenController,
                         ),
-                        FirebaseIntegrationWidget(
+                        CustomIntegrationButtonWidget(
                           caseNo: 3,
                           btnText: 'Sign in with email link',
                           categoryText: 'Sign in with email link',
@@ -107,22 +107,28 @@ class _FirebaseIntegrationScreenState extends State<FirebaseIntegrationScreen> {
                           fontFamily: AppFonts.poppinsBold,
                         ),
                         const SizedBox(height: 10),
-                        FirebaseIntegrationWidget(
-                          caseNo: 1,
-                          btnText: 'Login',
-                          categoryText: 'Login User',
+                        CustomIntegrationButtonWidget(
+                          caseNo: 4,
+                          btnText: 'Home1',
+                          categoryText: 'StreamBuilder by ListView.builder',
                           controller: firebaseIntegrationScreenController,
                         ),
-                        FirebaseIntegrationWidget(
-                          caseNo: 2,
-                          btnText: 'Sing up',
-                          categoryText: 'Sign up user',
+                        CustomIntegrationButtonWidget(
+                          caseNo: 5,
+                          btnText: 'Home2',
+                          categoryText: 'StreamBuilder by ListView.separated',
                           controller: firebaseIntegrationScreenController,
                         ),
-                        FirebaseIntegrationWidget(
-                          caseNo: 3,
-                          btnText: 'Sign in with email link',
-                          categoryText: 'Sign in with email link',
+                        CustomIntegrationButtonWidget(
+                          caseNo: 6,
+                          btnText: 'Home3',
+                          categoryText: 'StreamBuilder by ListView.custom',
+                          controller: firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 7,
+                          btnText: 'Home4',
+                          categoryText: 'ListView(Static Data)',
                           controller: firebaseIntegrationScreenController,
                         ),
                       ],
@@ -151,19 +157,19 @@ class _FirebaseIntegrationScreenState extends State<FirebaseIntegrationScreen> {
                           fontFamily: AppFonts.poppinsBold,
                         ),
                         const SizedBox(height: 10),
-                        FirebaseIntegrationWidget(
+                        CustomIntegrationButtonWidget(
                           caseNo: 1,
                           btnText: 'Login',
                           categoryText: 'Login User',
                           controller: firebaseIntegrationScreenController,
                         ),
-                        FirebaseIntegrationWidget(
+                        CustomIntegrationButtonWidget(
                           caseNo: 2,
                           btnText: 'Sing up',
                           categoryText: 'Sign up user',
                           controller: firebaseIntegrationScreenController,
                         ),
-                        FirebaseIntegrationWidget(
+                        CustomIntegrationButtonWidget(
                           caseNo: 3,
                           btnText: 'Sign in with email link',
                           categoryText: 'Sign in with email link',

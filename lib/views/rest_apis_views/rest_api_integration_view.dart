@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 import 'package:get/get.dart';
 
 import '../../custom_widgets/rest_api_widget.dart';
@@ -9,15 +8,14 @@ import '../../view_models/controllers/rest_apis_controllers/get_api_controller.d
 import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 import '../../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
 
-class RestApiIntegrationScreen extends StatefulWidget {
-  const RestApiIntegrationScreen({super.key});
+class RestApiIntegrationView extends StatefulWidget {
+  const RestApiIntegrationView({super.key});
 
   @override
-  State<RestApiIntegrationScreen> createState() =>
-      _RestApiIntegrationScreenState();
+  State<RestApiIntegrationView> createState() => _RestApiIntegrationViewState();
 }
 
-class _RestApiIntegrationScreenState extends State<RestApiIntegrationScreen> {
+class _RestApiIntegrationViewState extends State<RestApiIntegrationView> {
   late final RestApiIntegrationViewController restApiIntegrationController;
   late final GetApiController getApiController;
   late final PostPutPatchDeleteApiController postPutPatchDeleteApiController;

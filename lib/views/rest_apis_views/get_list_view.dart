@@ -8,14 +8,14 @@ import 'package:get/get.dart';
 import '../../custom_widgets/custom_text_widget.dart';
 import '../../res/app_utils.dart';
 
-class GetListScreen extends StatefulWidget {
-  const GetListScreen({super.key});
+class GetListView extends StatefulWidget {
+  const GetListView({super.key});
 
   @override
-  State<GetListScreen> createState() => _GetListScreenState();
+  State<GetListView> createState() => _GetListViewState();
 }
 
-class _GetListScreenState extends State<GetListScreen> {
+class _GetListViewState extends State<GetListView> {
   final getApiController = Get.find<GetApiController>();
   @override
   void initState() {

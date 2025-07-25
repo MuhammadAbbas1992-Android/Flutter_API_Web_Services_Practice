@@ -9,15 +9,15 @@ import '../../../common/common_text_form_field_widget.dart';
 import '../../../res/app_utils.dart';
 import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/forgot_reset_password_screen_controller.dart';
 
-class ForgotResetPasswordScreen extends StatefulWidget {
-  const ForgotResetPasswordScreen({super.key});
+class ForgotResetPasswordView extends StatefulWidget {
+  const ForgotResetPasswordView({super.key});
 
   @override
-  State<ForgotResetPasswordScreen> createState() =>
-      _ForgotResetPasswordScreenState();
+  State<ForgotResetPasswordView> createState() =>
+      _ForgotResetPasswordViewState();
 }
 
-class _ForgotResetPasswordScreenState extends State<ForgotResetPasswordScreen> {
+class _ForgotResetPasswordViewState extends State<ForgotResetPasswordView> {
   late final ForgotResetPasswordScreenController
       forgotResetPasswordScreenController;
   final _formKey = GlobalKey<FormState>();
