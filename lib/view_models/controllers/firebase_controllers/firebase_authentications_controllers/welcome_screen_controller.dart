@@ -8,7 +8,7 @@ import '../../../../res/routs/rout_names.dart';
 
 class WelcomeScreenController extends GetxController {
   void showFirebaseIntegrationScreen() {
-    Get.offNamed(RoutNames.firebaseIntegrationScreen);
+    Get.offNamed(RoutNames.firebaseIntegrationView);
   }
 
   void handleDynamicLink(
@@ -53,7 +53,7 @@ class WelcomeScreenController extends GetxController {
           AppUtils.mySnackBar(
               title: 'HandleLinkData',
               message: '✅ Signed in as: ${userCredential.user?.email}');
-          Get.offNamed(RoutNames.dashboardScreen);
+          Get.offNamed(RoutNames.dashboardView);
         } catch (e) {
           AppUtils.mySnackBar(
               title: 'HandleLinkData', message: '❌ Failed to sign in: $e');

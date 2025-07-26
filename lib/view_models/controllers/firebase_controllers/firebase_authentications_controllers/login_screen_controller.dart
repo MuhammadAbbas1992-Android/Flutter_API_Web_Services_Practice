@@ -31,7 +31,7 @@ class LoginScreenController extends GetxController {
           title: 'Response',
           message: 'Login successfully',
         );
-        Get.offNamed(RoutNames.welcomeScreen);
+        Get.offNamed(RoutNames.welcomeView);
         // AppUtils.toggleUserLoginStatus(emailController.value.text);
       }
     } on FirebaseAuthException catch (e) {
@@ -67,7 +67,7 @@ class LoginScreenController extends GetxController {
   }
 
   Future<void> forgotOrResetPassword() async {
-    if (await Get.toNamed(RoutNames.forgotResetPasswordScreen)) {
+    if (await Get.toNamed(RoutNames.forgotResetPasswordView)) {
       AppUtils.mySnackBar(
           title: 'Message',
           message:

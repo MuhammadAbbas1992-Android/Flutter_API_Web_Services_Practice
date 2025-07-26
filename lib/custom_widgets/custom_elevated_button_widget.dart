@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_screen_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_view_controller.dart';
 
 class CustomElevatedButtonWidget extends StatelessWidget {
   const CustomElevatedButtonWidget(
       {super.key,
-      required this.homeScreenController,
+      required this.dashboardViewController,
       required this.btnText,
       required this.integrationType});
 
   final int integrationType;
   final String btnText;
-  final DashboardScreenController homeScreenController;
+  final DashboardViewController dashboardViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,10 @@ class CustomElevatedButtonWidget extends StatelessWidget {
       onPressed: () {
         switch (integrationType) {
           case 1:
-            homeScreenController.openRestApiIntegrationView();
+            dashboardViewController.openRestApiIntegrationView();
             break;
           case 2:
-            homeScreenController.openFirebaseIntegrationView();
+            dashboardViewController.openFirebaseIntegrationView();
             break;
         }
       },

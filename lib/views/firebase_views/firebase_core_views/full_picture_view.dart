@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_text_widget.dart';
+import '../../../custom_widgets/custom_header_widget.dart';
 import '../../../res/app_utils.dart';
 import '../../../res/constants/app_colors.dart';
 import '../../../res/constants/app_fonts.dart';
@@ -54,11 +55,11 @@ class _FullPictureViewState extends State<FullPictureView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // CommonHeaderWidget(
-                    //   logo: 'assets/images/logo.png',
-                    //   icon: 'assets/icons/ic_close.svg',
-                    //   onTap: () => fullPictureViewController.backToHomeScreen(),
-                    // ),
+                    CommonHeaderWidget(
+                      logo: 'assets/images/logo.png',
+                      icon: 'assets/icons/ic_close.svg',
+                      onTap: () => fullPictureViewController.backToHomeScreen(),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: Container(

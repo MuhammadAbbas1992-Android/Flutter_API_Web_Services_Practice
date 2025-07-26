@@ -41,7 +41,7 @@ class SigninWithEmailLinkScreenController extends GetxController {
           title: 'Message',
           message:
               'Link sent to email ${emailController.value}, Please check your email');
-      Get.offNamed(RoutNames.welcomeScreen);
+      Get.offNamed(RoutNames.welcomeView);
     } catch (e) {
       isLogining.value = false;
       AppUtils.mySnackBar(title: 'Error', message: 'sending sign-in link: $e');

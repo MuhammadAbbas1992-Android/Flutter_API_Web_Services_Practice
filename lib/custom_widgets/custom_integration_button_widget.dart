@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../view_models/controllers/firebase_controllers/firebase_integration_screen_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_database_steam_builder_with_list_view_builder_view_controller.dart';
+import '../view_models/controllers/firebase_controllers/firebase_integration_view_controller.dart';
 import 'custom_text_widget.dart';
 
 class CustomIntegrationButtonWidget extends StatelessWidget {
@@ -8,13 +9,13 @@ class CustomIntegrationButtonWidget extends StatelessWidget {
     required this.caseNo,
     required this.btnText,
     required this.categoryText,
-    this.controller,
+    this.firebaseIntegrationViewController,
   });
 
   final int caseNo;
   final String btnText;
   final String categoryText;
-  final FirebaseIntegrationScreenController? controller;
+  final FirebaseIntegrationViewController? firebaseIntegrationViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +27,18 @@ class CustomIntegrationButtonWidget extends StatelessWidget {
               switch (caseNo) {
                 //Firebase User Authentication
                 case 1:
-                  controller?.showLoginScreen(caseNo);
+                  firebaseIntegrationViewController?.showLoginView(caseNo);
                   break;
                 case 2:
-                  controller?.showSignUpScreen(caseNo);
+                  firebaseIntegrationViewController?.showSignUpView(caseNo);
                   break;
                 case 3:
-                  controller?.showSigninEmailLinkScreen(caseNo);
+                  firebaseIntegrationViewController
+                      ?.showSigninEmailLinkView(caseNo);
+                  break;
+                case 4:
+                  firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithListViewBuilderView(caseNo);
                   break;
               }
             },

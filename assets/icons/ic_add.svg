@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 50 50">
+  <defs>
+    <filter id="Ellipse_5" x="0" y="0" width="50" height="50" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.255"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1" data-name="Group 1" transform="translate(-356 -10)">
+    <g transform="matrix(1, 0, 0, 1, 356, 10)" filter="url(#Ellipse_5)">
+      <circle id="Ellipse_5-2" data-name="Ellipse 5" cx="16" cy="16" r="16" transform="translate(7 7)" fill="#fdd116"/>
+    </g>
+    <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(374.486 28.908)">
+      <path id="Path_9244" data-name="Path 9244" d="M18,7.5v8.775" transform="translate(-13.612 -7.5)" fill="none" stroke="#ce1127" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_9245" data-name="Path 9245" d="M7.5,18h8.775" transform="translate(-7.5 -13.612)" fill="none" stroke="#ce1127" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

@@ -118,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
                 CommonRowAccountWidget(
                   textMessage: 'Don’t have an account?',
                   textScreen: 'Sign Up',
-                  onTap: () => Get.offNamed(RoutNames.signUpScreen),
+                  onTap: () => Get.offNamed(RoutNames.signUpView),
                 ),
               ],
             ),

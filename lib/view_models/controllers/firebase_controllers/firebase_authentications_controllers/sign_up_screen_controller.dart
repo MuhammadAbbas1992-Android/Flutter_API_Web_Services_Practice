@@ -29,7 +29,7 @@ class SignUpScreenController extends GetxController {
       if (newUser.user != null) {
         AppUtils.mySnackBar(
             title: 'Response', message: 'New user created successfully');
-        Get.offNamed(RoutNames.welcomeScreen);
+        Get.offNamed(RoutNames.welcomeView);
       } else {
         AppUtils.mySnackBar(
             title: 'Response', message: 'Error occurred for creating new user');

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_elevated_button_widget.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_screen_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../custom_widgets/custom_text_widget.dart';
@@ -13,12 +13,12 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView> {
-  late final DashboardScreenController homeScreenController;
+  late final DashboardViewController homeScreenController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeScreenController = Get.put(DashboardScreenController());
+    homeScreenController = Get.put(DashboardViewController());
   }
 
   @override
@@ -49,7 +49,7 @@ class _DashboardViewState extends State<DashboardView> {
                           CustomElevatedButtonWidget(
                             btnText: 'REST API Integration',
                             integrationType: 1,
-                            homeScreenController: homeScreenController,
+                            dashboardViewController: homeScreenController,
                           ),
                           const SizedBox(
                             height: 10,
@@ -57,7 +57,7 @@ class _DashboardViewState extends State<DashboardView> {
                           CustomElevatedButtonWidget(
                             btnText: 'Firebase Integration',
                             integrationType: 2,
-                            homeScreenController: homeScreenController,
+                            dashboardViewController: homeScreenController,
                           )
                         ])))));
   }

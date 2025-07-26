@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_integration_button_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_fonts.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_database_steam_builder_with_list_view_builder_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
-import '../../view_models/controllers/firebase_controllers/firebase_integration_screen_controller.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_integration_view_controller.dart';
 
 class FirebaseIntegrationView extends StatefulWidget {
   const FirebaseIntegrationView({super.key});
@@ -16,7 +17,7 @@ class FirebaseIntegrationView extends StatefulWidget {
 }
 
 class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
-  late final FirebaseIntegrationScreenController
+  late final FirebaseIntegrationViewController
       firebaseIntegrationScreenController;
 
   @override
@@ -24,14 +25,14 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
     // TODO: implement initState
     super.initState();
     firebaseIntegrationScreenController =
-        Get.put(FirebaseIntegrationScreenController());
+        Get.put(FirebaseIntegrationViewController());
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    firebaseIntegrationScreenController.dispose();
     super.dispose();
+    firebaseIntegrationScreenController.dispose();
   }
 
   @override
@@ -67,19 +68,22 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           caseNo: 1,
                           btnText: 'Login',
                           categoryText: 'Login User',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 2,
                           btnText: 'Sing up',
                           categoryText: 'Sign up user',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 3,
                           btnText: 'Sign in with email link',
                           categoryText: 'Sign in with email link',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                       ],
                     ),
@@ -111,25 +115,29 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           caseNo: 4,
                           btnText: 'Home1',
                           categoryText: 'StreamBuilder by ListView.builder',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 5,
                           btnText: 'Home2',
                           categoryText: 'StreamBuilder by ListView.separated',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 6,
                           btnText: 'Home3',
                           categoryText: 'StreamBuilder by ListView.custom',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 7,
                           btnText: 'Home4',
                           categoryText: 'ListView(Static Data)',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                       ],
                     ),
@@ -161,19 +169,22 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           caseNo: 1,
                           btnText: 'Login',
                           categoryText: 'Login User',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 2,
                           btnText: 'Sing up',
                           categoryText: 'Sign up user',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 3,
                           btnText: 'Sign in with email link',
                           categoryText: 'Sign in with email link',
-                          controller: firebaseIntegrationScreenController,
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
                         ),
                       ],
                     ),

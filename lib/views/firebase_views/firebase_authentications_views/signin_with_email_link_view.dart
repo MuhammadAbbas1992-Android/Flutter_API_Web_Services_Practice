@@ -100,7 +100,7 @@ class _SigninWithEmailLinkViewState extends State<SigninWithEmailLinkView> {
                 CommonRowAccountWidget(
                   textMessage: 'Login with email and password',
                   textScreen: 'Login',
-                  onTap: () => Get.offNamed(RoutNames.loginScreen),
+                  onTap: () => Get.offNamed(RoutNames.loginView),
                 ),
               ],
             ),
