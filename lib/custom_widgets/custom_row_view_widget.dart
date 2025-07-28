@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_database_steam_builder_with_list_view_builder_view_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../common/common_text_widget.dart';
 import '../res/constants/app_colors.dart';
 import '../res/constants/app_fonts.dart';
+import 'custom_dialog_box_widget.dart';
 
 class CustomRowViewWidget extends StatelessWidget {
   const CustomRowViewWidget({
@@ -34,8 +36,45 @@ class CustomRowViewWidget extends StatelessWidget {
           () => Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [SvgPicture.string('assets/icons/ic_delete.svg')],
+              SizedBox(
+                child: homeDatabaseSteamBuilderWithListViewBuilderViewController
+                        .isAllData.value
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () =>
+                                homeDatabaseSteamBuilderWithListViewBuilderViewController
+                                    .addPicture(index),
+                            child: SvgPicture.asset(
+                              'assets/icons/ic_edit.svg',
+                              width: 20,
+                              height: 20,
+                              color: AppColors.pink,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              bool shouldDelete =
+                                  await showDeleteConfirmationDialog(context);
+                              if (shouldDelete) {
+                                await homeDatabaseSteamBuilderWithListViewBuilderViewController
+                                    .deleteItem(index);
+                              }
+                            },
+                            child: SvgPicture.asset(
+                              'assets/icons/ic_delete.svg',
+                              width: 20,
+                              height: 20,
+                              color: AppColors.pink,
+                            ),
+                          )
+                        ],
+                      )
+                    : null,
+              ),
+              const SizedBox(
+                height: 10,
               ),
               InkWell(
                   onTap: () =>
@@ -46,16 +85,33 @@ class CustomRowViewWidget extends StatelessWidget {
                     child:
                         homeDatabaseSteamBuilderWithListViewBuilderViewController
                                 .isAllData.value
-                            ? Image.network(
-                                homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                    .picturesList[index].imageUrl,
+                            ? CachedNetworkImage(
+                                imageUrl:
+                                    homeDatabaseSteamBuilderWithListViewBuilderViewController
+                                        .picturesList[index].imageUrl,
+                                placeholder: (context, url) => const Center(
+                                    child: SizedBox(
+                                        width: 30,
+                                        height: 30,
+                                        child: CircularProgressIndicator())),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                                 fit: BoxFit.fill,
                                 height: 155,
                                 width: 156,
                               )
-                            : Image.network(
-                                homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                    .processedUnprocessedList[index].imageUrl,
+                            : CachedNetworkImage(
+                                imageUrl:
+                                    homeDatabaseSteamBuilderWithListViewBuilderViewController
+                                        .processedUnprocessedList[index]
+                                        .imageUrl,
+                                placeholder: (context, url) => const Center(
+                                    child: SizedBox(
+                                        width: 30,
+                                        height: 30,
+                                        child: CircularProgressIndicator())),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                                 fit: BoxFit.fill,
                                 height: 155,
                                 width: 156,

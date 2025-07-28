@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../models/picture_model.dart';
@@ -10,11 +13,16 @@ class AddImageViewController extends GetxController {
   RxString imageName = ''.obs;
   RxString imagePath = ''.obs;
   RxString imageUrl = ''.obs;
+  late int index;
+
+  AddImageViewController() {
+    index = Get.arguments as int;
+  }
 
   Future<void> getImageFromGalleryOrCamera(bool isCameraImage) async {
     AppUtils.mySnackBar(title: 'Alert', message: 'Please choose an image');
     final ImagePicker picker = ImagePicker();
-    final image;
+    final XFile? image;
     if (isCameraImage) {
       image = await picker.pickImage(source: ImageSource.camera);
     } else {
@@ -22,11 +30,47 @@ class AddImageViewController extends GetxController {
     }
 
     if (image != null) {
-      //Get String of Image File from Gallery or Camera
-      imagePath.value = image.path;
-      imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-      isImageSet.value = true;
+      File originalFile = File(image.path);
+      int originalSize = await originalFile.length();
+
+      print("📷 ABC Original Image Size: ${originalSize / 1024} KB");
+
+      late XFile? finalFile = XFile(originalFile.path);
+
+      // ✅ Compress if size > 100KB
+      if (originalSize > 100 * 1024) {
+        finalFile = await compressImage(originalFile);
+      }
+
+      if (finalFile != null) {
+        //Get String of Image File from Gallery or Camera
+        imagePath.value = finalFile.path;
+        imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+        isImageSet.value = true;
+      } else {
+        clearData();
+        AppUtils.mySnackBar(
+            title: 'Error',
+            message:
+                'Image size is large and image not compressed successfully. So try another image');
+      }
     }
+  }
+
+  /// ✅ Helper function to compress the image
+  Future<XFile?> compressImage(File file) async {
+    final String targetPath = "${file.parent.path}.jpg";
+
+    final compressedFile = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path,
+      targetPath,
+      quality: 70, // adjust compression quality (0-100)
+    );
+
+    /*print(
+        "📉 ABC Compressed Image Size: ${(await compressedFile!.length()) / 1024} KB");*/
+
+    return compressedFile;
   }
 
   Future<void> addPicture() async {

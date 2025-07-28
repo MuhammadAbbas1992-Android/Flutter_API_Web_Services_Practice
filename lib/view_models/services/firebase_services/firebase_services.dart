@@ -62,6 +62,10 @@ class FirebaseServices {
 
   // Delete Picture item from Firebase
   static Future<bool> deletePicture(int index) async {
+    String imageUrl = AppUtils.picturesList[index].imageUrl;
+    if (imageUrl.isNotEmpty) {
+      _deleteImage(imageUrl);
+    }
     final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
     try {
       await databaseReference
@@ -78,7 +82,7 @@ class FirebaseServices {
   static Future<String?> uploadImage(String imagePath, String imageUrl) async {
     //Replace with new image , need to delete old image
     if (imageUrl.isNotEmpty) {
-      deleteImage(imageUrl);
+      _deleteImage(imageUrl);
     }
     try {
       // Create a new reference to Firebase Storage
@@ -96,7 +100,7 @@ class FirebaseServices {
   }
 
   // Delete Picture image from Firebase Storage
-  static Future<bool> deleteImage(String imageUrl) async {
+  static Future<bool> _deleteImage(String imageUrl) async {
     try {
       // Extract the reference path from the URL
       Reference ref = FirebaseStorage.instance.refFromURL(imageUrl);

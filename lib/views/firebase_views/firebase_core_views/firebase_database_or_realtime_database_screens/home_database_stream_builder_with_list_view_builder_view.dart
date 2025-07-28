@@ -45,7 +45,7 @@ class _HomeDatabaseStreamBuilderWithListViewBuilderViewState
             icon: 'assets/icons/ic_add.svg',
             onTap: () =>
                 homeDatabaseSteamBuilderWithListViewBuilderViewController
-                    .addPicture(),
+                    .addPicture(-1),
           ),
           CustomCategoryWidget(
             homeDatabaseSteamBuilderWithListViewBuilderViewController:

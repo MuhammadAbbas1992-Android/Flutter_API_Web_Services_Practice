@@ -33,7 +33,8 @@ class CustomDataWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : AppUtils.picturesList.isEmpty
+              : homeDatabaseSteamBuilderWithListViewBuilderViewController
+                      .picturesList.isEmpty
                   ? const Center(
                       child: CommonTextWidget(
                         text: 'No data found',
@@ -46,7 +47,7 @@ class CustomDataWidget extends StatelessWidget {
                               crossAxisCount: 2,
                               mainAxisSpacing: 15,
                               crossAxisSpacing: 20,
-                              mainAxisExtent: 220),
+                              mainAxisExtent: 250),
                       itemCount: homeDatabaseSteamBuilderWithListViewBuilderViewController
                               .isAllData.value
                           ? homeDatabaseSteamBuilderWithListViewBuilderViewController
