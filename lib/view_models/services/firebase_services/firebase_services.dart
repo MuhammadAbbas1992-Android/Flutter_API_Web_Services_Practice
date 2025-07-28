@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
@@ -79,10 +80,15 @@ class FirebaseServices {
   }
 
   //Upload Image on Firebase Storage
-  static Future<String?> uploadImage(String imagePath, String imageUrl) async {
+  static Future<String?> uploadImage(
+      String imagePath, String oldImageUrl) async {
+    // ✅ Ensure a Firebase user is signed in
+    if (FirebaseAuth.instance.currentUser == null) {
+      await FirebaseAuth.instance.signInAnonymously();
+    }
     //Replace with new image , need to delete old image
-    if (imageUrl.isNotEmpty) {
-      _deleteImage(imageUrl);
+    if (oldImageUrl.isNotEmpty) {
+      _deleteImage(oldImageUrl);
     }
     try {
       // Create a new reference to Firebase Storage

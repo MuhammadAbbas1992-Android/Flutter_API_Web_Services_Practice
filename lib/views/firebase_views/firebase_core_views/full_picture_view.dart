@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,8 +44,15 @@ class _FullPictureViewState extends State<FullPictureView> {
                                 .picturesList[fullPictureViewController.index]
                                 .imageUrl,
                             scale: double.infinity)))),*/
-            Image.network(
-              AppUtils.picturesList[fullPictureViewController.index].imageUrl,
+            CachedNetworkImage(
+              imageUrl: AppUtils
+                  .picturesList[fullPictureViewController.index].imageUrl,
+              placeholder: (context, url) => const Center(
+                  child: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: CircularProgressIndicator())),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.fill,
               height: double.infinity,
               width: double.infinity,

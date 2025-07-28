@@ -17,6 +17,10 @@ class AddImageViewController extends GetxController {
 
   AddImageViewController() {
     index = Get.arguments as int;
+    if (index > -1) {
+      imageUrl.value = AppUtils.picturesList[index].imageUrl;
+      imageName.value = AppUtils.picturesList[index].name;
+    }
   }
 
   Future<void> getImageFromGalleryOrCamera(bool isCameraImage) async {
@@ -30,7 +34,7 @@ class AddImageViewController extends GetxController {
     }
 
     if (image != null) {
-      File originalFile = File(image.path);
+      /*File originalFile = File(image.path);
       int originalSize = await originalFile.length();
 
       print("📷 ABC Original Image Size: ${originalSize / 1024} KB");
@@ -41,23 +45,25 @@ class AddImageViewController extends GetxController {
       if (originalSize > 100 * 1024) {
         finalFile = await compressImage(originalFile);
       }
-
-      if (finalFile != null) {
-        //Get String of Image File from Gallery or Camera
-        imagePath.value = finalFile.path;
-        imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-        isImageSet.value = true;
-      } else {
-        clearData();
-        AppUtils.mySnackBar(
-            title: 'Error',
-            message:
-                'Image size is large and image not compressed successfully. So try another image');
-      }
+*/
+      // if (finalFile != null)
+      // {
+      //Get String of Image File from Gallery or Camera
+      // imagePath.value = finalFile.path;
+      imagePath.value = image.path;
+      imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      isImageSet.value = true;
+    } else {
+      clearData();
+      AppUtils.mySnackBar(
+          title: 'Error',
+          message:
+              'Image size is large and image not compressed successfully. So try another image');
     }
   }
+  // }
 
-  /// ✅ Helper function to compress the image
+  /*/// ✅ Helper function to compress the image
   Future<XFile?> compressImage(File file) async {
     final String targetPath = "${file.parent.path}.jpg";
 
@@ -67,11 +73,11 @@ class AddImageViewController extends GetxController {
       quality: 70, // adjust compression quality (0-100)
     );
 
-    /*print(
-        "📉 ABC Compressed Image Size: ${(await compressedFile!.length()) / 1024} KB");*/
+    */ /*print(
+        "📉 ABC Compressed Image Size: ${(await compressedFile!.length()) / 1024} KB");*/ /*
 
     return compressedFile;
-  }
+  }*/
 
   Future<void> addPicture() async {
     isLoading.value = !isLoading.value;
