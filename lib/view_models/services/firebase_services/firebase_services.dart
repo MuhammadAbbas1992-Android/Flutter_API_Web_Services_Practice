@@ -82,10 +82,10 @@ class FirebaseServices {
   //Upload Image on Firebase Storage
   static Future<String?> uploadImage(
       String imagePath, String oldImageUrl) async {
-    // ✅ Ensure a Firebase user is signed in
+    /*// ✅ Ensure a Firebase user is signed in
     if (FirebaseAuth.instance.currentUser == null) {
       await FirebaseAuth.instance.signInAnonymously();
-    }
+    }*/
     //Replace with new image , need to delete old image
     if (oldImageUrl.isNotEmpty) {
       _deleteImage(oldImageUrl);
