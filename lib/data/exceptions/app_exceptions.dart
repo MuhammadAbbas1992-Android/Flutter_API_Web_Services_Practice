@@ -31,3 +31,8 @@ class InvalidUrlException extends AppExceptions {
   InvalidUrlException([String? message])
       : super('InvalidUrlException: ', message);
 }
+
+class FirebaseRequestException extends AppExceptions {
+  FirebaseRequestException([String? message])
+      : super('FirebaseException: ', message);
+}

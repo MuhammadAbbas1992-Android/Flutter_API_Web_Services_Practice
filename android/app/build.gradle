@@ -29,6 +29,10 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    // ✅ Enable TLS 1.2 for pre-Lollipop
+    configurations.all {
+        resolutionStrategy.force 'com.squareup.okhttp3:okhttp:4.9.3'
+    }
 
     buildTypes {
         release {

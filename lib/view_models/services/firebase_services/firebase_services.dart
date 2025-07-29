@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 
+import '../../../data/exceptions/app_exceptions.dart';
 import '../../../models/picture_model.dart';
 import '../../../res/app_utils.dart';
 
@@ -80,16 +83,11 @@ class FirebaseServices {
   }
 
   //Upload Image on Firebase Storage
-  static Future<String?> uploadImage(
-      String imagePath, String oldImageUrl) async {
-    /*// ✅ Ensure a Firebase user is signed in
-    if (FirebaseAuth.instance.currentUser == null) {
-      await FirebaseAuth.instance.signInAnonymously();
-    }*/
+  static Future<String?> uploadImage(String imagePath, String imageUrl) async {
     //Replace with new image , need to delete old image
-    if (oldImageUrl.isNotEmpty) {
-      _deleteImage(oldImageUrl);
-    }
+    /*if (imageUrl.isNotEmpty) {
+      deleteImage(imageUrl);
+    }*/
     try {
       // Create a new reference to Firebase Storage
       final storageRef = FirebaseStorage.instance.ref().child(
@@ -104,6 +102,88 @@ class FirebaseServices {
       return null;
     }
   }
+
+  static Future<dynamic> testUpload(String imagePath, String imageUrl) async {
+    final ref = FirebaseStorage.instance.ref().child(
+        '${AppConstants.firebaseDBName}/Images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+    try {
+      // Start upload
+      final uploadTask = ref.putFile(File(imagePath));
+      await uploadTask
+          .whenComplete(() => print("ABC ✅ Upload Completed"))
+          .timeout(const Duration(seconds: 10), onTimeout: () async {
+        print("ABC Upload task took longer than 10 seconds.");
+        uploadTask.cancel();
+        throw TimeoutException("ABC Upload task took longer than 10 seconds.");
+      });
+      print("✅ Upload Completed Successfully");
+    } on TimeoutException catch (e) {
+      print("⏳ Timeout: $e");
+      // Stop further processing
+      return;
+    } catch (e) {
+      print("❌ Upload Failed: $e");
+    }
+  }
+
+  /*static Future<String?> uploadImage(
+      String imagePath, String oldImageUrl) async {
+    try {
+      // ✅ Ensure Firebase is initialized
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp();
+      }
+
+      // ✅ Ensure user is authenticated (anonymous sign-in)
+      if (FirebaseAuth.instance.currentUser == null) {
+        await FirebaseAuth.instance.signInAnonymously();
+      }
+
+      final ref = FirebaseStorage.instance.ref().child(
+          '${AppConstants.firebaseDBName}/Images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+      print("ABC 🚀 Upload started for: $imagePath");
+      await ref.putFile(File(imagePath));
+      String url = await ref.getDownloadURL();
+      print("ABC ✅ Upload success: $url");
+
+      return url;
+    } on FirebaseException catch (e) {
+      print("ABC 🔥 Firebase Storage Error: ${e.code} - ${e.message}");
+      return null;
+    } catch (e) {
+      print("ABC 🔥 General Upload Error: $e");
+      return null;
+    }
+  }
+*/
+  //Upload Image on Firebase Storage
+  /* static Future<dynamic> uploadImage(String imagePath, String oldImageUrl) async {
+    // ✅ Ensure a Firebase user is signed in
+    if (FirebaseAuth.instance.currentUser == null) {
+      await FirebaseAuth.instance.signInAnonymously();
+    }
+    //Replace with new image , need to delete old image
+    */ /* if (oldImageUrl.isNotEmpty) {
+      _deleteImage(oldImageUrl);
+    }*/ /*
+
+    try {
+      // Create a new reference to Firebase Storage
+      final storageRef = FirebaseStorage.instance.ref().child(
+          '${AppConstants.firebaseDBName}/Images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+      // Upload the image file
+      await storageRef.putFile(File(imagePath));
+      String imageUrl = await storageRef.getDownloadURL();
+      return imageUrl;
+    } on FirebaseException catch (e) {
+      throw FirebaseRequestException('${e.code} - ${e.message}');
+    } catch (e) {
+      return null;
+    }
+  }*/
 
   // Delete Picture image from Firebase Storage
   static Future<bool> _deleteImage(String imageUrl) async {

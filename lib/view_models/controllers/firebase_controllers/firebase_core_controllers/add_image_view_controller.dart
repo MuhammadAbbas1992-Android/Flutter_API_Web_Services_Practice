@@ -34,7 +34,25 @@ class AddImageViewController extends GetxController {
     }
 
     if (image != null) {
-      /*File originalFile = File(image.path);
+      //Get String of Image File from Gallery or Camera
+      imagePath.value = image.path;
+      print('ABC ${imagePath.value}');
+      imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      isImageSet.value = true;
+    }
+  }
+  /* Future<void> getImageFromGalleryOrCamera(bool isCameraImage) async {
+    AppUtils.mySnackBar(title: 'Alert', message: 'Please choose an image');
+    final ImagePicker picker = ImagePicker();
+    final XFile? image;
+    if (isCameraImage) {
+      image = await picker.pickImage(source: ImageSource.camera);
+    } else {
+      image = await picker.pickImage(source: ImageSource.gallery);
+    }
+
+    if (image != null) {
+      */ /*File originalFile = File(image.path);
       int originalSize = await originalFile.length();
 
       print("📷 ABC Original Image Size: ${originalSize / 1024} KB");
@@ -45,7 +63,7 @@ class AddImageViewController extends GetxController {
       if (originalSize > 100 * 1024) {
         finalFile = await compressImage(originalFile);
       }
-*/
+*/ /*
       // if (finalFile != null)
       // {
       //Get String of Image File from Gallery or Camera
@@ -60,7 +78,7 @@ class AddImageViewController extends GetxController {
           message:
               'Image size is large and image not compressed successfully. So try another image');
     }
-  }
+  }*/
   // }
 
   /*/// ✅ Helper function to compress the image
@@ -78,12 +96,11 @@ class AddImageViewController extends GetxController {
 
     return compressedFile;
   }*/
-
   Future<void> addPicture() async {
     isLoading.value = !isLoading.value;
     //Each time it will work as u choose a new image from gallery
     if (imagePath.value.isNotEmpty) {
-      await FirebaseServices.uploadImage(imagePath.value, imageUrl.value)
+      await FirebaseServices.testUpload(imagePath.value, imageUrl.value)
           .then((value) {
         if (value != null) {
           imageUrl.value = value;
@@ -98,6 +115,30 @@ class AddImageViewController extends GetxController {
       saveMedicine();
     }
   }
+  /*Future<void> addPicture() async {
+    isLoading.value = !isLoading.value;
+    //Each time it will work as u choose a new image from gallery
+    if (imagePath.value.isNotEmpty) {
+      await FirebaseServices.uploadImage(imagePath.value, imageUrl.value)
+          .then((value) {
+        if (value != null) {
+          imageUrl.value = value;
+          saveMedicine();
+        } else {
+          isLoading.value = !isLoading.value;
+          AppUtils.mySnackBar(
+              title: 'Error', message: 'Failed to upload image');
+        }
+      }).onError(
+        (error, stackTrace) {
+          isLoading.value = !isLoading.value;
+          Get.snackbar('Error', error.toString());
+        },
+      );
+    } else {
+      saveMedicine();
+    }
+  }*/
 
   Future<void> saveMedicine() async {
     //Add new Pet
