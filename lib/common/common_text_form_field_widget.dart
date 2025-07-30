@@ -53,7 +53,7 @@ class CommonTextFormFieldWidget extends StatelessWidget {
               bottom: 18.0,
             ),
             child: SvgPicture.asset(
-              prefixIcon!,
+              prefixIcon,
             ),
           ),
           hintText: hint,

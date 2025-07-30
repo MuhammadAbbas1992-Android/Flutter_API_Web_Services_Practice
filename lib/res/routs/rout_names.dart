@@ -23,4 +23,13 @@ class RoutNames {
   //Firebase Database or Realtime Database RoutNames
   static const String homeDatabaseStreamBuilderWithListViewBuilderView =
       '/home_database_stream_builder_with_list_view_builder_view';
+
+  //Google Maps RoutNames
+  static const String googleMapsIntegrationViews =
+      '/google_maps_integration_views';
+  static const String googleMapView = '/google_map_view';
+
+  //Go Maps RoutNames
+  static const String goMapsIntegrationView = '/go_maps_integration_view';
+  static const String goMapPredictionsView = '/go_map_predictions_view';
 }

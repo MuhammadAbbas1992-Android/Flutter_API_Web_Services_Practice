@@ -24,4 +24,9 @@ class AppUrl {
   static const Map<String, String> header = {
     'Content-Type': 'application/json',
   };
+
+  //GoMaps APIs
+  static const String goMapsApiKey = 'AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr';
+  static const String goMapsBaseUrl =
+      'https://maps.gomaps.pro/maps/api/place/queryautocomplete/json';
 }

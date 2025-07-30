@@ -58,6 +58,22 @@ class _DashboardViewState extends State<DashboardView> {
                             btnText: 'Firebase Integration',
                             integrationType: 2,
                             dashboardViewController: homeScreenController,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomElevatedButtonWidget(
+                            btnText: 'Google Maps',
+                            integrationType: 3,
+                            dashboardViewController: homeScreenController,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomElevatedButtonWidget(
+                            btnText: 'Go Maps',
+                            integrationType: 4,
+                            dashboardViewController: homeScreenController,
                           )
                         ])))));
   }

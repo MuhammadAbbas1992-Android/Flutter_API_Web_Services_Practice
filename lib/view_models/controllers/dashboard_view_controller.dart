@@ -9,4 +9,12 @@ class DashboardViewController extends GetxController {
   openFirebaseIntegrationView() {
     Get.toNamed(RoutNames.firebaseIntegrationView);
   }
+
+  openGoogleMapsIntegrationView() {
+    Get.toNamed(RoutNames.googleMapsIntegrationViews);
+  }
+
+  openGoMapsIntegrationView() {
+    Get.toNamed(RoutNames.goMapsIntegrationView);
+  }
 }

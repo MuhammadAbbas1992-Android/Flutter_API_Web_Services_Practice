@@ -42,9 +42,9 @@ class AppUtils {
     return null;
   }
 
-  static String? validateFieldData(String? value, String field) {
+  static String? validateFieldData(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter $field';
+      return 'Please enter any text';
     }
     return null;
   }

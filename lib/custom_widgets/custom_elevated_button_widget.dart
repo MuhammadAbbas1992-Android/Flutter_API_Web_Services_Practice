@@ -23,6 +23,12 @@ class CustomElevatedButtonWidget extends StatelessWidget {
           case 2:
             dashboardViewController.openFirebaseIntegrationView();
             break;
+          case 3:
+            dashboardViewController.openGoogleMapsIntegrationView();
+            break;
+          case 4:
+            dashboardViewController.openGoMapsIntegrationView();
+            break;
         }
       },
       style: ElevatedButton.styleFrom(
