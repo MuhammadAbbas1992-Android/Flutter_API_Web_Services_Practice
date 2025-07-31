@@ -62,7 +62,7 @@ class _GoMapPredictionsViewState extends State<GoMapPredictionsView> {
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
                           decoration: const InputDecoration(
-                            labelText: 'Search',
+                            labelText: 'Search your location here',
                             prefixIcon: Icon(Icons.search),
                             border: OutlineInputBorder(),
                           ),

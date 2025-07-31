@@ -73,6 +73,36 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 3,
+                  btnText: 'Polyline Map',
+                  categoryText: 'Map with Polyline',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 4,
+                  btnText: 'Polyline Address Map',
+                  categoryText: 'Polyline with Address Map',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 5,
+                  btnText: 'Routs Map',
+                  categoryText: 'Map with Routs',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
               ],
             ),
           ),

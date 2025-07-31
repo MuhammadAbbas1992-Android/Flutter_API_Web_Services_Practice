@@ -28,6 +28,11 @@ class RoutNames {
   static const String googleMapsIntegrationViews =
       '/google_maps_integration_views';
   static const String googleMapView = '/google_map_view';
+  static const String googleMapWithPolylineView =
+      '/google_map_with_polyline_view';
+  static const String googleMapWithPolylineAddressView =
+      '/google_map_with_polyline_address_view';
+  static const String googleMapWithRoutsView = '/google_map_with_routs_view';
 
   //Go Maps RoutNames
   static const String goMapsIntegrationView = '/go_maps_integration_view';

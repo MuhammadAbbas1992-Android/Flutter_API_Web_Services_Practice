@@ -34,6 +34,18 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
                 case 2:
                   googleMapsIntegrationViewController?.showMapScreen(caseNo);
                   break;
+                case 3:
+                  googleMapsIntegrationViewController
+                      ?.showMapWithPolylineScreen(caseNo);
+                  break;
+                case 4:
+                  googleMapsIntegrationViewController
+                      ?.showMapWithPolylineAddressScreen(caseNo);
+                  break;
+                case 5:
+                  googleMapsIntegrationViewController
+                      ?.showMapWithRoutsScreen(caseNo);
+                  break;
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

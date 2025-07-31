@@ -5,7 +5,10 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_with_polyline_address_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_with_routs_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_maps_integration_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_with_polyline_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import '../../views/firebase_views/firebase_authentications_views/forgot_reset_password_view.dart';
@@ -109,6 +112,21 @@ class AppRouts {
     GetPage(
         name: RoutNames.googleMapView,
         page: () => const GoogleMapView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.googleMapWithPolylineView,
+        page: () => const GoogleMapWithPolylineView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.googleMapWithPolylineAddressView,
+        page: () => const GoogleMapWithPolylineAddressView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.googleMapWithRoutsView,
+        page: () => const GoogleMapWithRoutsView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 

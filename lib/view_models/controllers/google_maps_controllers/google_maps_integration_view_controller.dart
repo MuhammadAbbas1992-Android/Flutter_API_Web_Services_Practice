@@ -13,4 +13,19 @@ class GoogleMapsIntegrationViewController extends GetxController {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.googleMapView);
   }
+
+  void showMapWithPolylineScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.googleMapWithPolylineView);
+  }
+
+  void showMapWithPolylineAddressScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.googleMapWithPolylineAddressView);
+  }
+
+  void showMapWithRoutsScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.googleMapWithRoutsView);
+  }
 }
