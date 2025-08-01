@@ -1,14 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_map_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../custom_widgets/custom_button_widget.dart';
-import '../../../custom_widgets/custom_elevation_button_widget.dart';
-import '../../../custom_widgets/custom_header_widget.dart';
-import '../../../custom_widgets/custom_image_widget.dart';
-import '../../../custom_widgets/custom_name_widget.dart';
-import '../../../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
+import '../../custom_widgets/custom_text_widget.dart';
 
 class GoogleMapView extends StatefulWidget {
   const GoogleMapView({super.key});
@@ -18,36 +14,102 @@ class GoogleMapView extends StatefulWidget {
 }
 
 class _GoogleMapViewState extends State<GoogleMapView> {
-  late GoogleMapController mapController;
+  late final GoogleMapViewController _googleMapViewController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-  Set<Marker> markers = {
-    const Marker(
-      markerId: MarkerId("1"),
-      position: LatLng(45.521563, -122.677433),
-      infoWindow: InfoWindow(title: "Portland"),
-    )
-  };
-  void _onMapCreated(GoogleMapController controller) async {
-    mapController = controller;
+  @override
+  void initState() {
+    super.initState();
+    _googleMapViewController = Get.put(GoogleMapViewController());
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _googleMapViewController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async {
-          Get.back(result: false);
-          return true;
-        },
-        child: SafeArea(
-            child: Scaffold(
-                body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11.0,
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Center(
+                child: CustomTextWidget(
+              text: 'Google Map',
+            )),
+            backgroundColor: Colors.blue.shade500,
           ),
-          markers: markers,
-        ))));
+          body:
+              Obx(() => _googleMapViewController.isPositionLoaded.value == false
+                  ? const Center(child: CircularProgressIndicator())
+                  : Stack(
+                      children: [
+                        GoogleMap(
+                          initialCameraPosition: CameraPosition(
+                            target: _googleMapViewController.currentPosition!,
+                            zoom: 14,
+                          ),
+                          markers: _googleMapViewController.markers,
+                          // polylines: _polylines,
+                          /*onMapCreated: (GoogleMapController controller) {
+                      _googleMapViewController.controller.complete(controller);
+                    },*/
+                          myLocationEnabled: true,
+                          myLocationButtonEnabled: true,
+                        ),
+                        Positioned(
+                          top: 40,
+                          left: 10,
+                          right: 10,
+                          child: Card(
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text("Latitude",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16)),
+                                      Text("Longitude",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  _googleMapViewController
+                                          .isDisplayCoordinates.value
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(_googleMapViewController
+                                                .currentPosition!.latitude
+                                                .toStringAsFixed(6)),
+                                            Text(_googleMapViewController
+                                                .currentPosition!.longitude
+                                                .toStringAsFixed(6)),
+                                          ],
+                                        )
+                                      : const SizedBox.shrink(),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                      onPressed: () => _googleMapViewController
+                                          .toggleButton(),
+                                      child: const Text("Show Coordinates")),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))),
+    );
   }
 }

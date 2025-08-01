@@ -58,8 +58,8 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
               children: [
                 CustomGoogleMapsButtonWidget(
                   caseNo: 1,
-                  btnText: 'Predictions',
-                  categoryText: 'Predictions/Search',
+                  btnText: 'Show Location',
+                  categoryText: 'Show Location on Map',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -68,16 +68,6 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 2,
-                  btnText: 'Map',
-                  categoryText: 'Open Map',
-                  googleMapsIntegrationViewController:
-                      googleMapsIntegrationViewController,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomGoogleMapsButtonWidget(
-                  caseNo: 3,
                   btnText: 'Polyline Map',
                   categoryText: 'Map with Polyline',
                   googleMapsIntegrationViewController:
@@ -87,9 +77,19 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                   height: 10,
                 ),
                 CustomGoogleMapsButtonWidget(
-                  caseNo: 4,
+                  caseNo: 3,
                   btnText: 'Polyline Address Map',
-                  categoryText: 'Polyline with Address Map',
+                  categoryText: ' Map with Polyline Address',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 4,
+                  btnText: 'Routs Map',
+                  categoryText: 'Map with Routs',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -98,8 +98,8 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 5,
-                  btnText: 'Routs Map',
-                  categoryText: 'Map with Routs',
+                  btnText: 'Share Location',
+                  categoryText: 'Share current location',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),

@@ -27,24 +27,24 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               switch (caseNo) {
-                //GoMaps Predictions
                 case 1:
                   googleMapsIntegrationViewController?.showMapScreen(caseNo);
                   break;
                 case 2:
-                  googleMapsIntegrationViewController?.showMapScreen(caseNo);
-                  break;
-                case 3:
                   googleMapsIntegrationViewController
                       ?.showMapWithPolylineScreen(caseNo);
                   break;
-                case 4:
+                case 3:
                   googleMapsIntegrationViewController
                       ?.showMapWithPolylineAddressScreen(caseNo);
                   break;
-                case 5:
+                case 4:
                   googleMapsIntegrationViewController
                       ?.showMapWithRoutsScreen(caseNo);
+                  break;
+                case 5:
+                  googleMapsIntegrationViewController
+                      ?.showShareLocationScreen(caseNo);
                   break;
               }
             },

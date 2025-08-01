@@ -23,8 +23,12 @@ class _GoogleMapWithRoutsViewState extends State<GoogleMapWithRoutsView> {
   final TextEditingController lngController =
       TextEditingController(text: '74.329376');
 
+  //Google Map API Key not working..
   final String googleApiKey =
-      "AIzaSyBtAubRGSlTZanGLTPT3JrKWsRCFAXZzrE"; // 🔹 Replace with your real API Key
+      "AIzaSyBtAubRGSlTZanGLTPT3JrKWsRCFAXZzrE"; // 🔹 Replace with your real key
+  //app.gomaps.pro Map API Key is working...
+  final String goMapApiKey =
+      "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
 
   @override
   void initState() {
@@ -50,11 +54,14 @@ class _GoogleMapWithRoutsViewState extends State<GoogleMapWithRoutsView> {
   Future<void> _drawRouteFromAPI() async {
     if (currentPosition == null) return;
 
-    double? destLat = double.tryParse(latController.text);
-    double? destLng = double.tryParse(lngController.text);
+    double? destLat = double.tryParse(latController.value.text);
+    double? destLng = double.tryParse(lngController.value.text);
     if (destLat == null || destLng == null) return;
 
     LatLng destination = LatLng(destLat, destLng);
+    AppUtils.mySnackBar(
+        title: 'Coordinates',
+        message: '${destination.latitude},${destination.longitude}');
 
     // Add destination marker
     setState(() {
@@ -65,17 +72,23 @@ class _GoogleMapWithRoutsViewState extends State<GoogleMapWithRoutsView> {
       ));
     });
 
-    // Build URL
+    //Google Map API Key not working...
+    /* String url =
+        "https://maps.googleapis.com/maps/api/directions/json?origin=${currentPosition!.latitude},${currentPosition!.longitude}&destination=${destination.latitude},${destination.longitude}&key=$goMapApiKey";*/
+    //app.gomaps.pro Map API Key is working...
     String url =
-        "https://maps.googleapis.com/maps/api/directions/json?origin=${currentPosition!.latitude},${currentPosition!.longitude}&destination=${destination.latitude},${destination.longitude}&key=$googleApiKey";
-
+        'https://maps.gomaps.pro/maps/api/directions/json?origin=${currentPosition!.latitude},${currentPosition!.longitude}&destination=${destination.latitude},${destination.longitude}&key=$goMapApiKey';
+    AppUtils.mySnackBar(title: 'URL', message: url);
+    print('ABC Url: $url');
     final response = await http.get(Uri.parse(url));
-
+    AppUtils.mySnackBar(title: 'response', message: url);
+    print('ABC Response: $response');
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
+      print('ABC data: $data');
 
       // ✅ Check if routes exist
-      if (data['routes'] == null || data['routes'].isEmpty) {
+      if (data['status'] != 'OK' || data['routes'].isEmpty) {
         AppUtils.mySnackBar(
             title: 'Error',
             message: "⚠️ No route found. Check your API key or location.");
