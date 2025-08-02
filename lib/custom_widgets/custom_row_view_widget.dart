@@ -14,12 +14,12 @@ class CustomRowViewWidget extends StatelessWidget {
   const CustomRowViewWidget({
     super.key,
     required this.index,
-    required this.homeDatabaseSteamBuilderWithListViewBuilderViewController,
+    required this.homeStreamAndListViewBuilderViewController,
   });
 
   final int index;
-  final HomeDatabaseSteamBuilderWithListViewBuilderViewController
-      homeDatabaseSteamBuilderWithListViewBuilderViewController;
+  final HomeStreamAndListViewBuilderViewController
+      homeStreamAndListViewBuilderViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +37,14 @@ class CustomRowViewWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                child: homeDatabaseSteamBuilderWithListViewBuilderViewController
+                child: homeStreamAndListViewBuilderViewController
                         .isAllData.value
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
                             onTap: () =>
-                                homeDatabaseSteamBuilderWithListViewBuilderViewController
+                                homeStreamAndListViewBuilderViewController
                                     .addPicture(index),
                             child: SvgPicture.asset(
                               'assets/icons/ic_edit.svg',
@@ -58,7 +58,7 @@ class CustomRowViewWidget extends StatelessWidget {
                               bool shouldDelete =
                                   await showDeleteConfirmationDialog(context);
                               if (shouldDelete) {
-                                await homeDatabaseSteamBuilderWithListViewBuilderViewController
+                                await homeStreamAndListViewBuilderViewController
                                     .deleteItem(index);
                               }
                             },
@@ -77,45 +77,40 @@ class CustomRowViewWidget extends StatelessWidget {
                 height: 10,
               ),
               InkWell(
-                  onTap: () =>
-                      homeDatabaseSteamBuilderWithListViewBuilderViewController
-                          .openFullPictureView(index),
+                  onTap: () => homeStreamAndListViewBuilderViewController
+                      .openFullPictureView(index),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(7),
-                    child:
-                        homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                .isAllData.value
-                            ? CachedNetworkImage(
-                                imageUrl:
-                                    homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                        .picturesList[index].imageUrl,
-                                placeholder: (context, url) => const Center(
-                                    child: SizedBox(
-                                        width: 30,
-                                        height: 30,
-                                        child: CircularProgressIndicator())),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                fit: BoxFit.fill,
-                                height: 155,
-                                width: 156,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl:
-                                    homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                        .processedUnprocessedList[index]
-                                        .imageUrl,
-                                placeholder: (context, url) => const Center(
-                                    child: SizedBox(
-                                        width: 30,
-                                        height: 30,
-                                        child: CircularProgressIndicator())),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                fit: BoxFit.fill,
-                                height: 155,
-                                width: 156,
-                              ),
+                    child: homeStreamAndListViewBuilderViewController
+                            .isAllData.value
+                        ? CachedNetworkImage(
+                            imageUrl: homeStreamAndListViewBuilderViewController
+                                .picturesList[index].imageUrl,
+                            placeholder: (context, url) => const Center(
+                                child: SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: CircularProgressIndicator())),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            fit: BoxFit.fill,
+                            height: 155,
+                            width: 156,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: homeStreamAndListViewBuilderViewController
+                                .processedUnprocessedList[index].imageUrl,
+                            placeholder: (context, url) => const Center(
+                                child: SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: CircularProgressIndicator())),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            fit: BoxFit.fill,
+                            height: 155,
+                            width: 156,
+                          ),
                   )),
               const SizedBox(
                 height: 5,
@@ -124,14 +119,14 @@ class CustomRowViewWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CommonTextWidget(
-                    text: homeDatabaseSteamBuilderWithListViewBuilderViewController
+                    text: homeStreamAndListViewBuilderViewController
                             .isAllData.value
-                        ? homeDatabaseSteamBuilderWithListViewBuilderViewController
+                        ? homeStreamAndListViewBuilderViewController
                                     .picturesList[index].processed ==
                                 true
                             ? 'Processed'
                             : 'Unprocessed'
-                        : homeDatabaseSteamBuilderWithListViewBuilderViewController
+                        : homeStreamAndListViewBuilderViewController
                                     .processedUnprocessedList[index]
                                     .processed ==
                                 true
@@ -143,31 +138,30 @@ class CustomRowViewWidget extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   FlutterSwitch(
-                    value: homeDatabaseSteamBuilderWithListViewBuilderViewController
+                    value: homeStreamAndListViewBuilderViewController
                             .isAllData.value
-                        ? homeDatabaseSteamBuilderWithListViewBuilderViewController
+                        ? homeStreamAndListViewBuilderViewController
                             .picturesList[index].processed!
-                        : homeDatabaseSteamBuilderWithListViewBuilderViewController
+                        : homeStreamAndListViewBuilderViewController
                             .processedUnprocessedList[index].processed!,
                     onToggle: (value) =>
-                        homeDatabaseSteamBuilderWithListViewBuilderViewController
-                            .toggle(value, index),
+                        homeStreamAndListViewBuilderViewController.toggle(
+                            value, index),
                     activeColor: AppColors.lightPink,
                     inactiveColor: AppColors.mediumGrey,
-                    toggleColor:
-                        homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                .isAllData.value
-                            ? homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                        .picturesList[index].processed ==
-                                    true
-                                ? AppColors.pink
-                                : AppColors.lightGrey
-                            : homeDatabaseSteamBuilderWithListViewBuilderViewController
-                                        .processedUnprocessedList[index]
-                                        .processed ==
-                                    true
-                                ? AppColors.pink
-                                : AppColors.lightGrey,
+                    toggleColor: homeStreamAndListViewBuilderViewController
+                            .isAllData.value
+                        ? homeStreamAndListViewBuilderViewController
+                                    .picturesList[index].processed ==
+                                true
+                            ? AppColors.pink
+                            : AppColors.lightGrey
+                        : homeStreamAndListViewBuilderViewController
+                                    .processedUnprocessedList[index]
+                                    .processed ==
+                                true
+                            ? AppColors.pink
+                            : AppColors.lightGrey,
                     toggleSize: 18,
                     width: 40.0,
                     height: 17.0,
@@ -181,11 +175,10 @@ class CustomRowViewWidget extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               CommonTextWidget(
-                text: homeDatabaseSteamBuilderWithListViewBuilderViewController
-                        .isAllData.value
-                    ? homeDatabaseSteamBuilderWithListViewBuilderViewController
+                text: homeStreamAndListViewBuilderViewController.isAllData.value
+                    ? homeStreamAndListViewBuilderViewController
                         .picturesList[index].name
-                    : homeDatabaseSteamBuilderWithListViewBuilderViewController
+                    : homeStreamAndListViewBuilderViewController
                         .processedUnprocessedList[index].name,
                 size: 10,
                 color: AppColors.pink,

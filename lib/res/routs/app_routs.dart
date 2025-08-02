@@ -6,7 +6,7 @@ import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_pre
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/polyline_map_address_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_with_routs_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/routs_map_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/polyline_map_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/share_current_location_view.dart';
@@ -17,7 +17,7 @@ import '../../views/firebase_views/firebase_authentications_views/login_view.dar
 import '../../views/firebase_views/firebase_authentications_views/sign_up_view.dart';
 import '../../views/firebase_views/firebase_authentications_views/signin_with_email_link_view.dart';
 import '../../views/firebase_views/firebase_authentications_views/welcome_view.dart';
-import '../../views/firebase_views/firebase_core_views/firebase_database_or_realtime_database_screens/home_database_stream_builder_with_list_view_builder_view.dart';
+import '../../views/firebase_views/firebase_core_views/database_or_realtime_screens/home_stream_and_list_view_builder_view.dart';
 import '../../views/firebase_views/firebase_integration_view.dart';
 import '../../views/rest_apis_views/get_list_view.dart';
 import '../../views/rest_apis_views/get_single_view.dart';
@@ -99,8 +99,8 @@ class AppRouts {
 
     //Firebase Database or Realtime Database Routs
     GetPage(
-        name: RoutNames.homeDatabaseStreamBuilderWithListViewBuilderView,
-        page: () => const HomeDatabaseStreamBuilderWithListViewBuilderView(),
+        name: RoutNames.homeStreamAndListViewBuilderView,
+        page: () => const HomeStreamAndListViewBuilderView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 
@@ -126,8 +126,8 @@ class AppRouts {
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.googleMapWithRoutsView,
-        page: () => const GoogleMapWithRoutsView(),
+        name: RoutNames.routsMapView,
+        page: () => const RoutsMapView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(

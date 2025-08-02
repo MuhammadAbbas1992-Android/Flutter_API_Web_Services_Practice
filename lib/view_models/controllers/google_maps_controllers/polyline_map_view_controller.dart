@@ -47,11 +47,11 @@ class PolylineMapViewController extends GetxController {
         ));
 
         isPositionLoaded.value = true;
-      }).timeout(const Duration(seconds: 20), onTimeout: () {
+      }).timeout(const Duration(seconds: 30), onTimeout: () {
         isPositionLoaded.value = true;
         AppUtils.mySnackBar(
             title: 'Error',
-            message: 'Fetching location timed out after 20 seconds, Try again');
+            message: 'Fetching location timed out after 30 seconds, Try again');
       });
     } catch (e) {
       isPositionLoaded.value = true;

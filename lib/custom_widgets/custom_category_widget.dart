@@ -9,11 +9,11 @@ import '../res/constants/app_fonts.dart';
 class CustomCategoryWidget extends StatelessWidget {
   const CustomCategoryWidget({
     super.key,
-    required this.homeDatabaseSteamBuilderWithListViewBuilderViewController,
+    required this.homeStreamAndListViewBuilderViewController,
   });
 
-  final HomeDatabaseSteamBuilderWithListViewBuilderViewController
-      homeDatabaseSteamBuilderWithListViewBuilderViewController;
+  final HomeStreamAndListViewBuilderViewController
+      homeStreamAndListViewBuilderViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class CustomCategoryWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          onTap: () => homeDatabaseSteamBuilderWithListViewBuilderViewController
-              .selectAllPictures(),
+          onTap: () =>
+              homeStreamAndListViewBuilderViewController.selectAllPictures(),
           child: Container(
             height: 20,
             width: Get.width * .15,
@@ -40,7 +40,7 @@ class CustomCategoryWidget extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         InkWell(
-          onTap: () => homeDatabaseSteamBuilderWithListViewBuilderViewController
+          onTap: () => homeStreamAndListViewBuilderViewController
               .selectUnprocessedPictures(0),
           child: Container(
             height: 20,
@@ -60,7 +60,7 @@ class CustomCategoryWidget extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         InkWell(
-          onTap: () => homeDatabaseSteamBuilderWithListViewBuilderViewController
+          onTap: () => homeStreamAndListViewBuilderViewController
               .selectUnprocessedPictures(1),
           child: Container(
             height: 20,

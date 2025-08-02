@@ -21,8 +21,8 @@ class RoutNames {
   static const String fullPictureView = '/full_picture_view';
 
   //Firebase Database or Realtime Database RoutNames
-  static const String homeDatabaseStreamBuilderWithListViewBuilderView =
-      '/home_database_stream_builder_with_list_view_builder_view';
+  static const String homeStreamAndListViewBuilderView =
+      '/home_stream_and_list_view_builder_view';
 
   //Google Maps RoutNames
   static const String googleMapsIntegrationViews =
@@ -30,7 +30,7 @@ class RoutNames {
   static const String googleMapView = '/google_map_view';
   static const String polylineMapView = '/polyline_map_view';
   static const String polylineMapAddressView = '/polyline_map_address_view';
-  static const String googleMapWithRoutsView = '/google_map_with_routs_view';
+  static const String routsMapView = '/routs_map_view';
   static const String shareCurrentLocationView = '/share_current_location_view';
 
   //Go Maps RoutNames

@@ -10,17 +10,16 @@ import 'custom_row_view_widget.dart';
 class CustomDataWidget extends StatelessWidget {
   const CustomDataWidget({
     super.key,
-    required this.homeDatabaseSteamBuilderWithListViewBuilderViewController,
+    required this.homeStreamAndListViewBuilderViewController,
   });
 
-  final HomeDatabaseSteamBuilderWithListViewBuilderViewController
-      homeDatabaseSteamBuilderWithListViewBuilderViewController;
+  final HomeStreamAndListViewBuilderViewController
+      homeStreamAndListViewBuilderViewController;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Expanded(
-          child: homeDatabaseSteamBuilderWithListViewBuilderViewController
-                  .isLoading.value
+          child: homeStreamAndListViewBuilderViewController.isLoading.value
               ? const Center(
                   child: SizedBox(
                     width: 50,
@@ -33,8 +32,7 @@ class CustomDataWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : homeDatabaseSteamBuilderWithListViewBuilderViewController
-                      .picturesList.isEmpty
+              : homeStreamAndListViewBuilderViewController.picturesList.isEmpty
                   ? const Center(
                       child: CommonTextWidget(
                         text: 'No data found',
@@ -48,11 +46,11 @@ class CustomDataWidget extends StatelessWidget {
                               mainAxisSpacing: 15,
                               crossAxisSpacing: 20,
                               mainAxisExtent: 250),
-                      itemCount: homeDatabaseSteamBuilderWithListViewBuilderViewController
+                      itemCount: homeStreamAndListViewBuilderViewController
                               .isAllData.value
-                          ? homeDatabaseSteamBuilderWithListViewBuilderViewController
+                          ? homeStreamAndListViewBuilderViewController
                               .picturesList.length
-                          : homeDatabaseSteamBuilderWithListViewBuilderViewController
+                          : homeStreamAndListViewBuilderViewController
                               .processedUnprocessedList.length,
                       // itemCount: homeViewController.isAllData.value
                       //     ? AppUtils.picturesList.length
@@ -60,8 +58,8 @@ class CustomDataWidget extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return CustomRowViewWidget(
                           index: index,
-                          homeDatabaseSteamBuilderWithListViewBuilderViewController:
-                              homeDatabaseSteamBuilderWithListViewBuilderViewController,
+                          homeStreamAndListViewBuilderViewController:
+                              homeStreamAndListViewBuilderViewController,
                         );
                       },
                     ),

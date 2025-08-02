@@ -6,24 +6,24 @@ import '../../../../custom_widgets/custom_category_widget.dart';
 import '../../../../custom_widgets/custom_data_widget.dart';
 import '../../../../custom_widgets/custom_header_widget.dart';
 
-class HomeDatabaseStreamBuilderWithListViewBuilderView extends StatefulWidget {
-  const HomeDatabaseStreamBuilderWithListViewBuilderView({super.key});
+class HomeStreamAndListViewBuilderView extends StatefulWidget {
+  const HomeStreamAndListViewBuilderView({super.key});
 
   @override
-  State<HomeDatabaseStreamBuilderWithListViewBuilderView> createState() =>
-      _HomeDatabaseStreamBuilderWithListViewBuilderViewState();
+  State<HomeStreamAndListViewBuilderView> createState() =>
+      _HomeStreamAndListViewBuilderViewState();
 }
 
-class _HomeDatabaseStreamBuilderWithListViewBuilderViewState
-    extends State<HomeDatabaseStreamBuilderWithListViewBuilderView> {
-  late final HomeDatabaseSteamBuilderWithListViewBuilderViewController
-      homeDatabaseSteamBuilderWithListViewBuilderViewController;
+class _HomeStreamAndListViewBuilderViewState
+    extends State<HomeStreamAndListViewBuilderView> {
+  late final HomeStreamAndListViewBuilderViewController
+      homeStreamAndListViewBuilderViewController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeDatabaseSteamBuilderWithListViewBuilderViewController =
-        Get.put(HomeDatabaseSteamBuilderWithListViewBuilderViewController());
+    homeStreamAndListViewBuilderViewController =
+        Get.put(HomeStreamAndListViewBuilderViewController());
   }
 
   @override
@@ -44,19 +44,18 @@ class _HomeDatabaseStreamBuilderWithListViewBuilderViewState
             logo: 'assets/images/logo.png',
             icon: 'assets/icons/ic_add.svg',
             onTap: () =>
-                homeDatabaseSteamBuilderWithListViewBuilderViewController
-                    .addPicture(-1),
+                homeStreamAndListViewBuilderViewController.addPicture(-1),
           ),
           CustomCategoryWidget(
-            homeDatabaseSteamBuilderWithListViewBuilderViewController:
-                homeDatabaseSteamBuilderWithListViewBuilderViewController,
+            homeStreamAndListViewBuilderViewController:
+                homeStreamAndListViewBuilderViewController,
           ),
           const SizedBox(
             height: 10,
           ),
           CustomDataWidget(
-              homeDatabaseSteamBuilderWithListViewBuilderViewController:
-                  homeDatabaseSteamBuilderWithListViewBuilderViewController)
+              homeStreamAndListViewBuilderViewController:
+                  homeStreamAndListViewBuilderViewController)
         ],
       ),
     )));
