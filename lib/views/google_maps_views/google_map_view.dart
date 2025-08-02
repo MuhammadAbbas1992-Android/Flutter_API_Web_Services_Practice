@@ -46,19 +46,16 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                   : Stack(
                       children: [
                         GoogleMap(
+                          mapType: MapType.hybrid,
                           initialCameraPosition: CameraPosition(
                             target: _googleMapViewController.currentPosition!,
                             zoom: 14,
                           ),
                           markers: _googleMapViewController.markers,
-                          // polylines: _polylines,
-                          /*onMapCreated: (GoogleMapController controller) {
-                      _googleMapViewController.controller.complete(controller);
-                    },*/
                           myLocationEnabled: true,
                           myLocationButtonEnabled: true,
                         ),
-                        Positioned(
+                        /*Positioned(
                           top: 40,
                           left: 10,
                           right: 10,
@@ -107,7 +104,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                       ],
                     ))),
     );

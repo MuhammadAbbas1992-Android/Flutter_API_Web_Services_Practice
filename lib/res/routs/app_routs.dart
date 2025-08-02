@@ -4,6 +4,7 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_types/google_map_types_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/polyline_map_address_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/routs_map_view.dart';
@@ -105,6 +106,11 @@ class AppRouts {
         transition: Transition.leftToRightWithFade),
 
     //Google Maps Routs
+    GetPage(
+        name: RoutNames.googleMapTypesView,
+        page: () => const GoogleMapTypesView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
     GetPage(
         name: RoutNames.googleMapsIntegrationViews,
         page: () => const GoogleMapsIntegrationView(),

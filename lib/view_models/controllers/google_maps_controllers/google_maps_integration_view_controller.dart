@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 import '../../../res/app_utils.dart';
 
 class GoogleMapsIntegrationViewController extends GetxController {
+  void showMapTypesScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.googleMapTypesView);
+  }
+
   void showMapScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.googleMapView);

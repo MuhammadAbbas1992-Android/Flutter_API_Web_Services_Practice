@@ -28,21 +28,25 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
             onPressed: () {
               switch (caseNo) {
                 case 1:
-                  googleMapsIntegrationViewController?.showMapScreen(caseNo);
+                  googleMapsIntegrationViewController
+                      ?.showMapTypesScreen(caseNo);
                   break;
                 case 2:
-                  googleMapsIntegrationViewController
-                      ?.showMapWithPolylineScreen(caseNo);
+                  googleMapsIntegrationViewController?.showMapScreen(caseNo);
                   break;
                 case 3:
                   googleMapsIntegrationViewController
-                      ?.showMapWithPolylineAddressScreen(caseNo);
+                      ?.showMapWithPolylineScreen(caseNo);
                   break;
                 case 4:
                   googleMapsIntegrationViewController
-                      ?.showMapWithRoutsScreen(caseNo);
+                      ?.showMapWithPolylineAddressScreen(caseNo);
                   break;
                 case 5:
+                  googleMapsIntegrationViewController
+                      ?.showMapWithRoutsScreen(caseNo);
+                  break;
+                case 6:
                   googleMapsIntegrationViewController
                       ?.showShareLocationScreen(caseNo);
                   break;
