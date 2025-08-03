@@ -18,7 +18,7 @@ import '../../views/firebase_views/firebase_authentications_views/login_view.dar
 import '../../views/firebase_views/firebase_authentications_views/sign_up_view.dart';
 import '../../views/firebase_views/firebase_authentications_views/signin_with_email_link_view.dart';
 import '../../views/firebase_views/firebase_authentications_views/welcome_view.dart';
-import '../../views/firebase_views/firebase_core_views/database_or_realtime_screens/home_stream_and_list_view_builder_view.dart';
+import '../../views/firebase_views/firebase_core_views/database_or_realtime_screens/home_stream_builder_l_v_b_view.dart';
 import '../../views/firebase_views/firebase_integration_view.dart';
 import '../../views/rest_apis_views/get_list_view.dart';
 import '../../views/rest_apis_views/get_single_view.dart';
@@ -100,8 +100,8 @@ class AppRouts {
 
     //Firebase Database or Realtime Database Routs
     GetPage(
-        name: RoutNames.homeStreamAndListViewBuilderView,
-        page: () => const HomeStreamAndListViewBuilderView(),
+        name: RoutNames.homeStreamBuilderLVBView,
+        page: () => const HomeStreamBuilderLVBView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 

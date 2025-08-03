@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/constants/app_colors.dart';
 
 class PolylineMapView extends StatefulWidget {
   const PolylineMapView({super.key});
@@ -39,59 +40,70 @@ class _PolylineMapViewState extends State<PolylineMapView> {
           backgroundColor: Colors.blue.shade500,
         ),
         body: Obx(
-          () => _polylineMapViewController.isPositionLoaded.value == false
-              ? const Center(child: CircularProgressIndicator())
-              : Stack(
-                  children: [
-                    GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                        target: _polylineMapViewController.currentPosition!,
-                        zoom: 14,
-                      ),
-                      markers: _polylineMapViewController.markers,
-                      polylines: _polylineMapViewController.polylines,
-                      onMapCreated: (GoogleMapController controller) {
-                        _polylineMapViewController.controller
-                            .complete(controller);
-                      },
-                      myLocationEnabled: true,
-                      myLocationButtonEnabled: true,
+          () => _polylineMapViewController.errorMessage.value.isNotEmpty
+              ? Container(
+                  color: AppColors.lightGrey,
+                  child: Center(
+                    child: CustomTextWidget(
+                      text: _polylineMapViewController.errorMessage.value,
+                      color: AppColors.black,
                     ),
-                    Positioned(
-                      top: 40,
-                      left: 10,
-                      right: 10,
-                      child: Card(
-                        elevation: 5,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              TextField(
-                                controller:
-                                    _polylineMapViewController.latController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                    labelText: "Enter Latitude"),
+                  ),
+                )
+              : _polylineMapViewController.isPositionLoaded.value == false
+                  ? const Center(child: CircularProgressIndicator())
+                  : Stack(
+                      children: [
+                        GoogleMap(
+                          initialCameraPosition: CameraPosition(
+                            target: _polylineMapViewController.currentPosition!,
+                            zoom: 14,
+                          ),
+                          markers: _polylineMapViewController.markers,
+                          polylines: _polylineMapViewController.polylines,
+                          onMapCreated: (GoogleMapController controller) {
+                            _polylineMapViewController.controller
+                                .complete(controller);
+                          },
+                          myLocationEnabled: true,
+                          myLocationButtonEnabled: true,
+                        ),
+                        Positioned(
+                          top: 40,
+                          left: 10,
+                          right: 10,
+                          child: Card(
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  TextField(
+                                    controller: _polylineMapViewController
+                                        .latController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                        labelText: "Enter Latitude"),
+                                  ),
+                                  TextField(
+                                    controller: _polylineMapViewController
+                                        .lngController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                        labelText: "Enter Longitude"),
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () =>
+                                          _polylineMapViewController
+                                              .drawPolylineToDestination(),
+                                      child: const Text("Draw Polyline")),
+                                ],
                               ),
-                              TextField(
-                                controller:
-                                    _polylineMapViewController.lngController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                    labelText: "Enter Longitude"),
-                              ),
-                              ElevatedButton(
-                                  onPressed: () => _polylineMapViewController
-                                      .drawPolylineToDestination(),
-                                  child: const Text("Draw Polyline")),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
         ));
   }
 }

@@ -12,6 +12,7 @@ class RoutsMapViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
+  RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final TextEditingController latController =
@@ -28,6 +29,7 @@ class RoutsMapViewController extends GetxController {
       "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
 
   RoutsMapViewController() {
+    errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
   }
@@ -57,14 +59,12 @@ class RoutsMapViewController extends GetxController {
         isPositionLoaded.value = true;
       }).timeout(const Duration(seconds: 30), onTimeout: () {
         isPositionLoaded.value = true;
-        AppUtils.mySnackBar(
-            title: 'Error',
-            message: 'Fetching location timed out after 30 seconds, Try again');
+        errorMessage.value =
+            'Error❌:\nFetching location timed out after 30 seconds,\nTry again';
       });
     } catch (e) {
       isPositionLoaded.value = true;
-      AppUtils.mySnackBar(
-          title: 'Error', message: "❌ Error getting location: $e");
+      errorMessage.value = 'Error❌:\nGetting location: $e\nTry again';
     }
   }
 

@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class GoogleMapTypesViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
+  RxString errorMessage = ''.obs;
   Rx<MapType> selectedMapType = MapType.none.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   RxBool isPositionLoaded = false.obs;
@@ -23,6 +22,7 @@ class GoogleMapTypesViewController extends GetxController {
   };
 
   GoogleMapTypesViewController() {
+    errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
   }
@@ -53,14 +53,12 @@ class GoogleMapTypesViewController extends GetxController {
         isPositionLoaded.value = true;
       }).timeout(const Duration(seconds: 30), onTimeout: () {
         isPositionLoaded.value = true;
-        AppUtils.mySnackBar(
-            title: 'Error',
-            message: 'Fetching location timed out after 30 seconds, Try again');
+        errorMessage.value =
+            'Error❌:\nFetching location timed out after 30 seconds,\nTry again';
       });
     } catch (e) {
       isPositionLoaded.value = true;
-      AppUtils.mySnackBar(
-          title: 'Error', message: "❌ Error getting location: $e");
+      errorMessage.value = 'Error❌:\nGetting location: $e\nTry again';
     }
   }
 

@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class PolylineMapViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
+  RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final TextEditingController latController =
@@ -21,6 +22,7 @@ class PolylineMapViewController extends GetxController {
   RxBool isPositionLoaded = false.obs;
 
   PolylineMapViewController() {
+    errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
   }
@@ -49,14 +51,12 @@ class PolylineMapViewController extends GetxController {
         isPositionLoaded.value = true;
       }).timeout(const Duration(seconds: 30), onTimeout: () {
         isPositionLoaded.value = true;
-        AppUtils.mySnackBar(
-            title: 'Error',
-            message: 'Fetching location timed out after 30 seconds, Try again');
+        errorMessage.value =
+            'Error❌:\nFetching location timed out after 30 seconds,\nTry again';
       });
     } catch (e) {
       isPositionLoaded.value = true;
-      AppUtils.mySnackBar(
-          title: 'Error', message: "❌ Error getting location: $e");
+      errorMessage.value = 'Error❌:\nGetting location: $e\nTry again';
     }
   }
 

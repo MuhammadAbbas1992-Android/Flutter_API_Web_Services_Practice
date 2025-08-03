@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/constants/app_colors.dart';
 
 class PolylineMapAddressView extends StatefulWidget {
   const PolylineMapAddressView({super.key});
@@ -42,59 +43,72 @@ class _PolylineMapAddressViewState extends State<PolylineMapAddressView> {
             backgroundColor: Colors.blue.shade500,
           ),
           body: Obx(
-            () => _polylineMapAddressViewController.isPositionLoaded.value ==
-                    false
-                ? const Center(child: CircularProgressIndicator())
-                : Stack(
-                    children: [
-                      GoogleMap(
-                        initialCameraPosition: CameraPosition(
-                          target: _polylineMapAddressViewController
-                              .currentPosition!,
-                          zoom: 14,
-                        ),
-                        markers: _polylineMapAddressViewController.markers,
-                        polylines: _polylineMapAddressViewController.polylines,
-                        onMapCreated: (GoogleMapController controller) {
-                          _polylineMapAddressViewController.controller
-                              .complete(controller);
-                        },
-                        myLocationEnabled: true,
-                        myLocationButtonEnabled: true,
+            () => _polylineMapAddressViewController
+                    .errorMessage.value.isNotEmpty
+                ? Container(
+                    color: AppColors.lightGrey,
+                    child: Center(
+                      child: CustomTextWidget(
+                        text: _polylineMapAddressViewController
+                            .errorMessage.value,
+                        color: AppColors.black,
                       ),
-                      Positioned(
-                        top: 40,
-                        left: 10,
-                        right: 10,
-                        child: Card(
-                          elevation: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    controller:
-                                        _polylineMapAddressViewController
-                                            .searchController,
-                                    decoration: const InputDecoration(
-                                        labelText: "Enter Location Name"),
-                                  ),
+                    ),
+                  )
+                : _polylineMapAddressViewController.isPositionLoaded.value ==
+                        false
+                    ? const Center(child: CircularProgressIndicator())
+                    : Stack(
+                        children: [
+                          GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                              target: _polylineMapAddressViewController
+                                  .currentPosition!,
+                              zoom: 14,
+                            ),
+                            markers: _polylineMapAddressViewController.markers,
+                            polylines:
+                                _polylineMapAddressViewController.polylines,
+                            onMapCreated: (GoogleMapController controller) {
+                              _polylineMapAddressViewController.controller
+                                  .complete(controller);
+                            },
+                            myLocationEnabled: true,
+                            myLocationButtonEnabled: true,
+                          ),
+                          Positioned(
+                            top: 40,
+                            left: 10,
+                            right: 10,
+                            child: Card(
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller:
+                                            _polylineMapAddressViewController
+                                                .searchController,
+                                        decoration: const InputDecoration(
+                                            labelText: "Enter Location Name"),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.search,
+                                          color: Colors.blue),
+                                      onPressed: () =>
+                                          _polylineMapAddressViewController
+                                              .searchAndDrawRoute(),
+                                    )
+                                  ],
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.search,
-                                      color: Colors.blue),
-                                  onPressed: () =>
-                                      _polylineMapAddressViewController
-                                          .searchAndDrawRoute(),
-                                )
-                              ],
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
           )),
     );
   }

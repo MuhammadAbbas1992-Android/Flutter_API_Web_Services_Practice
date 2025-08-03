@@ -4,6 +4,7 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/google
 import 'package:get/get.dart';
 
 import '../../custom_widgets/custom_text_widget.dart';
+import '../../res/constants/app_colors.dart';
 
 class ShareCurrentLocationView extends StatefulWidget {
   const ShareCurrentLocationView({super.key});
@@ -34,21 +35,48 @@ class _ShareCurrentLocationViewState extends State<ShareCurrentLocationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-            child: CustomTextWidget(
-          text: 'Share current location',
-        )),
-        backgroundColor: Colors.blue.shade500,
-      ),
-      body: Center(
-        child: ElevatedButton.icon(
-          onPressed: () =>
-              _shareCurrentLocationViewController.getAndShareLocation(),
-          icon: const Icon(Icons.share_location),
-          label: const Text("Share My Location"),
+        appBar: AppBar(
+          title: const Center(
+              child: CustomTextWidget(
+            text: 'Share current location',
+          )),
+          backgroundColor: Colors.blue.shade500,
         ),
-      ),
-    );
+        body: Stack(
+          children: [
+            Obx(() => _shareCurrentLocationViewController
+                    .isSharingLocation.value
+                ? _shareCurrentLocationViewController
+                        .errorMessage.value.isNotEmpty
+                    ? Container(
+                        color: AppColors.lightGrey,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: CustomTextWidget(
+                              text: _shareCurrentLocationViewController
+                                  .errorMessage.value,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                      )
+                    : _shareCurrentLocationViewController.isLocationShared.value
+                        ? const SizedBox.shrink()
+                        : const Center(child: CircularProgressIndicator())
+                : const SizedBox.shrink()),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton.icon(
+                    onPressed: () => _shareCurrentLocationViewController
+                        .getAndShareLocation(),
+                    icon: const Icon(Icons.share_location),
+                    label: const Text("Share My Location"),
+                  )),
+            ),
+          ],
+        ));
   }
 }

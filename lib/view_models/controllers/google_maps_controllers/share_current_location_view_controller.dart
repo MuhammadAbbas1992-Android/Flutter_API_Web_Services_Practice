@@ -1,12 +1,23 @@
 import 'dart:async';
-
-import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareCurrentLocationViewController extends GetxController {
+  RxBool isSharingLocation = false.obs;
+  RxBool isLocationShared = false.obs;
+  RxString errorMessage = ''.obs;
+
+  ShareCurrentLocationViewController() {
+    isSharingLocation.value = false;
+    isLocationShared.value = false;
+    errorMessage.value = '';
+  }
+
   Future<void> getAndShareLocation() async {
+    isSharingLocation.value = true;
+    errorMessage.value = '';
+
     try {
       LocationPermission permission = await Geolocator.requestPermission();
 
@@ -17,17 +28,15 @@ class ShareCurrentLocationViewController extends GetxController {
         String? locationLink;
         locationLink =
             "https://www.google.com/maps?q=${position.latitude},${position.longitude}";
-
         // ✅ Share the link
         Share.share("Here is my location: $locationLink");
-      }).timeout(const Duration(seconds: 20), onTimeout: () {
-        AppUtils.mySnackBar(
-            title: 'Error',
-            message: 'Fetching location timed out after 20 seconds, Try again');
+        isLocationShared.value = true;
+      }).timeout(const Duration(seconds: 5), onTimeout: () {
+        errorMessage.value =
+            'TimeOut Error❌:\nFetching location timed out after 5 seconds,\nTry again';
       });
     } catch (e) {
-      AppUtils.mySnackBar(
-          title: 'Error', message: "❌ Error getting location: $e");
+      errorMessage.value = 'Getting location Error❌:\n$e\nTry again';
     }
   }
 }

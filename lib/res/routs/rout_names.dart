@@ -21,8 +21,8 @@ class RoutNames {
   static const String fullPictureView = '/full_picture_view';
 
   //Firebase Database or Realtime Database RoutNames
-  static const String homeStreamAndListViewBuilderView =
-      '/home_stream_and_list_view_builder_view';
+  static const String homeStreamBuilderLVBView =
+      '/home_stream_builder_l_v_b_view';
 
   //Google Maps RoutNames
   static const String googleMapsIntegrationViews =
