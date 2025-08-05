@@ -3,8 +3,8 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/google
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../custom_widgets/custom_text_widget.dart';
-import '../../res/constants/app_colors.dart';
+import '../../../custom_widgets/custom_text_widget.dart';
+import '../../../res/constants/app_colors.dart';
 
 class PolylineMapView extends StatefulWidget {
   const PolylineMapView({super.key});
@@ -60,6 +60,8 @@ class _PolylineMapViewState extends State<PolylineMapView> {
                             zoom: 14,
                           ),
                           markers: _polylineMapViewController.markers,
+                          circles: _polylineMapViewController.circle,
+                          polygons: _polylineMapViewController.polygon,
                           polylines: _polylineMapViewController.polylines,
                           onMapCreated: (GoogleMapController controller) {
                             _polylineMapViewController.controller

@@ -106,6 +106,8 @@ class _GoogleMapTypesViewState extends State<GoogleMapTypesView> {
                                   if (newType != null) {
                                     _googleMapTypesViewController
                                         .selectedMapType.value = newType;
+                                    print(
+                                        'ABC Map Type ${_googleMapTypesViewController.selectedMapType.value}: $newType');
                                   }
                                 },
                               ),

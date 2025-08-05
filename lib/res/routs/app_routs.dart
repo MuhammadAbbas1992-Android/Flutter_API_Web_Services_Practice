@@ -6,10 +6,11 @@ import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_pre
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_types/google_map_types_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/polyline_map_address_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/routs_map_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/address_m_p_p_c_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/marker_routs_polygon_circle/address_m_r_p_c_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/marker_routs_polygon_circle/coordinates_m_r_p_c_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/google_maps_integration_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/polyline_map_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/coordinates_m_p_p_c_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/share_current_location_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -134,6 +135,11 @@ class AppRouts {
     GetPage(
         name: RoutNames.routsMapView,
         page: () => const RoutsMapView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.routsMapAddressView,
+        page: () => const RoutsMapAddressView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(

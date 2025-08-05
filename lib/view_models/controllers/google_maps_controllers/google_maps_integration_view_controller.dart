@@ -29,6 +29,11 @@ class GoogleMapsIntegrationViewController extends GetxController {
     Get.toNamed(RoutNames.routsMapView);
   }
 
+  void showMapWithRoutsAddressScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.routsMapAddressView);
+  }
+
   void showShareLocationScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.shareCurrentLocationView);

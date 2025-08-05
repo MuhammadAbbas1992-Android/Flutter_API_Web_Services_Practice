@@ -108,6 +108,16 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 6,
+                  btnText: 'Routs Address Map',
+                  categoryText: 'Map with Routs Address',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 7,
                   btnText: 'Share Location',
                   categoryText: 'Share current location',
                   googleMapsIntegrationViewController:

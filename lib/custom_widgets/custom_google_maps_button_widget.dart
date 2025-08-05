@@ -46,6 +46,10 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
                   break;
                 case 6:
                   googleMapsIntegrationViewController
+                      ?.showMapWithRoutsAddressScreen(caseNo);
+                  break;
+                case 7:
+                  googleMapsIntegrationViewController
                       ?.showShareLocationScreen(caseNo);
                   break;
               }

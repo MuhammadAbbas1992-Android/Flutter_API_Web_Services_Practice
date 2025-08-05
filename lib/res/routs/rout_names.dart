@@ -27,12 +27,13 @@ class RoutNames {
   //Google Maps RoutNames
   static const String googleMapsIntegrationViews =
       '/google_maps_integration_views';
-
   static const String googleMapTypesView = '/google_map_types_view';
   static const String googleMapView = '/google_map_view';
   static const String polylineMapView = '/polyline_map_view';
   static const String polylineMapAddressView = '/polyline_map_address_view';
   static const String routsMapView = '/routs_map_view';
+  static const String routsMapAddressView = '/routs_map_address_view';
+
   static const String shareCurrentLocationView = '/share_current_location_view';
 
   //Go Maps RoutNames

@@ -1,8 +1,6 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -13,6 +11,8 @@ class PolylineMapViewController extends GetxController {
   LatLng? currentPosition;
   RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
+  final RxSet<Circle> _circle = <Circle>{}.obs;
+  final RxSet<Polygon> _polygon = <Polygon>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final TextEditingController latController =
       TextEditingController(text: '31.582045');
@@ -28,6 +28,8 @@ class PolylineMapViewController extends GetxController {
   }
 
   Set<Marker> get markers => _markers.toSet();
+  Set<Circle> get circle => _circle.toSet();
+  Set<Polygon> get polygon => _polygon.toSet();
   Set<Polyline> get polylines => _polylines.toSet();
 
   Future<void> _getCurrentLocation() async {
@@ -60,7 +62,7 @@ class PolylineMapViewController extends GetxController {
     }
   }
 
-  void drawPolylineToDestination() {
+  Future<void> drawPolylineToDestination() async {
     if (currentPosition == null) return;
 
     double? destLat = double.tryParse(latController.value.text);
@@ -73,6 +75,8 @@ class PolylineMapViewController extends GetxController {
     // ✅ Clear previous destination marker & polyline
     _markers.removeWhere((m) => m.markerId.value == "destination");
     _polylines.clear();
+    _circle.clear();
+    _polygon.clear();
 
     // ✅ Add new marker
     _markers.add(Marker(
@@ -93,8 +97,62 @@ class PolylineMapViewController extends GetxController {
       points: [currentPosition!, destinationPosition],
     ));
 
+    /*_circle.add(Circle(
+      circleId: const CircleId('circle1'),
+      center: LatLng(currentPosition!.latitude, currentPosition!.longitude),
+      radius: 1000,
+      fillColor: Colors.blue.withOpacity(0.3),
+      strokeColor: Colors.blue,
+      strokeWidth: 2,
+    ));
+    _circle.add(Circle(
+      circleId: const CircleId('circle2'),
+      center:
+          LatLng(destinationPosition.latitude, destinationPosition.longitude),
+      radius: 1000,
+      fillColor: Colors.pink.withOpacity(0.3),
+      strokeColor: AppColors.pink,
+      strokeWidth: 2,
+    ));*/
+    final polygonPoints = generatePolygonPoints(currentPosition!, 1000);
+    _polygon.add(Polygon(
+      polygonId: const PolygonId('area1'),
+      points: polygonPoints,
+      fillColor: Colors.green.withOpacity(0.3),
+      strokeColor: Colors.black,
+      strokeWidth: 2,
+    ));
     // ✅ Force UI update
+    _polygon.refresh();
     _markers.refresh();
     _polylines.refresh();
+    _circle.refresh();
+  }
+
+  //Just an example to get Polygons point to draw.
+  // But different APIs can be used for getting Polygons points
+  List<LatLng> generatePolygonPoints(LatLng center, double radiusInMeters) {
+    const int numPoints = 10; // Number of vertices in polygon
+    const double earthRadius = 6378137.0; // Earth's radius in meters
+    List<LatLng> points = [];
+
+    double lat = center.latitude * pi / 180;
+    double lng = center.longitude * pi / 180;
+
+    for (int i = 0; i < numPoints; i++) {
+      double angle = (i / numPoints) * 2 * pi;
+
+      // Offset in radians
+      double latOffset = (radiusInMeters / earthRadius) * cos(angle);
+      double lngOffset = (radiusInMeters / earthRadius) * sin(angle) / cos(lat);
+
+      // Convert back to degrees
+      double newLat = lat + latOffset;
+      double newLng = lng + lngOffset;
+
+      points.add(LatLng(newLat * 180 / pi, newLng * 180 / pi));
+    }
+
+    return points;
   }
 }
