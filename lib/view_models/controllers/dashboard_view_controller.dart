@@ -11,7 +11,7 @@ class DashboardViewController extends GetxController {
   }
 
   openGoogleMapsIntegrationView() {
-    Get.toNamed(RoutNames.googleMapsIntegrationViews);
+    Get.toNamed(RoutNames.mapsIntegrationViews);
   }
 
   openGoMapsIntegrationView() {

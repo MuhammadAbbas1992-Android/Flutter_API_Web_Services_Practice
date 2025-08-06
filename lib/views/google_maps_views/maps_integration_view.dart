@@ -13,24 +13,22 @@ import '../../view_models/controllers/rest_apis_controllers/get_api_controller.d
 import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 import '../../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
 
-class GoogleMapsIntegrationView extends StatefulWidget {
-  const GoogleMapsIntegrationView({super.key});
+class MapsIntegrationView extends StatefulWidget {
+  const MapsIntegrationView({super.key});
 
   @override
-  State<GoogleMapsIntegrationView> createState() =>
-      _GoogleMapsIntegrationViewState();
+  State<MapsIntegrationView> createState() => _MapsIntegrationViewState();
 }
 
-class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
-  late final GoogleMapsIntegrationViewController
-      googleMapsIntegrationViewController;
+class _MapsIntegrationViewState extends State<MapsIntegrationView> {
+  late final MapsIntegrationViewController googleMapsIntegrationViewController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     googleMapsIntegrationViewController =
-        Get.put(GoogleMapsIntegrationViewController());
+        Get.put(MapsIntegrationViewController());
   }
 
   @override
@@ -58,16 +56,6 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
               children: [
                 CustomGoogleMapsButtonWidget(
                   caseNo: 1,
-                  btnText: 'Google Map Types',
-                  categoryText: 'Types of Google Map',
-                  googleMapsIntegrationViewController:
-                      googleMapsIntegrationViewController,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomGoogleMapsButtonWidget(
-                  caseNo: 2,
                   btnText: 'Show Location',
                   categoryText: 'Show Location on Map',
                   googleMapsIntegrationViewController:
@@ -77,9 +65,19 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                   height: 10,
                 ),
                 CustomGoogleMapsButtonWidget(
+                  caseNo: 2,
+                  btnText: 'Share Location',
+                  categoryText: 'Share current location',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
                   caseNo: 3,
-                  btnText: 'Polyline Map',
-                  categoryText: 'Map with Polyline',
+                  btnText: 'Marker',
+                  categoryText: 'Marker with Coordinates',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -88,8 +86,8 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 4,
-                  btnText: 'Polyline Address Map',
-                  categoryText: ' Map with Polyline Address',
+                  btnText: 'Marker',
+                  categoryText: 'Marker with Address',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -98,8 +96,8 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 5,
-                  btnText: 'Routs Map',
-                  categoryText: 'Map with Routs',
+                  btnText: 'Polyline',
+                  categoryText: 'Polyline with Coordinates',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -108,6 +106,19 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 6,
+                  btnText: 'Polyline',
+                  categoryText: 'Polyline with Address',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                /*
+
+
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 7,
                   btnText: 'Routs Address Map',
                   categoryText: 'Map with Routs Address',
                   googleMapsIntegrationViewController:
@@ -117,12 +128,22 @@ class _GoogleMapsIntegrationViewState extends State<GoogleMapsIntegrationView> {
                   height: 10,
                 ),
                 CustomGoogleMapsButtonWidget(
-                  caseNo: 7,
-                  btnText: 'Share Location',
-                  categoryText: 'Share current location',
+                  caseNo: 8,
+                  btnText: 'Google Map Types',
+                  categoryText: 'Types of Google Map',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 9,
+                  btnText: 'Map Marker',
+                  categoryText: 'check List',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),*/
               ],
             ),
           ),

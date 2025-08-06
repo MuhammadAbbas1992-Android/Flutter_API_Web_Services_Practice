@@ -1,33 +1,31 @@
 import 'dart:async';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class GoogleMapTypesViewController extends GetxController {
+class MapCheckListViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   RxString errorMessage = ''.obs;
-  Rx<MapType> selectedMapType = MapType.none.obs;
-  final RxSet<Marker> _markers = <Marker>{}.obs;
   RxBool isPositionLoaded = false.obs;
-  RxBool isDisplayCoordinates = false.obs;
+  final RxSet<Marker> _markers = <Marker>{}.obs;
+  var showMarkers = true.obs;
+  var showPolylines = false.obs;
+  var showCircles = false.obs;
+  var showPolygons = false.obs;
 
-  // List of available map types
-  final Map<String, MapType> listMapTypes = {
-    "Normal": MapType.normal,
-    "Satellite": MapType.satellite,
-    "Terrain": MapType.terrain,
-    "Hybrid": MapType.hybrid,
-    "None": MapType.none,
-  };
+  /// Existing properties
+  var markers = <Marker>{};
+  var polylines = <Polyline>{};
+  var circles = <Circle>{};
+  var polygons = <Polygon>{};
 
-  GoogleMapTypesViewController() {
+  MapCheckListViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
   }
-
-  Set<Marker> get markers => _markers.toSet();
 
   Future<void> _getCurrentLocation() async {
     try {
@@ -38,9 +36,6 @@ class GoogleMapTypesViewController extends GetxController {
           .then((position) async {
         currentPosition = LatLng(position.latitude, position.longitude);
 
-        // ✅ Clear previous destination marker & polyline
-        _markers.removeWhere((m) => m.markerId.value == "current");
-
         _markers.add(Marker(
           markerId: const MarkerId("current"),
           position: currentPosition!,
@@ -49,7 +44,7 @@ class GoogleMapTypesViewController extends GetxController {
               snippet:
                   '${currentPosition?.latitude},${currentPosition?.longitude}'),
         ));
-        _markers.refresh();
+
         isPositionLoaded.value = true;
       }).timeout(const Duration(seconds: 30), onTimeout: () {
         isPositionLoaded.value = true;
@@ -62,8 +57,15 @@ class GoogleMapTypesViewController extends GetxController {
     }
   }
 
-  void toggleButton() {
-    _getCurrentLocation();
-    isDisplayCoordinates.value = !isDisplayCoordinates.value;
+  /// Method to process button click
+  void updateMapLayers() {
+    // Here you can add any logic when user presses apply
+    // For example, load additional data, modify shapes dynamically, etc.
+    print("✅ Map Layers Updated: "
+        "Markers=${showMarkers.value}, "
+        "Polylines=${showPolylines.value}, "
+        "Circles=${showCircles.value}, "
+        "Polygons=${showPolygons.value}");
+    update();
   }
 }

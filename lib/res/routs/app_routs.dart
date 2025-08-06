@@ -4,13 +4,12 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_types/google_map_types_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/google_map_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/address_m_p_p_c_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/marker_routs_polygon_circle/address_m_r_p_c_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/marker_routs_polygon_circle/coordinates_m_r_p_c_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/google_maps_integration_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/googel_maps_categories/coordinates_m_p_p_c_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/address_marker_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/coordinates_marker_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polylines/address_polyline_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polylines/coordinates_polyline_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/share_current_location_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -108,26 +107,42 @@ class AppRouts {
 
     //Google Maps Routs
     GetPage(
-        name: RoutNames.googleMapTypesView,
-        page: () => const GoogleMapTypesView(),
+        name: RoutNames.mapsIntegrationViews,
+        page: () => const MapsIntegrationView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.googleMapsIntegrationViews,
-        page: () => const GoogleMapsIntegrationView(),
+        name: RoutNames.currentLocationView,
+        page: () => const CurrentLocationView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.googleMapView,
-        page: () => const GoogleMapView(),
+        name: RoutNames.shareCurrentLocationView,
+        page: () => const ShareCurrentLocationView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.polylineMapView,
-        page: () => const PolylineMapView(),
+        name: RoutNames.coordinatesMarkerView,
+        page: () => const CoordinatesMarkerView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
+        name: RoutNames.addressMarkerView,
+        page: () => const AddressMarkerView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.coordinatesPolylineView,
+        page: () => const CoordinatesPolylineView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
+    GetPage(
+        name: RoutNames.addressPolylineView,
+        page: () => const AddressPolylineView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    /* GetPage(
         name: RoutNames.polylineMapAddressView,
         page: () => const PolylineMapAddressView(),
         transitionDuration: const Duration(milliseconds: 250),
@@ -142,11 +157,12 @@ class AppRouts {
         page: () => const RoutsMapAddressView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
-    GetPage(
-        name: RoutNames.shareCurrentLocationView,
-        page: () => const ShareCurrentLocationView(),
+*/
+    /*GetPage(
+        name: RoutNames.mapMarkerView,
+        page: () => const MapCheckListView(),
         transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
+        transition: Transition.leftToRightWithFade),*/
 
     //Go Maps Routs
     GetPage(

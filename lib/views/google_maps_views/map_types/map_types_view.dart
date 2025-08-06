@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_maps_types_controllers/google_map_types_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/maps_types_controllers/map_types_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../custom_widgets/custom_text_widget.dart';
 import '../../../res/constants/app_colors.dart';
 
-class GoogleMapTypesView extends StatefulWidget {
-  const GoogleMapTypesView({super.key});
+class MapTypesView extends StatefulWidget {
+  const MapTypesView({super.key});
 
   @override
-  State<GoogleMapTypesView> createState() => _GoogleMapTypesViewState();
+  State<MapTypesView> createState() => _MapTypesViewState();
 }
 
-class _GoogleMapTypesViewState extends State<GoogleMapTypesView> {
-  late final GoogleMapTypesViewController _googleMapTypesViewController;
+class _MapTypesViewState extends State<MapTypesView> {
+  late final MapTypesViewController _googleMapTypesViewController;
 
   @override
   void initState() {
     super.initState();
-    _googleMapTypesViewController = Get.put(GoogleMapTypesViewController());
+    _googleMapTypesViewController = Get.put(MapTypesViewController());
   }
 
   @override

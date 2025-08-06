@@ -3,15 +3,25 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class CurrentLocationViewController extends GetxController {
+class MapTypesViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   RxString errorMessage = ''.obs;
+  Rx<MapType> selectedMapType = MapType.none.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   RxBool isPositionLoaded = false.obs;
   RxBool isDisplayCoordinates = false.obs;
 
-  CurrentLocationViewController() {
+  // List of available map types
+  final Map<String, MapType> listMapTypes = {
+    "Normal": MapType.normal,
+    "Satellite": MapType.satellite,
+    "Terrain": MapType.terrain,
+    "Hybrid": MapType.hybrid,
+    "None": MapType.none,
+  };
+
+  MapTypesViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();

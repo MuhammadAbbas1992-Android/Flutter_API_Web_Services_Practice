@@ -14,8 +14,7 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
   final int caseNo;
   final String btnText;
   final String categoryText;
-  final GoogleMapsIntegrationViewController?
-      googleMapsIntegrationViewController;
+  final MapsIntegrationViewController? googleMapsIntegrationViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +25,40 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
             onPressed: () {
               switch (caseNo) {
                 case 1:
-                  googleMapsIntegrationViewController
-                      ?.showMapTypesScreen(caseNo);
-                  break;
-                case 2:
                   googleMapsIntegrationViewController?.showMapScreen(caseNo);
                   break;
-                case 3:
-                  googleMapsIntegrationViewController
-                      ?.showMapWithPolylineScreen(caseNo);
-                  break;
-                case 4:
-                  googleMapsIntegrationViewController
-                      ?.showMapWithPolylineAddressScreen(caseNo);
-                  break;
-                case 5:
-                  googleMapsIntegrationViewController
-                      ?.showMapWithRoutsScreen(caseNo);
-                  break;
-                case 6:
-                  googleMapsIntegrationViewController
-                      ?.showMapWithRoutsAddressScreen(caseNo);
-                  break;
-                case 7:
+                case 2:
                   googleMapsIntegrationViewController
                       ?.showShareLocationScreen(caseNo);
                   break;
+                case 3:
+                  googleMapsIntegrationViewController
+                      ?.showCoordinatesMarkerScreen(caseNo);
+                  break;
+                case 4:
+                  googleMapsIntegrationViewController
+                      ?.showAddressMarkerScreen(caseNo);
+                  break;
+                case 5:
+                  googleMapsIntegrationViewController
+                      ?.showCoordinatesPolylineScreen(caseNo);
+                  break;
+                case 6:
+                  googleMapsIntegrationViewController
+                      ?.showAddressPolylineScreen(caseNo);
+                  break;
+                /*
+
+
+
+                case 7:
+                  googleMapsIntegrationViewController
+                      ?.showMapTypesScreen(caseNo);
+                  break;
+                case 8:
+                  googleMapsIntegrationViewController
+                      ?.showMapMarkersScreen(caseNo);
+                  break;*/
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

@@ -1,17 +1,24 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class CurrentLocationViewController extends GetxController {
+class CoordinatesMarkerViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
+  LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
-  RxBool isPositionLoaded = false.obs;
-  RxBool isDisplayCoordinates = false.obs;
 
-  CurrentLocationViewController() {
+  final TextEditingController latController =
+      TextEditingController(text: '31.582045');
+  final TextEditingController lngController =
+      TextEditingController(text: '74.329376');
+
+  RxBool isPositionLoaded = false.obs;
+
+  CoordinatesMarkerViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
@@ -28,9 +35,6 @@ class CurrentLocationViewController extends GetxController {
           .then((position) async {
         currentPosition = LatLng(position.latitude, position.longitude);
 
-        // ✅ Clear previous destination marker & polyline
-        _markers.removeWhere((m) => m.markerId.value == "current");
-
         _markers.add(Marker(
           markerId: const MarkerId("current"),
           position: currentPosition!,
@@ -39,7 +43,7 @@ class CurrentLocationViewController extends GetxController {
               snippet:
                   '${currentPosition?.latitude},${currentPosition?.longitude}'),
         ));
-        _markers.refresh();
+
         isPositionLoaded.value = true;
       }).timeout(const Duration(seconds: 30), onTimeout: () {
         isPositionLoaded.value = true;
@@ -52,8 +56,31 @@ class CurrentLocationViewController extends GetxController {
     }
   }
 
-  void toggleButton() {
-    _getCurrentLocation();
-    isDisplayCoordinates.value = !isDisplayCoordinates.value;
+  Future<void> drawDestinationMarker() async {
+    if (currentPosition == null) return;
+
+    double? destLat = double.tryParse(latController.value.text);
+    double? destLng = double.tryParse(lngController.value.text);
+
+    if (destLat == null || destLng == null) return;
+
+    destinationPosition = LatLng(destLat, destLng);
+
+    // ✅ Clear previous destination marker & polyline
+    _markers.removeWhere((m) => m.markerId.value == "destination");
+
+    // ✅ Add new marker
+    _markers.add(Marker(
+      markerId: const MarkerId("destination"),
+      position: destinationPosition!,
+      infoWindow: InfoWindow(
+          title: "Destination",
+          snippet:
+              '${destinationPosition?.latitude},${destinationPosition?.longitude}'),
+    ));
+
+    // ✅ Force UI update
+
+    _markers.refresh();
   }
 }

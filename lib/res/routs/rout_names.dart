@@ -25,16 +25,23 @@ class RoutNames {
       '/home_stream_builder_l_v_b_view';
 
   //Google Maps RoutNames
-  static const String googleMapsIntegrationViews =
-      '/google_maps_integration_views';
-  static const String googleMapTypesView = '/google_map_types_view';
-  static const String googleMapView = '/google_map_view';
-  static const String polylineMapView = '/polyline_map_view';
+
+  static const String mapsIntegrationViews = '/maps_integration_view';
+  static const String currentLocationView = '/current_location_view';
+  static const String shareCurrentLocationView = '/share_current_location_view';
+  static const String coordinatesMarkerView = '/coordinates_marker_view';
+  static const String addressMarkerView = '/address_marker_view';
+  static const String coordinatesPolylineView = '/coordinates_polyline_view';
+  static const String addressPolylineView = '/address_polyline_view';
+
+  /*
+
+
   static const String polylineMapAddressView = '/polyline_map_address_view';
   static const String routsMapView = '/routs_map_view';
   static const String routsMapAddressView = '/routs_map_address_view';
 
-  static const String shareCurrentLocationView = '/share_current_location_view';
+  static const String mapMarkerView = '/map_marker_view';*/
 
   //Go Maps RoutNames
   static const String goMapsIntegrationView = '/go_maps_integration_view';

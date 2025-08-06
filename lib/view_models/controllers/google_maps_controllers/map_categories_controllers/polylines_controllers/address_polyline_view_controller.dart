@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class PolylineMapAddressViewController extends GetxController {
+class AddressPolylineViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
@@ -27,7 +27,7 @@ class PolylineMapAddressViewController extends GetxController {
   final String goMapApiKey =
       "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
 
-  PolylineMapAddressViewController() {
+  AddressPolylineViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();

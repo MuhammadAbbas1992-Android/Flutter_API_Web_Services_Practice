@@ -3,21 +3,38 @@ import 'package:get/get.dart';
 
 import '../../../res/app_utils.dart';
 
-class GoogleMapsIntegrationViewController extends GetxController {
-  void showMapTypesScreen(int caseNo) {
-    AppUtils.caseNo = caseNo;
-    Get.toNamed(RoutNames.googleMapTypesView);
-  }
-
+class MapsIntegrationViewController extends GetxController {
   void showMapScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
-    Get.toNamed(RoutNames.googleMapView);
+    Get.toNamed(RoutNames.currentLocationView);
   }
 
-  void showMapWithPolylineScreen(int caseNo) {
+  void showShareLocationScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
-    Get.toNamed(RoutNames.polylineMapView);
+    Get.toNamed(RoutNames.shareCurrentLocationView);
   }
+
+  void showCoordinatesMarkerScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.coordinatesMarkerView);
+  }
+
+  void showAddressMarkerScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.addressMarkerView);
+  }
+
+  void showCoordinatesPolylineScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.coordinatesPolylineView);
+  }
+
+  void showAddressPolylineScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.addressPolylineView);
+  }
+
+  /*
 
   void showMapWithPolylineAddressScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
@@ -34,8 +51,13 @@ class GoogleMapsIntegrationViewController extends GetxController {
     Get.toNamed(RoutNames.routsMapAddressView);
   }
 
-  void showShareLocationScreen(int caseNo) {
+  void showMapTypesScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
-    Get.toNamed(RoutNames.shareCurrentLocationView);
+    Get.toNamed(RoutNames.googleMapTypesView);
   }
+
+  void showMapMarkersScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.mapMarkerView);
+  }*/
 }

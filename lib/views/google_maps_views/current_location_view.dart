@@ -1,33 +1,31 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_map_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../../custom_widgets/custom_text_widget.dart';
 
-class GoogleMapView extends StatefulWidget {
-  const GoogleMapView({super.key});
+class CurrentLocationView extends StatefulWidget {
+  const CurrentLocationView({super.key});
 
   @override
-  State<GoogleMapView> createState() => _GoogleMapViewState();
+  State<CurrentLocationView> createState() => _CurrentLocationViewState();
 }
 
-class _GoogleMapViewState extends State<GoogleMapView> {
-  late final GoogleMapViewController _googleMapViewController;
+class _CurrentLocationViewState extends State<CurrentLocationView> {
+  late final CurrentLocationViewController _currentLocationViewController;
 
   @override
   void initState() {
     super.initState();
-    _googleMapViewController = Get.put(GoogleMapViewController());
+    _currentLocationViewController = Get.put(CurrentLocationViewController());
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _googleMapViewController.dispose();
+    _currentLocationViewController.dispose();
   }
 
   @override
@@ -41,27 +39,29 @@ class _GoogleMapViewState extends State<GoogleMapView> {
             )),
             backgroundColor: Colors.blue.shade500,
           ),
-          body: Obx(() => _googleMapViewController.errorMessage.value.isNotEmpty
+          body: Obx(() => _currentLocationViewController
+                  .errorMessage.value.isNotEmpty
               ? Container(
                   color: AppColors.lightGrey,
                   child: Center(
                     child: CustomTextWidget(
-                      text: _googleMapViewController.errorMessage.value,
+                      text: _currentLocationViewController.errorMessage.value,
                       color: AppColors.black,
                     ),
                   ),
                 )
-              : _googleMapViewController.isPositionLoaded.value == false
+              : _currentLocationViewController.isPositionLoaded.value == false
                   ? const Center(child: CircularProgressIndicator())
                   : Stack(
                       children: [
                         GoogleMap(
                           mapType: MapType.hybrid,
                           initialCameraPosition: CameraPosition(
-                            target: _googleMapViewController.currentPosition!,
+                            target:
+                                _currentLocationViewController.currentPosition!,
                             zoom: 14,
                           ),
-                          markers: _googleMapViewController.markers,
+                          markers: _currentLocationViewController.markers,
                           myLocationEnabled: true,
                           myLocationButtonEnabled: true,
                         ),
@@ -90,16 +90,16 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                     ],
                                   ),
                                   const SizedBox(height: 10),
-                                  _googleMapViewController
+                                  _currentLocationViewController
                                           .isDisplayCoordinates.value
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Text(_googleMapViewController
+                                            Text(_currentLocationViewController
                                                 .currentPosition!.latitude
                                                 .toStringAsFixed(6)),
-                                            Text(_googleMapViewController
+                                            Text(_currentLocationViewController
                                                 .currentPosition!.longitude
                                                 .toStringAsFixed(6)),
                                           ],
@@ -107,8 +107,9 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                       : const SizedBox.shrink(),
                                   const SizedBox(height: 10),
                                   ElevatedButton(
-                                      onPressed: () => _googleMapViewController
-                                          .toggleButton(),
+                                      onPressed: () =>
+                                          _currentLocationViewController
+                                              .toggleButton(),
                                       child: const Text("Show Coordinates")),
                                 ],
                               ),
