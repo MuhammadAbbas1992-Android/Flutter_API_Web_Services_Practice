@@ -3,15 +3,7 @@ import 'package:flutter_api_web_services_practice/custom_widgets/custom_google_m
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_maps_integration_view_controller.dart';
 import 'package:get/get.dart';
 
-import '../../custom_widgets/custom_integration_button_widget.dart';
-import '../../custom_widgets/rest_api_widget.dart';
 import '../../custom_widgets/custom_text_widget.dart';
-import '../../res/app_utils.dart';
-import '../../res/constants/app_colors.dart';
-import '../../res/constants/app_fonts.dart';
-import '../../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
-import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
-import '../../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
 
 class MapsIntegrationView extends StatefulWidget {
   const MapsIntegrationView({super.key});
@@ -114,13 +106,10 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
                 const SizedBox(
                   height: 10,
                 ),
-                /*
-
-
                 CustomGoogleMapsButtonWidget(
                   caseNo: 7,
-                  btnText: 'Routs Address Map',
-                  categoryText: 'Map with Routs Address',
+                  btnText: 'Routs',
+                  categoryText: 'Routs with Coordinates',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -129,8 +118,8 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 8,
-                  btnText: 'Google Map Types',
-                  categoryText: 'Types of Google Map',
+                  btnText: 'Routs',
+                  categoryText: 'Routs with Address',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
@@ -139,11 +128,11 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
                 ),
                 CustomGoogleMapsButtonWidget(
                   caseNo: 9,
-                  btnText: 'Map Marker',
-                  categoryText: 'check List',
+                  btnText: 'Polygon',
+                  categoryText: 'Polygon with Coordinates',
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
-                ),*/
+                ),
               ],
             ),
           ),

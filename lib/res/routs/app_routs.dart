@@ -7,6 +7,9 @@ import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_in
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/address_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/coordinates_marker_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polygons/coordinates_polygon_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/routs/address_routs_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/routs/coordinates_routs_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polylines/address_polyline_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polylines/coordinates_polyline_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/maps_integration_view.dart';
@@ -136,27 +139,29 @@ class AppRouts {
         page: () => const CoordinatesPolylineView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
-
     GetPage(
         name: RoutNames.addressPolylineView,
         page: () => const AddressPolylineView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
-    /* GetPage(
-        name: RoutNames.polylineMapAddressView,
-        page: () => const PolylineMapAddressView(),
+    GetPage(
+        name: RoutNames.coordinatesRoutsView,
+        page: () => const CoordinatesRoutsView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.routsMapView,
-        page: () => const RoutsMapView(),
+        name: RoutNames.addressRoutsView,
+        page: () => const AddressRoutsView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.routsMapAddressView,
-        page: () => const RoutsMapAddressView(),
+        name: RoutNames.coordinatesPolygonView,
+        page: () => const CoordinatesPolygonView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
+    /*
+
+
 */
     /*GetPage(
         name: RoutNames.mapMarkerView,

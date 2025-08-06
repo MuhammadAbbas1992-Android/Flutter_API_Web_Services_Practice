@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/polylines_controllers/address_polyline_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/routs_controllers/address_routs_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/routs_map_address_view_controller.dart';
+
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class AddressPolylineView extends StatefulWidget {
-  const AddressPolylineView({super.key});
+class AddressRoutsView extends StatefulWidget {
+  const AddressRoutsView({super.key});
 
   @override
-  State<AddressPolylineView> createState() => _AddressPolylineViewState();
+  State<AddressRoutsView> createState() => _AddressRoutsViewState();
 }
 
-class _AddressPolylineViewState extends State<AddressPolylineView> {
-  late final AddressPolylineViewController _addressPolylineViewController;
+class _AddressRoutsViewState extends State<AddressRoutsView> {
+  late final AddressRoutsViewController _addressRoutsViewController;
 
   @override
   void initState() {
     super.initState();
-    _addressPolylineViewController = Get.put(AddressPolylineViewController());
+    _addressRoutsViewController = Get.put(AddressRoutsViewController());
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _addressPolylineViewController.dispose();
+    _addressRoutsViewController.dispose();
   }
 
   @override
@@ -35,35 +37,35 @@ class _AddressPolylineViewState extends State<AddressPolylineView> {
           appBar: AppBar(
             title: const Center(
                 child: CustomTextWidget(
-              text: 'Address Polyline Map',
+              text: 'Address Routs Map',
             )),
             backgroundColor: Colors.blue.shade500,
           ),
           body: Obx(
-            () => _addressPolylineViewController.errorMessage.value.isNotEmpty
+            () => _addressRoutsViewController.errorMessage.value.isNotEmpty
                 ? Container(
                     color: AppColors.lightGrey,
                     child: Center(
                       child: CustomTextWidget(
-                        text: _addressPolylineViewController.errorMessage.value,
+                        text: _addressRoutsViewController.errorMessage.value,
                         color: AppColors.black,
                       ),
                     ),
                   )
-                : _addressPolylineViewController.isPositionLoaded.value == false
+                : _addressRoutsViewController.isPositionLoaded.value == false
                     ? const Center(child: CircularProgressIndicator())
                     : Stack(
                         children: [
                           GoogleMap(
                             initialCameraPosition: CameraPosition(
-                              target: _addressPolylineViewController
-                                  .currentPosition!,
+                              target:
+                                  _addressRoutsViewController.currentPosition!,
                               zoom: 14,
                             ),
-                            markers: _addressPolylineViewController.markers,
-                            polylines: _addressPolylineViewController.polylines,
+                            markers: _addressRoutsViewController.markers,
+                            polylines: _addressRoutsViewController.polylines,
                             onMapCreated: (GoogleMapController controller) {
-                              _addressPolylineViewController.controller
+                              _addressRoutsViewController.controller
                                   .complete(controller);
                             },
                             myLocationEnabled: true,
@@ -81,9 +83,8 @@ class _AddressPolylineViewState extends State<AddressPolylineView> {
                                   children: [
                                     Expanded(
                                       child: TextField(
-                                        controller:
-                                            _addressPolylineViewController
-                                                .searchController,
+                                        controller: _addressRoutsViewController
+                                            .searchController,
                                         decoration: const InputDecoration(
                                             labelText: "Enter Location Name"),
                                       ),
@@ -92,7 +93,7 @@ class _AddressPolylineViewState extends State<AddressPolylineView> {
                                       icon: const Icon(Icons.search,
                                           color: Colors.blue),
                                       onPressed: () =>
-                                          _addressPolylineViewController
+                                          _addressRoutsViewController
                                               .searchAndDrawRoute(),
                                     )
                                   ],

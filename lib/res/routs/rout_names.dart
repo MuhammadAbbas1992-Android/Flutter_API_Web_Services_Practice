@@ -33,13 +33,16 @@ class RoutNames {
   static const String addressMarkerView = '/address_marker_view';
   static const String coordinatesPolylineView = '/coordinates_polyline_view';
   static const String addressPolylineView = '/address_polyline_view';
+  static const String coordinatesRoutsView = '/coordinates_routs_view';
+  static const String addressRoutsView = '/address_routs_view';
+  static const String coordinatesPolygonView = '/coordinates_polygon_view';
 
   /*
 
 
-  static const String polylineMapAddressView = '/polyline_map_address_view';
-  static const String routsMapView = '/routs_map_view';
-  static const String routsMapAddressView = '/routs_map_address_view';
+
+
+
 
   static const String mapMarkerView = '/map_marker_view';*/
 
