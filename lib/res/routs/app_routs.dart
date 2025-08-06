@@ -7,6 +7,7 @@ import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_in
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/address_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/coordinates_marker_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polygons/address_polygon_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polygons/coordinates_polygon_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/routs/address_routs_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/routs/coordinates_routs_view.dart';
@@ -159,17 +160,13 @@ class AppRouts {
         page: () => const CoordinatesPolygonView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
-    /*
-
-
-*/
-    /*GetPage(
-        name: RoutNames.mapMarkerView,
-        page: () => const MapCheckListView(),
+    GetPage(
+        name: RoutNames.addressPolygonView,
+        page: () => const AddressPolygonView(),
         transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),*/
+        transition: Transition.leftToRightWithFade),
 
-    //Go Maps Routs
+    /*//Go Maps Routs
     GetPage(
         name: RoutNames.goMapsIntegrationView,
         page: () => const GoMapsIntegrationView(),
@@ -179,6 +176,6 @@ class AppRouts {
         name: RoutNames.goMapPredictionsView,
         page: () => const GoMapPredictionsView(),
         transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
+        transition: Transition.leftToRightWithFade),*/
   ];
 }

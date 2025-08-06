@@ -59,6 +59,10 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
                   googleMapsIntegrationViewController
                       ?.showCoordinatesPolygonScreen(caseNo);
                   break;
+                case 10:
+                  googleMapsIntegrationViewController
+                      ?.showAddressPolygonScreen(caseNo);
+                  break;
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

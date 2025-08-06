@@ -36,6 +36,7 @@ class RoutNames {
   static const String coordinatesRoutsView = '/coordinates_routs_view';
   static const String addressRoutsView = '/address_routs_view';
   static const String coordinatesPolygonView = '/coordinates_polygon_view';
+  static const String addressPolygonView = '/address_polygon_view';
 
   /*
 
@@ -47,6 +48,6 @@ class RoutNames {
   static const String mapMarkerView = '/map_marker_view';*/
 
   //Go Maps RoutNames
-  static const String goMapsIntegrationView = '/go_maps_integration_view';
   static const String goMapPredictionsView = '/go_map_predictions_view';
+  static const String goMapsIntegrationView = '/go_maps_integration_view';
 }

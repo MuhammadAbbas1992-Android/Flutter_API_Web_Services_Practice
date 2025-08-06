@@ -49,6 +49,11 @@ class MapsIntegrationViewController extends GetxController {
     Get.toNamed(RoutNames.coordinatesPolygonView);
   }
 
+  void showAddressPolygonScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.addressPolygonView);
+  }
+
   /*
 
   void showMapWithPolylineAddressScreen(int caseNo) {
