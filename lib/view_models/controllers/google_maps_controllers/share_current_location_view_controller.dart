@@ -31,9 +31,9 @@ class ShareCurrentLocationViewController extends GetxController {
         // ✅ Share the link
         Share.share("Here is my location: $locationLink");
         isLocationShared.value = true;
-      }).timeout(const Duration(seconds: 5), onTimeout: () {
+      }).timeout(const Duration(seconds: 20), onTimeout: () {
         errorMessage.value =
-            'TimeOut Error❌:\nFetching location timed out after 5 seconds,\nTry again';
+            'TimeOut Error❌:\nFetching location timed out after 20 seconds,\nTry again';
       });
     } catch (e) {
       errorMessage.value = 'Getting location Error❌:\n$e\nTry again';

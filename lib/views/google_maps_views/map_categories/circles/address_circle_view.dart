@@ -56,6 +56,7 @@ class _AddressCircleViewState extends State<AddressCircleView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target:
                                   _addressCircleViewController.currentPosition!,
@@ -91,7 +92,7 @@ class _AddressCircleViewState extends State<AddressCircleView> {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.search,
-                                          color: Colors.blue),
+                                          color: AppColors.blue),
                                       onPressed: () =>
                                           _addressCircleViewController
                                               .searchAndDrawRoute(),

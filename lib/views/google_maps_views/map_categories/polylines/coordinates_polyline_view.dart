@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/polylines_controllers/coordinates_polyline_view_controller.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/polyline_map_address_view_controller.dart';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -63,6 +62,7 @@ class _CoordinatesPolylineViewState extends State<CoordinatesPolylineView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target: _coordinatesPolylineViewController
                                   .currentPosition!,

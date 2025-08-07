@@ -55,6 +55,7 @@ class _CoordinatesMarkerViewState extends State<CoordinatesMarkerView> {
                   : Stack(
                       children: [
                         GoogleMap(
+                          mapType: MapType.satellite,
                           initialCameraPosition: CameraPosition(
                             target: _coordinatesMarkerViewController
                                 .currentPosition!,

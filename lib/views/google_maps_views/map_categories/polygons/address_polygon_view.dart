@@ -56,6 +56,7 @@ class _AddressPolygonViewState extends State<AddressPolygonView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target: _addressPolygonViewController
                                   .currentPosition!,
@@ -91,7 +92,7 @@ class _AddressPolygonViewState extends State<AddressPolygonView> {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.search,
-                                          color: Colors.blue),
+                                          color: AppColors.blue),
                                       onPressed: () =>
                                           _addressPolygonViewController
                                               .searchAndDrawRoute(),

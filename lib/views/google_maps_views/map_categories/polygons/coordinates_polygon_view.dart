@@ -57,6 +57,7 @@ class _CoordinatesPolygonViewState extends State<CoordinatesPolygonView> {
                   : Stack(
                       children: [
                         GoogleMap(
+                          mapType: MapType.satellite,
                           initialCameraPosition: CameraPosition(
                             target: _coordinatesPolygonViewController
                                 .currentPosition!,
@@ -101,7 +102,7 @@ class _CoordinatesPolygonViewState extends State<CoordinatesPolygonView> {
                                       onPressed: () =>
                                           _coordinatesPolygonViewController
                                               .drawPolylineToDestination(),
-                                      child: const Text("Draw Polyline")),
+                                      child: const Text("Draw Polygon")),
                                 ],
                               ),
                             ),

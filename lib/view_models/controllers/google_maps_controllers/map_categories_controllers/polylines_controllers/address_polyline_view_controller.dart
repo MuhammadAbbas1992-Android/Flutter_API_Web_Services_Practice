@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/data/exceptions/app_exceptions.dart';
 import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:geolocator/geolocator.dart';
@@ -120,6 +121,8 @@ class AddressPolylineViewController extends GetxController {
       } else {
         throw Exception('⚠️Error fetching route: ${response.statusCode}');
       }
+    } on InternetException {
+      throw InternetException('Check Internet connection');
     } catch (e) {
       throw TimeoutException('⚠️Getting route failed: $e\nTry again');
     }

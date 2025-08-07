@@ -56,6 +56,7 @@ class _AddressMarkerViewState extends State<AddressMarkerView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target:
                                   _addressMarkerViewController.currentPosition!,
@@ -89,7 +90,7 @@ class _AddressMarkerViewState extends State<AddressMarkerView> {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.search,
-                                          color: Colors.blue),
+                                          color: AppColors.blue),
                                       onPressed: () =>
                                           _addressMarkerViewController
                                               .searchAndDrawRoute(),

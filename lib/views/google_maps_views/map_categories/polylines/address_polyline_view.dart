@@ -55,6 +55,7 @@ class _AddressPolylineViewState extends State<AddressPolylineView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target: _addressPolylineViewController
                                   .currentPosition!,
@@ -90,7 +91,7 @@ class _AddressPolylineViewState extends State<AddressPolylineView> {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.search,
-                                          color: Colors.blue),
+                                          color: AppColors.blue),
                                       onPressed: () =>
                                           _addressPolylineViewController
                                               .searchAndDrawRoute(),

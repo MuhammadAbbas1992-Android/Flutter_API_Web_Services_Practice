@@ -56,6 +56,7 @@ class _AddressRoutsViewState extends State<AddressRoutsView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target:
                                   _addressRoutsViewController.currentPosition!,
@@ -90,7 +91,7 @@ class _AddressRoutsViewState extends State<AddressRoutsView> {
                                     ),
                                     IconButton(
                                       icon: const Icon(Icons.search,
-                                          color: Colors.blue),
+                                          color: AppColors.blue),
                                       onPressed: () =>
                                           _addressRoutsViewController
                                               .searchAndDrawRoute(),

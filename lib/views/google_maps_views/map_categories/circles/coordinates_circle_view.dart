@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/circle_controllers/coordinates_circle_view_controller.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/routs_controllers/coordinates_routs_view_controller.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/routs_map_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -61,6 +59,7 @@ class _CoordinatesCircleViewState extends State<CoordinatesCircleView> {
                     : Stack(
                         children: [
                           GoogleMap(
+                            mapType: MapType.satellite,
                             initialCameraPosition: CameraPosition(
                               target: _coordinatesCircleViewController
                                   .currentPosition!,
@@ -107,7 +106,7 @@ class _CoordinatesCircleViewState extends State<CoordinatesCircleView> {
                                         onPressed: () =>
                                             _coordinatesCircleViewController
                                                 .searchPointsAndDrawRout(),
-                                        child: const Text("Draw Route")),
+                                        child: const Text("Draw Circles")),
                                   ],
                                 ),
                               ),
