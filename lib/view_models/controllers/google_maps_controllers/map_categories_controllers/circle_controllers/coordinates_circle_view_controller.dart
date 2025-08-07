@@ -1,20 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/res/app_utils.dart';
+import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class CoordinatesRoutsViewController extends GetxController {
+class CoordinatesCircleViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
+  final RxSet<Circle> _circles = <Circle>{}.obs;
   final TextEditingController latController =
       TextEditingController(text: '24.860966');
   final TextEditingController lngController =
@@ -28,7 +29,7 @@ class CoordinatesRoutsViewController extends GetxController {
   final String goMapApiKey =
       "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
 
-  CoordinatesRoutsViewController() {
+  CoordinatesCircleViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
@@ -37,6 +38,8 @@ class CoordinatesRoutsViewController extends GetxController {
   Set<Marker> get markers => _markers.toSet();
 
   Set<Polyline> get polylines => _polylines.toSet();
+
+  Set<Circle> get circles => _circles.toSet();
 
   Future<void> _getCurrentLocation() async {
     try {
@@ -81,6 +84,7 @@ class CoordinatesRoutsViewController extends GetxController {
     // ✅ Clear previous destination marker & polyline
     _markers.removeWhere((m) => m.markerId.value == "destination");
     _polylines.clear();
+    _circles.clear();
 
     // ✅ Add new marker
     _markers.add(Marker(
@@ -103,22 +107,39 @@ class CoordinatesRoutsViewController extends GetxController {
           color: Colors.blue,
           points: polylineCoords,
         ));
+        _circles.add(Circle(
+          circleId: const CircleId('circle1'),
+          center: LatLng(currentPosition!.latitude, currentPosition!.longitude),
+          radius: 1000,
+          fillColor: AppColors.blue.withOpacity(0.3),
+          strokeColor: AppColors.blue,
+          strokeWidth: 2,
+        ));
+        _circles.add(Circle(
+          circleId: const CircleId('circle2'),
+          center: LatLng(
+              destinationPosition!.latitude, destinationPosition!.longitude),
+          radius: 1000,
+          fillColor: AppColors.pink.withOpacity(0.3),
+          strokeColor: AppColors.pink,
+          strokeWidth: 2,
+        ));
 
 // ✅ Force UI update
         _markers.refresh();
         _polylines.refresh();
+        _circles.refresh();
       } else {
         AppUtils.mySnackBar(
             title: 'Error',
             message:
-                "⚠️Polyline coordinates from current position to destination position not found. Check your API key or location.");
+                "⚠️Failed to find coordinated of destination . Check your API key or location.");
       }
     } catch (e) {
       AppUtils.mySnackBar(title: 'Error', message: '$e');
     }
   }
 
-  // get Routs Points from source to destination
   Future<dynamic> _getPolylinePointsFromGoMapAPI() async {
     //Google Map API Key not working...
     /* String url =
@@ -138,13 +159,16 @@ class CoordinatesRoutsViewController extends GetxController {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
-        // ✅ Check if routes exist
-        if (data['status'] == 'OK' || !data['routes'].isEmpty) {
+        if (data['status'] == 'OK' &&
+            data['routes'] != null &&
+            data['routes'].isNotEmpty) {
           final points = data['routes'][0]['overview_polyline']['points'];
           List<LatLng> polylineCoords = _decodePolyline(points);
+
           return polylineCoords;
         } else {
-          throw Exception('No polyline Coordinates found: ${data['status']}');
+          throw Exception(
+              '⚠️ No polyline coordinated found. Check API key or location values');
         }
       } else {
         throw Exception('⚠️Error fetching route: ${response.statusCode}');

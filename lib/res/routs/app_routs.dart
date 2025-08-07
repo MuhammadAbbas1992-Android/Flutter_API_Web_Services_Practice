@@ -5,6 +5,8 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/address_circle_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/coordinates_circle_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/address_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/coordinates_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polygons/address_polygon_view.dart';
@@ -165,17 +167,27 @@ class AppRouts {
         page: () => const AddressPolygonView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
-
-    /*//Go Maps Routs
     GetPage(
-        name: RoutNames.goMapsIntegrationView,
-        page: () => const GoMapsIntegrationView(),
+        name: RoutNames.coordinatesCircleView,
+        page: () => const CoordinatesCircleView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.addressCircleView,
+        page: () => const AddressCircleView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
+    //Go Maps Routs
+    GetPage(
+        name: RoutNames.coordinatesCircleView,
+        page: () => const CoordinatesCircleView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
         name: RoutNames.goMapPredictionsView,
         page: () => const GoMapPredictionsView(),
         transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),*/
+        transition: Transition.leftToRightWithFade),
   ];
 }

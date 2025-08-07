@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class CoordinatesPolylineViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
+  LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
@@ -65,7 +66,7 @@ class CoordinatesPolylineViewController extends GetxController {
 
     if (destLat == null || destLng == null) return;
 
-    LatLng destinationPosition = LatLng(destLat, destLng);
+    destinationPosition = LatLng(destLat, destLng);
 
     // ✅ Clear previous destination marker & polyline
     _markers.removeWhere((m) => m.markerId.value == "destination");
@@ -74,11 +75,11 @@ class CoordinatesPolylineViewController extends GetxController {
     // ✅ Add new marker
     _markers.add(Marker(
       markerId: const MarkerId("destination"),
-      position: destinationPosition,
+      position: destinationPosition!,
       infoWindow: InfoWindow(
           title: "Destination",
           snippet:
-              '${destinationPosition.latitude},${destinationPosition.longitude}'),
+              '${destinationPosition!.latitude},${destinationPosition!.longitude}'),
     ));
 
     // ✅ Add new polyline
@@ -87,7 +88,7 @@ class CoordinatesPolylineViewController extends GetxController {
       visible: true,
       color: AppColors.blue,
       width: 4,
-      points: [currentPosition!, destinationPosition],
+      points: [currentPosition!, destinationPosition!],
     ));
 
     // ✅ Force UI update

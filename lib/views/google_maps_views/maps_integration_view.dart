@@ -143,6 +143,26 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 11,
+                  btnText: 'Circle',
+                  categoryText: 'Circle with Coordinates',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 12,
+                  btnText: 'Circle',
+                  categoryText: 'Circle with Address',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
               ],
             ),
           ),

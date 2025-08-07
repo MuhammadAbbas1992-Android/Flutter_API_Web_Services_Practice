@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
@@ -9,13 +8,14 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class AddressRoutsViewController extends GetxController {
+class AddressCircleViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
+  final RxSet<Circle> _circles = <Circle>{}.obs;
   final TextEditingController searchController =
       TextEditingController(text: 'Lahore');
 
@@ -28,7 +28,7 @@ class AddressRoutsViewController extends GetxController {
 
   RxBool isPositionLoaded = false.obs;
 
-  AddressRoutsViewController() {
+  AddressCircleViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
@@ -36,6 +36,7 @@ class AddressRoutsViewController extends GetxController {
 
   Set<Marker> get markers => _markers.toSet();
   Set<Polyline> get polylines => _polylines.toSet();
+  Set<Circle> get circles => _circles.toSet();
 
   Future<void> _getCurrentLocation() async {
     try {
@@ -75,10 +76,18 @@ class AddressRoutsViewController extends GetxController {
           message: 'Please, enter any location which you want to search');
       return;
     }
-
-    destinationPosition = await _getCoordinatesFromAddress(address);
-    if (destinationPosition != null) {
-      _drawPolylineToDestination();
+    try {
+      destinationPosition = await _getCoordinatesFromAddress(address);
+      if (destinationPosition != null) {
+        _drawPolylineToDestination();
+      } else {
+        AppUtils.mySnackBar(
+            title: 'Error',
+            message:
+                "⚠️Failed to find coordinated of destination . Check your API key or location.");
+      }
+    } catch (e) {
+      AppUtils.mySnackBar(title: 'Error', message: '$e');
     }
   }
 
@@ -93,25 +102,28 @@ class AddressRoutsViewController extends GetxController {
     final url =
         'https://maps.gomaps.pro/maps/api/geocode/json?address=$encodedAddress&key=$goMapApiKey';
 
-    final response = await http.get(Uri.parse(url));
+    try {
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 30), onTimeout: () {
+        throw TimeoutException(
+            'Fetching time out after 30 seconds.\nPlease try again.');
+      });
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      if (data['status'] == 'OK' && data['results'].isNotEmpty) {
-        final location = data['results'][0]['geometry']['location'];
-        return LatLng(location['lat'], location['lng']);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['status'] == 'OK' && data['results'].isNotEmpty) {
+          final location = data['results'][0]['geometry']['location'];
+          return LatLng(location['lat'], location['lng']);
+        } else {
+          throw Exception('No destination found: ${data['status']}');
+        }
       } else {
-        AppUtils.mySnackBar(
-            title: 'Google API Error', message: ": ${data['status']}");
-        AppUtils.mySnackBar(
-            title: 'Message', message: "No location found: ${data['status']}");
+        throw Exception('⚠️Error fetching route: ${response.statusCode}');
       }
-    } else {
-      AppUtils.mySnackBar(
-          title: 'HTTP Error',
-          message: "${response.statusCode} - ${response.body}");
+    } catch (e) {
+      throw TimeoutException('⚠️Getting route failed: $e\nTry again');
     }
-    return null;
   }
 
   Future<void> _drawPolylineToDestination() async {
@@ -120,6 +132,7 @@ class AddressRoutsViewController extends GetxController {
     // ✅ Clear previous destination marker & polyline
     _markers.removeWhere((m) => m.markerId.value == "destination");
     _polylines.clear();
+    _circles.clear();
 
     // ✅ Add new marker
     _markers.add(Marker(
@@ -132,25 +145,47 @@ class AddressRoutsViewController extends GetxController {
           anchor: const Offset(.5, 0.0)),
     ));
 
-    final polylineCoords = await _getPolylinePointsFromGoMapAPI();
-    if (polylineCoords != null) {
-      // ✅ Add polyline coordinates
-      _polylines.add(Polyline(
-        polylineId: const PolylineId("route"),
-        visible: true,
-        width: 5,
-        color: Colors.blue,
-        points: polylineCoords,
-      ));
+    try {
+      final polylineCoords = await _getPolylinePointsFromGoMapAPI();
+      if (polylineCoords != null) {
+        // ✅ Add polyline coordinates
+        _polylines.add(Polyline(
+          polylineId: const PolylineId("route"),
+          visible: true,
+          width: 5,
+          color: Colors.blue,
+          points: polylineCoords,
+        ));
+        _circles.add(Circle(
+          circleId: const CircleId('circle1'),
+          center: LatLng(currentPosition!.latitude, currentPosition!.longitude),
+          radius: 1000,
+          fillColor: AppColors.blue.withOpacity(0.3),
+          strokeColor: AppColors.blue,
+          strokeWidth: 2,
+        ));
+        _circles.add(Circle(
+          circleId: const CircleId('circle2'),
+          center: LatLng(
+              destinationPosition!.latitude, destinationPosition!.longitude),
+          radius: 1000,
+          fillColor: AppColors.pink.withOpacity(0.3),
+          strokeColor: AppColors.pink,
+          strokeWidth: 2,
+        ));
 
 // ✅ Force UI update
-      _markers.refresh();
-      _polylines.refresh();
-    } else {
-      AppUtils.mySnackBar(
-          title: 'Error',
-          message:
-              "⚠️Polyline coordinates from current position to destination position found. Check your API key or location.");
+        _markers.refresh();
+        _polylines.refresh();
+        _circles.refresh();
+      } else {
+        AppUtils.mySnackBar(
+            title: 'Error',
+            message:
+                "⚠️Polyline coordinates from current position to destination position not found. Check your API key or location.");
+      }
+    } catch (e) {
+      AppUtils.mySnackBar(title: 'Error', message: '$e');
     }
   }
 
@@ -163,30 +198,30 @@ class AddressRoutsViewController extends GetxController {
     String url =
         'https://maps.gomaps.pro/maps/api/directions/json?origin=${currentPosition!.latitude},${currentPosition!.longitude}&destination=${destinationPosition?.latitude},${destinationPosition?.longitude}&key=$goMapApiKey';
 
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+    try {
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 30), onTimeout: () {
+        throw TimeoutException(
+            'Fetching time out after 30 seconds.\nPlease try again.');
+      });
 
-      // ✅ Check if routes exist
-      if (data['status'] == 'OK' || !data['routes'].isEmpty) {
-        final points = data['routes'][0]['overview_polyline']['points'];
-        List<LatLng> polylineCoords = _decodePolyline(points);
-        return polylineCoords;
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        // ✅ Check if routes exist
+        if (data['status'] == 'OK' || !data['routes'].isEmpty) {
+          final points = data['routes'][0]['overview_polyline']['points'];
+          List<LatLng> polylineCoords = _decodePolyline(points);
+          return polylineCoords;
+        } else {
+          throw Exception('No polyline Coordinates found: ${data['status']}');
+        }
       } else {
-        AppUtils.mySnackBar(
-            title: 'Error',
-            message: "⚠️ No route found. Check your API key or location.");
-        AppUtils.mySnackBar(
-            title: 'Warning',
-            message:
-                "⚠️ The Direction API is not enabled. That's why Routs not showing only destination is showing");
-        return null;
+        throw Exception('⚠️Error fetching route: ${response.statusCode}');
       }
-    } else {
-      AppUtils.mySnackBar(
-          title: 'Error',
-          message: "Error fetching route: ${response.statusCode}");
-      return null;
+    } catch (e) {
+      throw TimeoutException('⚠️Getting route failed: $e\nTry again');
     }
   }
 

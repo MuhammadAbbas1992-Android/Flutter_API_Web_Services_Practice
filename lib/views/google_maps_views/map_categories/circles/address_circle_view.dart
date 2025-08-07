@@ -6,27 +6,27 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/google
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class AddressRoutsView extends StatefulWidget {
-  const AddressRoutsView({super.key});
+class AddressCircleView extends StatefulWidget {
+  const AddressCircleView({super.key});
 
   @override
-  State<AddressRoutsView> createState() => _AddressRoutsViewState();
+  State<AddressCircleView> createState() => _AddressCircleViewState();
 }
 
-class _AddressRoutsViewState extends State<AddressRoutsView> {
-  late final AddressCircleViewController _addressRoutsViewController;
+class _AddressCircleViewState extends State<AddressCircleView> {
+  late final AddressCircleViewController _addressCircleViewController;
 
   @override
   void initState() {
     super.initState();
-    _addressRoutsViewController = Get.put(AddressCircleViewController());
+    _addressCircleViewController = Get.put(AddressCircleViewController());
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _addressRoutsViewController.dispose();
+    _addressCircleViewController.dispose();
   }
 
   @override
@@ -36,35 +36,36 @@ class _AddressRoutsViewState extends State<AddressRoutsView> {
           appBar: AppBar(
             title: const Center(
                 child: CustomTextWidget(
-              text: 'Address Routs Map',
+              text: 'Address Circle Map',
             )),
             backgroundColor: Colors.blue.shade500,
           ),
           body: Obx(
-            () => _addressRoutsViewController.errorMessage.value.isNotEmpty
+            () => _addressCircleViewController.errorMessage.value.isNotEmpty
                 ? Container(
                     color: AppColors.lightGrey,
                     child: Center(
                       child: CustomTextWidget(
-                        text: _addressRoutsViewController.errorMessage.value,
+                        text: _addressCircleViewController.errorMessage.value,
                         color: AppColors.black,
                       ),
                     ),
                   )
-                : _addressRoutsViewController.isPositionLoaded.value == false
+                : _addressCircleViewController.isPositionLoaded.value == false
                     ? const Center(child: CircularProgressIndicator())
                     : Stack(
                         children: [
                           GoogleMap(
                             initialCameraPosition: CameraPosition(
                               target:
-                                  _addressRoutsViewController.currentPosition!,
+                                  _addressCircleViewController.currentPosition!,
                               zoom: 14,
                             ),
-                            markers: _addressRoutsViewController.markers,
-                            polylines: _addressRoutsViewController.polylines,
+                            markers: _addressCircleViewController.markers,
+                            polylines: _addressCircleViewController.polylines,
+                            circles: _addressCircleViewController.circles,
                             onMapCreated: (GoogleMapController controller) {
-                              _addressRoutsViewController.controller
+                              _addressCircleViewController.controller
                                   .complete(controller);
                             },
                             myLocationEnabled: true,
@@ -82,7 +83,7 @@ class _AddressRoutsViewState extends State<AddressRoutsView> {
                                   children: [
                                     Expanded(
                                       child: TextField(
-                                        controller: _addressRoutsViewController
+                                        controller: _addressCircleViewController
                                             .searchController,
                                         decoration: const InputDecoration(
                                             labelText: "Enter Location Name"),
@@ -92,7 +93,7 @@ class _AddressRoutsViewState extends State<AddressRoutsView> {
                                       icon: const Icon(Icons.search,
                                           color: Colors.blue),
                                       onPressed: () =>
-                                          _addressRoutsViewController
+                                          _addressCircleViewController
                                               .searchAndDrawRoute(),
                                     )
                                   ],

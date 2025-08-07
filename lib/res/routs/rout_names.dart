@@ -25,7 +25,6 @@ class RoutNames {
       '/home_stream_builder_l_v_b_view';
 
   //Google Maps RoutNames
-
   static const String mapsIntegrationViews = '/maps_integration_view';
   static const String currentLocationView = '/current_location_view';
   static const String shareCurrentLocationView = '/share_current_location_view';
@@ -37,15 +36,8 @@ class RoutNames {
   static const String addressRoutsView = '/address_routs_view';
   static const String coordinatesPolygonView = '/coordinates_polygon_view';
   static const String addressPolygonView = '/address_polygon_view';
-
-  /*
-
-
-
-
-
-
-  static const String mapMarkerView = '/map_marker_view';*/
+  static const String coordinatesCircleView = '/coordinates_circle_view';
+  static const String addressCircleView = '/address_circle_view';
 
   //Go Maps RoutNames
   static const String goMapPredictionsView = '/go_map_predictions_view';

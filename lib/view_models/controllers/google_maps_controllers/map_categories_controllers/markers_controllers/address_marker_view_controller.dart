@@ -65,16 +65,30 @@ class AddressMarkerViewController extends GetxController {
 
   Future<void> searchAndDrawRoute() async {
     final address = searchController.value.text.trim();
-    if (address.isEmpty) return;
+    if (address.isEmpty) {
+      AppUtils.mySnackBar(
+          title: 'Alert',
+          message: 'Please, enter any location which you want to search');
+      return;
+    }
 
-    destinationPosition = await _getCoordinatesFromAddress(address);
-    if (destinationPosition != null) {
-      _drawPolylineToDestination();
+    try {
+      destinationPosition = await _getCoordinatesFromAddress(address);
+      if (destinationPosition != null) {
+        _drawPolylineToDestination();
+      } else {
+        AppUtils.mySnackBar(
+            title: 'Error',
+            message:
+                "⚠️Failed to find coordinated of destination . Check your API key or location.");
+      }
+    } catch (e) {
+      AppUtils.mySnackBar(title: 'Error', message: '$e');
     }
   }
 
   /// ✅ Convert Address → LatLng using Geocoding API
-  Future<LatLng?> _getCoordinatesFromAddress(String address) async {
+  Future<dynamic> _getCoordinatesFromAddress(String address) async {
     final encodedAddress = Uri.encodeComponent(address);
 
     //Google Map API Key not working...
@@ -84,25 +98,28 @@ class AddressMarkerViewController extends GetxController {
     final url =
         'https://maps.gomaps.pro/maps/api/geocode/json?address=$encodedAddress&key=$goMapApiKey';
 
-    final response = await http.get(Uri.parse(url));
+    try {
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 30), onTimeout: () {
+        throw TimeoutException(
+            'Fetching time out after 30 seconds.\nPlease try again.');
+      });
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      if (data['status'] == 'OK' && data['results'].isNotEmpty) {
-        final location = data['results'][0]['geometry']['location'];
-        return LatLng(location['lat'], location['lng']);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['status'] == 'OK' && data['results'].isNotEmpty) {
+          final location = data['results'][0]['geometry']['location'];
+          return LatLng(location['lat'], location['lng']);
+        } else {
+          throw TimeoutException('No location found: ${data['status']}');
+        }
       } else {
-        AppUtils.mySnackBar(
-            title: 'Google API Error', message: ": ${data['status']}");
-        AppUtils.mySnackBar(
-            title: 'Message', message: "No location found: ${data['status']}");
+        throw TimeoutException('Error to find location');
       }
-    } else {
-      AppUtils.mySnackBar(
-          title: 'HTTP Error',
-          message: "${response.statusCode} - ${response.body}");
+    } catch (e) {
+      throw TimeoutException('⚠️Getting destination failed: $e\nTry again');
     }
-    return null;
   }
 
   void _drawPolylineToDestination() {

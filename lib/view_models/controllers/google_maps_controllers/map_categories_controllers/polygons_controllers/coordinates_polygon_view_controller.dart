@@ -93,8 +93,6 @@ class CoordinatesPolygonViewController extends GetxController {
     _markers.refresh();
   }
 
-  //Just an example to get Polygons point to draw.
-  // But different APIs can be used for getting Polygons points
   List<LatLng> generatePolygonPoints(LatLng center, double radiusInMeters) {
     const int numPoints = 10; // Number of vertices in polygon
     const double earthRadius = 6378137.0; // Earth's radius in meters
