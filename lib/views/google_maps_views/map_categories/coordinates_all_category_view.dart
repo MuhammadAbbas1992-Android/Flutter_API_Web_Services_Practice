@@ -6,14 +6,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../custom_widgets/custom_text_widget.dart';
 import '../../../../res/constants/app_colors.dart';
 
-class CoordinatesCircleView extends StatefulWidget {
-  const CoordinatesCircleView({super.key});
+class CoordinatesAllCategoryView extends StatefulWidget {
+  const CoordinatesAllCategoryView({super.key});
 
   @override
-  State<CoordinatesCircleView> createState() => _CoordinatesCircleViewState();
+  State<CoordinatesAllCategoryView> createState() =>
+      _CoordinatesAllCategoryViewState();
 }
 
-class _CoordinatesCircleViewState extends State<CoordinatesCircleView> {
+class _CoordinatesAllCategoryViewState
+    extends State<CoordinatesAllCategoryView> {
   late final CoordinatesAllCategoryViewController
       _coordinatesCircleViewController;
 

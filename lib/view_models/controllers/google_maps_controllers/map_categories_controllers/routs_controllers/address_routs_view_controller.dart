@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class AddressCircleViewController extends GetxController {
+class CoordinatesAllCategoryViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
@@ -28,7 +28,7 @@ class AddressCircleViewController extends GetxController {
 
   RxBool isPositionLoaded = false.obs;
 
-  AddressCircleViewController() {
+  CoordinatesAllCategoryViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();

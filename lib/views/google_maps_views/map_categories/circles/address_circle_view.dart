@@ -14,12 +14,13 @@ class AddressCircleView extends StatefulWidget {
 }
 
 class _AddressCircleViewState extends State<AddressCircleView> {
-  late final AddressCircleViewController _addressCircleViewController;
+  late final CoordinatesAllCategoryViewController _addressCircleViewController;
 
   @override
   void initState() {
     super.initState();
-    _addressCircleViewController = Get.put(AddressCircleViewController());
+    _addressCircleViewController =
+        Get.put(CoordinatesAllCategoryViewController());
   }
 
   @override
