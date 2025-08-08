@@ -92,8 +92,14 @@ class _AddressCircleViewState extends State<AddressCircleView> {
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(Icons.search,
-                                          color: AppColors.blue),
+                                      icon: _addressCircleViewController
+                                                  .isFindingAddress.value ==
+                                              true
+                                          ? const Center(
+                                              child:
+                                                  CircularProgressIndicator())
+                                          : const Icon(Icons.search,
+                                              color: AppColors.blue),
                                       onPressed: () =>
                                           _addressCircleViewController
                                               .searchAndDrawRoute(),

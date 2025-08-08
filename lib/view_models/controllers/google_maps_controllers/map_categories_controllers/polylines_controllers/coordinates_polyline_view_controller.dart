@@ -10,14 +10,14 @@ class CoordinatesPolylineViewController extends GetxController {
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final TextEditingController latController =
       TextEditingController(text: '31.582045');
   final TextEditingController lngController =
       TextEditingController(text: '74.329376');
-
-  RxBool isPositionLoaded = false.obs;
 
   CoordinatesPolylineViewController() {
     errorMessage.value = '';
@@ -61,6 +61,7 @@ class CoordinatesPolylineViewController extends GetxController {
   Future<void> drawPolylineToDestination() async {
     if (currentPosition == null) return;
 
+    isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);
 
@@ -95,5 +96,6 @@ class CoordinatesPolylineViewController extends GetxController {
 
     _markers.refresh();
     _polylines.refresh();
+    isFindingAddress.value = false;
   }
 }

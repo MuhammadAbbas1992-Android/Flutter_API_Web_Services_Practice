@@ -91,8 +91,14 @@ class _AddressRoutsViewState extends State<AddressRoutsView> {
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(Icons.search,
-                                          color: AppColors.blue),
+                                      icon: _addressRoutsViewController
+                                                  .isFindingAddress.value ==
+                                              true
+                                          ? const Center(
+                                              child:
+                                                  CircularProgressIndicator())
+                                          : const Icon(Icons.search,
+                                              color: AppColors.blue),
                                       onPressed: () =>
                                           _addressRoutsViewController
                                               .searchAndDrawRoute(),

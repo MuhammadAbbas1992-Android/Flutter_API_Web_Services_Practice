@@ -8,11 +8,13 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class CoordinatesAllCategoryViewController extends GetxController {
+class CoordinatesCircleViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final RxSet<Circle> _circles = <Circle>{}.obs;
@@ -20,7 +22,6 @@ class CoordinatesAllCategoryViewController extends GetxController {
       TextEditingController(text: '24.860966');
   final TextEditingController lngController =
       TextEditingController(text: '66.990501');
-  RxBool isPositionLoaded = false.obs;
 
   //Google Map API Key not working..
   final String googleApiKey =
@@ -29,7 +30,7 @@ class CoordinatesAllCategoryViewController extends GetxController {
   final String goMapApiKey =
       "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
 
-  CoordinatesAllCategoryViewController() {
+  CoordinatesCircleViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
@@ -73,12 +74,11 @@ class CoordinatesAllCategoryViewController extends GetxController {
 
   Future<void> searchPointsAndDrawRout() async {
     if (currentPosition == null) return;
-
+    isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);
 
     if (destLat == null || destLng == null) return;
-
     destinationPosition = LatLng(destLat, destLng);
 
     // ✅ Clear previous destination marker & polyline
@@ -129,14 +129,17 @@ class CoordinatesAllCategoryViewController extends GetxController {
         _markers.refresh();
         _polylines.refresh();
         _circles.refresh();
+        isFindingAddress.value = false;
       } else {
         AppUtils.mySnackBar(
             title: 'Error',
             message:
                 "⚠️Failed to find coordinated of destination . Check your API key or location.");
+        isFindingAddress.value = false;
       }
     } catch (e) {
       AppUtils.mySnackBar(title: 'Error', message: '$e');
+      isFindingAddress.value = false;
     }
   }
 

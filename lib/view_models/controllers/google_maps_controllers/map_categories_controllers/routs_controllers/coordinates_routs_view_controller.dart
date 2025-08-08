@@ -13,13 +13,14 @@ class CoordinatesRoutsViewController extends GetxController {
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final TextEditingController latController =
       TextEditingController(text: '24.860966');
   final TextEditingController lngController =
       TextEditingController(text: '66.990501');
-  RxBool isPositionLoaded = false.obs;
 
   //Google Map API Key not working..
   final String googleApiKey =
@@ -71,6 +72,7 @@ class CoordinatesRoutsViewController extends GetxController {
   Future<void> searchPointsAndDrawRout() async {
     if (currentPosition == null) return;
 
+    isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);
 
@@ -107,14 +109,17 @@ class CoordinatesRoutsViewController extends GetxController {
 // ✅ Force UI update
         _markers.refresh();
         _polylines.refresh();
+        isFindingAddress.value = false;
       } else {
         AppUtils.mySnackBar(
             title: 'Error',
             message:
                 "⚠️Polyline coordinates from current position to destination position not found. Check your API key or location.");
+        isFindingAddress.value = false;
       }
     } catch (e) {
       AppUtils.mySnackBar(title: 'Error', message: '$e');
+      isFindingAddress.value = false;
     }
   }
 

@@ -89,8 +89,14 @@ class _AddressMarkerViewState extends State<AddressMarkerView> {
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(Icons.search,
-                                          color: AppColors.blue),
+                                      icon: _addressMarkerViewController
+                                                  .isFindingAddress.value ==
+                                              true
+                                          ? const Center(
+                                              child:
+                                                  CircularProgressIndicator())
+                                          : const Icon(Icons.search,
+                                              color: AppColors.blue),
                                       onPressed: () =>
                                           _addressMarkerViewController
                                               .searchAndDrawRoute(),

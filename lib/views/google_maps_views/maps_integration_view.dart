@@ -163,6 +163,16 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
                   googleMapsIntegrationViewController:
                       googleMapsIntegrationViewController,
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
+                  caseNo: 13,
+                  btnText: 'All Categories',
+                  categoryText: 'M.P.R.P.C with Coordinates',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
               ],
             ),
           ),

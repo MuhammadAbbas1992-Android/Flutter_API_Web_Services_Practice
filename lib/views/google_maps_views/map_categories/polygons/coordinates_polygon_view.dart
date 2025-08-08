@@ -98,11 +98,17 @@ class _CoordinatesPolygonViewState extends State<CoordinatesPolygonView> {
                                     decoration: const InputDecoration(
                                         labelText: "Enter Longitude"),
                                   ),
-                                  ElevatedButton(
-                                      onPressed: () =>
-                                          _coordinatesPolygonViewController
-                                              .drawPolylineToDestination(),
-                                      child: const Text("Draw Polygon")),
+                                  const SizedBox(height: 5),
+                                  _coordinatesPolygonViewController
+                                              .isFindingAddress.value ==
+                                          true
+                                      ? const Center(
+                                          child: CircularProgressIndicator())
+                                      : ElevatedButton(
+                                          onPressed: () =>
+                                              _coordinatesPolygonViewController
+                                                  .drawPolylineToDestination(),
+                                          child: const Text("Draw Polygon")),
                                 ],
                               ),
                             ),

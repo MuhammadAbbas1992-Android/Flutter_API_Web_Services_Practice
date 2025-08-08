@@ -14,6 +14,7 @@ class AddressPolygonViewController extends GetxController {
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
   RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polygon> _polygon = <Polygon>{}.obs;
   final TextEditingController searchController =
@@ -73,19 +74,22 @@ class AddressPolygonViewController extends GetxController {
           message: 'Please, enter any location which you want to search');
       return;
     }
-
+    isFindingAddress.value = true;
     try {
       destinationPosition = await _getCoordinatesFromAddress(address);
       if (destinationPosition != null) {
         _drawPolylineToDestination();
+        isFindingAddress.value = false;
       } else {
         AppUtils.mySnackBar(
             title: 'Error',
             message:
                 "⚠️Failed to find coordinated of destination . Check your API key or location.");
+        isFindingAddress.value = false;
       }
     } catch (e) {
       AppUtils.mySnackBar(title: 'Error', message: '$e');
+      isFindingAddress.value = false;
     }
   }
 

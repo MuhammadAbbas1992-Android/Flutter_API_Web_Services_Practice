@@ -9,14 +9,14 @@ class CoordinatesMarkerViewController extends GetxController {
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
 
   final TextEditingController latController =
       TextEditingController(text: '31.582045');
   final TextEditingController lngController =
       TextEditingController(text: '74.329376');
-
-  RxBool isPositionLoaded = false.obs;
 
   CoordinatesMarkerViewController() {
     errorMessage.value = '';
@@ -59,6 +59,7 @@ class CoordinatesMarkerViewController extends GetxController {
   Future<void> drawDestinationMarker() async {
     if (currentPosition == null) return;
 
+    isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);
 
@@ -82,5 +83,6 @@ class CoordinatesMarkerViewController extends GetxController {
     // ✅ Force UI update
 
     _markers.refresh();
+    isFindingAddress.value = false;
   }
 }

@@ -14,14 +14,13 @@ class CoordinatesCircleView extends StatefulWidget {
 }
 
 class _CoordinatesCircleViewState extends State<CoordinatesCircleView> {
-  late final CoordinatesAllCategoryViewController
-      _coordinatesCircleViewController;
+  late final CoordinatesCircleViewController _coordinatesCircleViewController;
 
   @override
   void initState() {
     super.initState();
     _coordinatesCircleViewController =
-        Get.put(CoordinatesAllCategoryViewController());
+        Get.put(CoordinatesCircleViewController());
   }
 
   @override
@@ -103,11 +102,17 @@ class _CoordinatesCircleViewState extends State<CoordinatesCircleView> {
                                       decoration: const InputDecoration(
                                           labelText: "Enter Longitude"),
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () =>
-                                            _coordinatesCircleViewController
-                                                .searchPointsAndDrawRout(),
-                                        child: const Text("Draw Circles")),
+                                    const SizedBox(height: 5),
+                                    _coordinatesCircleViewController
+                                                .isFindingAddress.value ==
+                                            true
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : ElevatedButton(
+                                            onPressed: () =>
+                                                _coordinatesCircleViewController
+                                                    .searchPointsAndDrawRout(),
+                                            child: const Text("Draw Circles")),
                                   ],
                                 ),
                               ),

@@ -13,6 +13,9 @@ class CoordinatesAllCategoryViewController extends GetxController {
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingCoordinates = false.obs;
+  RxBool isShowingPanel = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final RxSet<Circle> _circles = <Circle>{}.obs;
@@ -20,7 +23,6 @@ class CoordinatesAllCategoryViewController extends GetxController {
       TextEditingController(text: '24.860966');
   final TextEditingController lngController =
       TextEditingController(text: '66.990501');
-  RxBool isPositionLoaded = false.obs;
 
   //Google Map API Key not working..
   final String googleApiKey =
@@ -40,6 +42,10 @@ class CoordinatesAllCategoryViewController extends GetxController {
   Set<Polyline> get polylines => _polylines.toSet();
 
   Set<Circle> get circles => _circles.toSet();
+
+  void togglePanel() {
+    isShowingPanel.value = !isShowingPanel.value;
+  }
 
   Future<void> _getCurrentLocation() async {
     try {

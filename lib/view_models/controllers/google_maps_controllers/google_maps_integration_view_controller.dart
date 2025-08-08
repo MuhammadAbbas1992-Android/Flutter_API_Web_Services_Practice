@@ -63,4 +63,9 @@ class MapsIntegrationViewController extends GetxController {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.addressCircleView);
   }
+
+  void showCoordinatesAllCategoriesScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.coordinatesAllCategoryViewController);
+  }
 }

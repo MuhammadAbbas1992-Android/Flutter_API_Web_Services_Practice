@@ -9,13 +9,14 @@ class CoordinatesPolygonViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polygon> _polygon = <Polygon>{}.obs;
   final TextEditingController latController =
       TextEditingController(text: '31.582045');
   final TextEditingController lngController =
       TextEditingController(text: '74.329376');
-  RxBool isPositionLoaded = false.obs;
 
   CoordinatesPolygonViewController() {
     errorMessage.value = '';
@@ -59,6 +60,8 @@ class CoordinatesPolygonViewController extends GetxController {
   Future<void> drawPolylineToDestination() async {
     if (currentPosition == null) return;
 
+    isFindingAddress.value = true;
+
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);
 
@@ -91,6 +94,7 @@ class CoordinatesPolygonViewController extends GetxController {
     // ✅ Force UI update
     _polygon.refresh();
     _markers.refresh();
+    isFindingAddress.value = false;
   }
 
   List<LatLng> generatePolygonPoints(LatLng center, double radiusInMeters) {

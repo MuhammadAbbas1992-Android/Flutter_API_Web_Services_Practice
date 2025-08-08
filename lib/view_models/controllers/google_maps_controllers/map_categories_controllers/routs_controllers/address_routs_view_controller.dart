@@ -13,6 +13,8 @@ class CoordinatesAllCategoryViewController extends GetxController {
   LatLng? currentPosition;
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
+  RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final RxSet<Circle> _circles = <Circle>{}.obs;
@@ -25,8 +27,6 @@ class CoordinatesAllCategoryViewController extends GetxController {
   //app.gomaps.pro Map API Key is working...
   final String goMapApiKey =
       "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
-
-  RxBool isPositionLoaded = false.obs;
 
   CoordinatesAllCategoryViewController() {
     errorMessage.value = '';
@@ -76,18 +76,22 @@ class CoordinatesAllCategoryViewController extends GetxController {
           message: 'Please, enter any location which you want to search');
       return;
     }
+    isFindingAddress.value = true;
     try {
       destinationPosition = await _getCoordinatesFromAddress(address);
       if (destinationPosition != null) {
         _drawPolylineToDestination();
+        isFindingAddress.value = false;
       } else {
         AppUtils.mySnackBar(
             title: 'Error',
             message:
                 "⚠️Failed to find coordinated of destination . Check your API key or location.");
+        isFindingAddress.value = false;
       }
     } catch (e) {
       AppUtils.mySnackBar(title: 'Error', message: '$e');
+      isFindingAddress.value = false;
     }
   }
 

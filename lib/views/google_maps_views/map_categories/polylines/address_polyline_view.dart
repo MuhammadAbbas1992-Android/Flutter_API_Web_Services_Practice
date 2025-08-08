@@ -90,8 +90,14 @@ class _AddressPolylineViewState extends State<AddressPolylineView> {
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(Icons.search,
-                                          color: AppColors.blue),
+                                      icon: _addressPolylineViewController
+                                                  .isFindingAddress.value ==
+                                              true
+                                          ? const Center(
+                                              child:
+                                                  CircularProgressIndicator())
+                                          : const Icon(Icons.search,
+                                              color: AppColors.blue),
                                       onPressed: () =>
                                           _addressPolylineViewController
                                               .searchAndDrawRoute(),

@@ -14,6 +14,7 @@ class AddressMarkerViewController extends GetxController {
   LatLng? destinationPosition;
   RxString errorMessage = ''.obs;
   RxBool isPositionLoaded = false.obs;
+  RxBool isFindingAddress = false.obs;
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final TextEditingController searchController =
       TextEditingController(text: 'Lahore');
@@ -72,18 +73,22 @@ class AddressMarkerViewController extends GetxController {
       return;
     }
 
+    isFindingAddress.value = true;
     try {
       destinationPosition = await _getCoordinatesFromAddress(address);
       if (destinationPosition != null) {
         _drawPolylineToDestination();
+        isFindingAddress.value = false;
       } else {
         AppUtils.mySnackBar(
             title: 'Error',
             message:
                 "⚠️Failed to find coordinated of destination . Check your API key or location.");
+        isFindingAddress.value = false;
       }
     } catch (e) {
       AppUtils.mySnackBar(title: 'Error', message: '$e');
+      isFindingAddress.value = false;
     }
   }
 

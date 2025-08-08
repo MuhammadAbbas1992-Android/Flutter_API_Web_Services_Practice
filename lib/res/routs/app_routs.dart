@@ -1,4 +1,5 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/all_in_one_category_controller/coordinates_all_category_view_controller.dart';
 import 'package:flutter_api_web_services_practice/views/dashboard_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/add_image_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_in
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/address_circle_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/coordinates_circle_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/coordinates_all_category_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/address_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/coordinates_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polygons/address_polygon_view.dart';
@@ -175,6 +177,11 @@ class AppRouts {
     GetPage(
         name: RoutNames.addressCircleView,
         page: () => const AddressCircleView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.coordinatesAllCategoryViewController,
+        page: () => const CoordinatesAllCategoryView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 

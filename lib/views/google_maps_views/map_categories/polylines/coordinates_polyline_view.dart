@@ -104,11 +104,17 @@ class _CoordinatesPolylineViewState extends State<CoordinatesPolylineView> {
                                       decoration: const InputDecoration(
                                           labelText: "Enter Longitude"),
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () =>
-                                            _coordinatesPolylineViewController
-                                                .drawPolylineToDestination(),
-                                        child: const Text("Draw Polyline")),
+                                    const SizedBox(height: 5),
+                                    _coordinatesPolylineViewController
+                                                .isFindingAddress.value ==
+                                            true
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : ElevatedButton(
+                                            onPressed: () =>
+                                                _coordinatesPolylineViewController
+                                                    .drawPolylineToDestination(),
+                                            child: const Text("Draw Polyline")),
                                   ],
                                 ),
                               ),

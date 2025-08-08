@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/circle_controllers/coordinates_circle_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/all_in_one_category_controller/coordinates_all_category_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -40,7 +40,7 @@ class _CoordinatesAllCategoryViewState
           appBar: AppBar(
             title: const Center(
                 child: CustomTextWidget(
-              text: 'Coordinates Circle Map',
+              text: 'Coordinates All Categories',
             )),
             backgroundColor: Colors.blue.shade500,
           ),
@@ -80,41 +80,72 @@ class _CoordinatesAllCategoryViewState
                             myLocationButtonEnabled: true,
                           ),
                           Positioned(
-                            top: 40,
-                            left: 10,
-                            right: 10,
-                            child: Card(
-                              elevation: 5,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    TextField(
-                                      controller:
-                                          _coordinatesCircleViewController
-                                              .latController,
-                                      keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
-                                          labelText: "Enter Latitude"),
-                                    ),
-                                    TextField(
-                                      controller:
-                                          _coordinatesCircleViewController
-                                              .lngController,
-                                      keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
-                                          labelText: "Enter Longitude"),
-                                    ),
-                                    ElevatedButton(
-                                        onPressed: () =>
-                                            _coordinatesCircleViewController
-                                                .searchPointsAndDrawRout(),
-                                        child: const Text("Draw Circles")),
-                                  ],
+                              top: 10,
+                              left: 10,
+                              right: Get.width * .8,
+                              child: InkWell(
+                                onTap: () => _coordinatesCircleViewController
+                                    .togglePanel(),
+                                child: Card(
+                                  color: AppColors.pink,
+                                  child: _coordinatesCircleViewController
+                                              .isShowingPanel.value ==
+                                          true
+                                      ? const Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(4.0),
+                                            child: Text('Hide'),
+                                          ),
+                                        )
+                                      : const Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(4.0),
+                                            child: Text('Show'),
+                                          ),
+                                        ),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
+                          _coordinatesCircleViewController
+                                      .isShowingPanel.value ==
+                                  true
+                              ? Positioned(
+                                  top: 40,
+                                  left: 10,
+                                  right: 10,
+                                  child: Card(
+                                    elevation: 5,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          TextField(
+                                            controller:
+                                                _coordinatesCircleViewController
+                                                    .latController,
+                                            keyboardType: TextInputType.number,
+                                            decoration: const InputDecoration(
+                                                labelText: "Enter Latitude"),
+                                          ),
+                                          TextField(
+                                            controller:
+                                                _coordinatesCircleViewController
+                                                    .lngController,
+                                            keyboardType: TextInputType.number,
+                                            decoration: const InputDecoration(
+                                                labelText: "Enter Longitude"),
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () =>
+                                                  _coordinatesCircleViewController
+                                                      .searchPointsAndDrawRout(),
+                                              child:
+                                                  const Text("Draw Circles")),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
                         ],
                       ),
           )),

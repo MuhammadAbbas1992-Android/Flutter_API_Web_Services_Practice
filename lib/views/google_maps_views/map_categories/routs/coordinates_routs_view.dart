@@ -100,11 +100,17 @@ class _CoordinatesRoutsViewState extends State<CoordinatesRoutsView> {
                                       decoration: const InputDecoration(
                                           labelText: "Enter Longitude"),
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () =>
-                                            _coordinatesRoutsViewController
-                                                .searchPointsAndDrawRout(),
-                                        child: const Text("Draw Route")),
+                                    const SizedBox(height: 5),
+                                    _coordinatesRoutsViewController
+                                                .isFindingAddress.value ==
+                                            true
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : ElevatedButton(
+                                            onPressed: () =>
+                                                _coordinatesRoutsViewController
+                                                    .searchPointsAndDrawRout(),
+                                            child: const Text("Draw Route")),
                                   ],
                                 ),
                               ),

@@ -93,11 +93,17 @@ class _CoordinatesMarkerViewState extends State<CoordinatesMarkerView> {
                                     decoration: const InputDecoration(
                                         labelText: "Enter Longitude"),
                                   ),
-                                  ElevatedButton(
-                                      onPressed: () =>
-                                          _coordinatesMarkerViewController
-                                              .drawDestinationMarker(),
-                                      child: const Text("Draw Markers")),
+                                  const SizedBox(height: 5),
+                                  _coordinatesMarkerViewController
+                                              .isFindingAddress.value ==
+                                          true
+                                      ? const Center(
+                                          child: CircularProgressIndicator())
+                                      : ElevatedButton(
+                                          onPressed: () =>
+                                              _coordinatesMarkerViewController
+                                                  .drawDestinationMarker(),
+                                          child: const Text("Draw Markers")),
                                 ],
                               ),
                             ),

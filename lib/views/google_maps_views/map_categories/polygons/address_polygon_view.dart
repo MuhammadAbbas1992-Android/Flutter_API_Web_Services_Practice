@@ -91,8 +91,14 @@ class _AddressPolygonViewState extends State<AddressPolygonView> {
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(Icons.search,
-                                          color: AppColors.blue),
+                                      icon: _addressPolygonViewController
+                                                  .isFindingAddress.value ==
+                                              true
+                                          ? const Center(
+                                              child:
+                                                  CircularProgressIndicator())
+                                          : const Icon(Icons.search,
+                                              color: AppColors.blue),
                                       onPressed: () =>
                                           _addressPolygonViewController
                                               .searchAndDrawRoute(),
