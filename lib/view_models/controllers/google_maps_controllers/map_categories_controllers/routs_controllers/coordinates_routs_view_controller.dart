@@ -70,7 +70,13 @@ class CoordinatesRoutsViewController extends GetxController {
   }
 
   Future<void> searchPointsAndDrawRout() async {
-    if (currentPosition == null) return;
+    if (currentPosition == null) {
+      AppUtils.mySnackBar(
+          title: 'Warning',
+          message: 'Please provide correct Latitude and Longitude');
+      isFindingAddress.value = false;
+      return;
+    }
 
     isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);

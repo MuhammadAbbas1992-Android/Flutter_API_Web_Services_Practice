@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
@@ -11,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class CoordinatesAllCategoryViewController extends GetxController {
+class AddressAllCategoryViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
   LatLng? destinationPosition;
@@ -31,10 +30,8 @@ class CoordinatesAllCategoryViewController extends GetxController {
   final RxSet<Circle> _circles = <Circle>{}.obs;
   final RxSet<Polygon> _polygons = <Polygon>{}.obs;
 
-  final TextEditingController latController =
-      TextEditingController(text: '24.860966');
-  final TextEditingController lngController =
-      TextEditingController(text: '66.990501');
+  final TextEditingController searchController =
+      TextEditingController(text: 'Lahore');
 
   Set<Marker> get markers => _markers.toSet();
   Set<Polyline> get polylines => _polylines.toSet();
@@ -48,7 +45,7 @@ class CoordinatesAllCategoryViewController extends GetxController {
   final String goMapApiKey =
       "AlzaSyabVY0fX-pDOPR5g4P0PhdZO2-6eeuJStr"; // 🔹 Replace with your real key
 
-  CoordinatesAllCategoryViewController() {
+  AddressAllCategoryViewController() {
     errorMessage.value = '';
     controller = Completer();
     _getCurrentLocation();
@@ -82,42 +79,54 @@ class CoordinatesAllCategoryViewController extends GetxController {
     if (currentPosition == null) return;
 
     isFindingCoordinates.value = true;
-    double? destLat = double.tryParse(latController.value.text);
-    double? destLng = double.tryParse(lngController.value.text);
-
-    if (destLat == null || destLng == null) {
+    final address = searchController.value.text.trim();
+    if (address.isEmpty) {
       AppUtils.mySnackBar(
           title: 'Alert',
-          message: 'Please provide correct Latitude and Longitude');
+          message: 'Please, enter any location which you want to search');
       isFindingCoordinates.value = false;
       return;
     }
-    destinationPosition = LatLng(destLat, destLng);
-    // ✅ Clear previous destination marker & polyline
-    _markers.removeWhere((m) => m.markerId.value == "destination");
-    _polylines.clear();
-    _circles.clear();
-    _polygons.clear();
 
-    if (showMarkers.value) {
-      _addMarkers();
-    }
-    if (showPolylines.value) {
-      await _addPolylinesAndRouts();
-    }
-    if (showCircles.value) {
-      _addCircles();
-    }
-    if (showPolygons.value) {
-      _addPolygons();
-    }
+    try {
+      destinationPosition = await _getCoordinatesFromAddress(address);
+      if (destinationPosition != null) {
+        // ✅ Clear previous destination marker & polyline
+        _markers.removeWhere((m) => m.markerId.value == "destination");
+        _polylines.clear();
+        _circles.clear();
+        _polygons.clear();
+
+        if (showMarkers.value) {
+          _addMarkers();
+        }
+        if (showPolylines.value) {
+          await _addPolylinesAndRouts();
+        }
+        if (showCircles.value) {
+          _addCircles();
+        }
+        if (showPolygons.value) {
+          _addPolygons();
+        }
 
 // ✅ Force UI update
-    _markers.refresh();
-    _polylines.refresh();
-    _circles.refresh();
-    _polygons.refresh();
-    isFindingCoordinates.value = false;
+        _markers.refresh();
+        _polylines.refresh();
+        _circles.refresh();
+        _polygons.refresh();
+        isFindingCoordinates.value = false;
+      } else {
+        AppUtils.mySnackBar(
+            title: 'Error',
+            message:
+                "⚠️Failed to find coordinated of destination . Check your API key or location.");
+        isFindingCoordinates.value = false;
+      }
+    } catch (e) {
+      AppUtils.mySnackBar(title: 'Error', message: '$e');
+      isFindingCoordinates.value = false;
+    }
   }
 
   void _addMarkers() {
@@ -214,6 +223,40 @@ class CoordinatesAllCategoryViewController extends GetxController {
       strokeColor: AppColors.black,
       strokeWidth: 2,
     ));
+  }
+
+  Future<LatLng?> _getCoordinatesFromAddress(String address) async {
+    final encodedAddress = Uri.encodeComponent(address);
+
+    //Google Map API Key not working...
+/*    final url =
+        "https://maps.googleapis.com/maps/api/geocode/json?address=$encodedAddress&key=$googleApiKey";*/
+    //app.gomaps.pro Map API Key is working...
+    final url =
+        'https://maps.gomaps.pro/maps/api/geocode/json?address=$encodedAddress&key=$goMapApiKey';
+
+    try {
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 30), onTimeout: () {
+        throw TimeoutException(
+            'Fetching time out after 30 seconds.\nPlease try again.');
+      });
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['status'] == 'OK' && data['results'].isNotEmpty) {
+          final location = data['results'][0]['geometry']['location'];
+          return LatLng(location['lat'], location['lng']);
+        } else {
+          throw Exception('No destination found: ${data['status']}');
+        }
+      } else {
+        throw Exception('⚠️Error fetching route: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw TimeoutException('⚠️Getting route failed: $e\nTry again');
+    }
   }
 
   Future<dynamic> _getPolylinePointsFromGoMapAPI() async {

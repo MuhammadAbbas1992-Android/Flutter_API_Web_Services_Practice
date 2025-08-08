@@ -15,9 +15,11 @@ class CoordinatesCircleViewController extends GetxController {
   RxString errorMessage = ''.obs;
   RxBool isPositionLoaded = false.obs;
   RxBool isFindingAddress = false.obs;
+
   final RxSet<Marker> _markers = <Marker>{}.obs;
   final RxSet<Polyline> _polylines = <Polyline>{}.obs;
   final RxSet<Circle> _circles = <Circle>{}.obs;
+
   final TextEditingController latController =
       TextEditingController(text: '24.860966');
   final TextEditingController lngController =
@@ -73,7 +75,14 @@ class CoordinatesCircleViewController extends GetxController {
   }
 
   Future<void> searchPointsAndDrawRout() async {
-    if (currentPosition == null) return;
+    if (currentPosition == null) {
+      AppUtils.mySnackBar(
+          title: 'Warning',
+          message: 'Please provide correct Latitude and Longitude');
+      isFindingAddress.value = false;
+      return;
+    }
+
     isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);

@@ -4,6 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../../res/app_utils.dart';
+
 class CoordinatesMarkerViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
@@ -63,7 +65,13 @@ class CoordinatesMarkerViewController extends GetxController {
     double? destLat = double.tryParse(latController.value.text);
     double? destLng = double.tryParse(lngController.value.text);
 
-    if (destLat == null || destLng == null) return;
+    if (destLat == null || destLng == null) {
+      AppUtils.mySnackBar(
+          title: 'Warning',
+          message: 'Please provide correct Latitude and Longitude');
+      isFindingAddress.value = false;
+      return;
+    }
 
     destinationPosition = LatLng(destLat, destLng);
 

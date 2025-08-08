@@ -38,8 +38,9 @@ class RoutNames {
   static const String addressPolygonView = '/address_polygon_view';
   static const String coordinatesCircleView = '/coordinates_circle_view';
   static const String addressCircleView = '/address_circle_view';
-  static const String coordinatesAllCategoryViewController =
-      '/coordinates_all_category_view_controller';
+  static const String coordinatesAllCategoryView =
+      '/coordinates_all_category_view';
+  static const String addressAllCategoryView = '/address_all_category_view';
 
   //Go Maps RoutNames
   static const String goMapPredictionsView = '/go_map_predictions_view';

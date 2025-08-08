@@ -6,9 +6,10 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/all_in_one_category/address_all_category_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/address_circle_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/coordinates_circle_view.dart';
-import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/coordinates_all_category_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/all_in_one_category/coordinates_all_category_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/address_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/markers/coordinates_marker_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polygons/address_polygon_view.dart';
@@ -180,8 +181,13 @@ class AppRouts {
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
     GetPage(
-        name: RoutNames.coordinatesAllCategoryViewController,
+        name: RoutNames.coordinatesAllCategoryView,
         page: () => const CoordinatesAllCategoryView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.addressAllCategoryView,
+        page: () => const AddressAllCategoryView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 

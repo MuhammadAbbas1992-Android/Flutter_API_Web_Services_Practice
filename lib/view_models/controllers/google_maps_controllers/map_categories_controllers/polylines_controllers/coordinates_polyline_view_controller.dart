@@ -5,6 +5,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../../res/app_utils.dart';
+
 class CoordinatesPolylineViewController extends GetxController {
   late Completer<GoogleMapController> controller;
   LatLng? currentPosition;
@@ -59,7 +61,13 @@ class CoordinatesPolylineViewController extends GetxController {
   }
 
   Future<void> drawPolylineToDestination() async {
-    if (currentPosition == null) return;
+    if (currentPosition == null) {
+      AppUtils.mySnackBar(
+          title: 'Warning',
+          message: 'Please provide correct Latitude and Longitude');
+      isFindingAddress.value = false;
+      return;
+    }
 
     isFindingAddress.value = true;
     double? destLat = double.tryParse(latController.value.text);
