@@ -47,6 +47,16 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
             child: Column(
               children: [
                 CustomGoogleMapsButtonWidget(
+                  caseNo: 0,
+                  btnText: 'Map Types',
+                  categoryText: 'Show Map Types',
+                  googleMapsIntegrationViewController:
+                      googleMapsIntegrationViewController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomGoogleMapsButtonWidget(
                   caseNo: 1,
                   btnText: 'Show Location',
                   categoryText: 'Show Location on Map',

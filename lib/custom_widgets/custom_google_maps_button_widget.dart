@@ -24,6 +24,10 @@ class CustomGoogleMapsButtonWidget extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               switch (caseNo) {
+                case 0:
+                  googleMapsIntegrationViewController
+                      ?.showMapTypesScreen(caseNo);
+                  break;
                 case 1:
                   googleMapsIntegrationViewController?.showMapScreen(caseNo);
                   break;

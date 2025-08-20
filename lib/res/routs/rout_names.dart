@@ -25,6 +25,7 @@ class RoutNames {
       '/home_stream_builder_l_v_b_view';
 
   //Google Maps RoutNames
+  static const String mapTypesView = '/map_types_view';
   static const String mapsIntegrationViews = '/maps_integration_view';
   static const String currentLocationView = '/current_location_view';
   static const String shareCurrentLocationView = '/share_current_location_view';

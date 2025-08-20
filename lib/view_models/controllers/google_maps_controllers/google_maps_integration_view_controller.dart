@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 import '../../../res/app_utils.dart';
 
 class MapsIntegrationViewController extends GetxController {
+  void showMapTypesScreen(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.mapTypesView);
+  }
+
   void showMapScreen(int caseNo) {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.currentLocationView);

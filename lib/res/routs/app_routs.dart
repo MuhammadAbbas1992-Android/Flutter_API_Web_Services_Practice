@@ -18,6 +18,7 @@ import 'package:flutter_api_web_services_practice/views/google_maps_views/map_ca
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/routs/coordinates_routs_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polylines/address_polyline_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/polylines/coordinates_polyline_view.dart';
+import 'package:flutter_api_web_services_practice/views/google_maps_views/map_types/map_types_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/share_current_location_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -115,6 +116,11 @@ class AppRouts {
         transition: Transition.leftToRightWithFade),
 
     //Google Maps Routs
+    GetPage(
+        name: RoutNames.mapTypesView,
+        page: () => const MapTypesView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
     GetPage(
         name: RoutNames.mapsIntegrationViews,
         page: () => const MapsIntegrationView(),

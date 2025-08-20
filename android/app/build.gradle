@@ -11,6 +11,7 @@ plugins {
 android {
     namespace = "com.example.flutter_api_web_services_practice"
     compileSdk = 35
+//    compileSdkVersion 34  // latest stable
     ndkVersion = "25.1.8937393"
 
     compileOptions {
@@ -24,7 +25,9 @@ android {
 
     defaultConfig {
         applicationId = "com.example.flutter_api_web_services_practice"
-        minSdkVersion 23
+        minSdkVersion 24  // update this!
+//        targetSdkVersion 34  // match latest stable
+//        minSdkVersion 23
 //        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
