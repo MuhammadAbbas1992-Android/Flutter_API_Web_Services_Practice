@@ -112,10 +112,10 @@ class FirebaseServices {
       final uploadTask = ref.putFile(File(imagePath));
       await uploadTask
           .whenComplete(() => print("ABC ✅ Upload Completed"))
-          .timeout(const Duration(seconds: 10), onTimeout: () async {
-        print("ABC Upload task took longer than 10 seconds.");
+          .timeout(const Duration(seconds: 20), onTimeout: () async {
+        print("ABC Upload task took longer than 20 seconds.");
         uploadTask.cancel();
-        throw TimeoutException("ABC Upload task took longer than 10 seconds.");
+        throw TimeoutException("ABC Upload task took longer than 20 seconds.");
       });
       print("✅ Upload Completed Successfully");
     } on TimeoutException catch (e) {

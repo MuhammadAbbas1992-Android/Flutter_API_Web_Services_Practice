@@ -100,7 +100,7 @@ class AddImageViewController extends GetxController {
     isLoading.value = !isLoading.value;
     //Each time it will work as u choose a new image from gallery
     if (imagePath.value.isNotEmpty) {
-      await FirebaseServices.testUpload(imagePath.value, imageUrl.value)
+      await FirebaseServices.uploadImage(imagePath.value, imageUrl.value)
           .then((value) {
         if (value != null) {
           imageUrl.value = value;

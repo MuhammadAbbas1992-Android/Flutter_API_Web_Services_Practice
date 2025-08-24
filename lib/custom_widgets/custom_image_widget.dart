@@ -30,7 +30,7 @@ class CustomImageWidget extends StatelessWidget {
             border: Border.all(color: AppColors.pink, width: 1)),
         child: Center(
             child: addImageViewController.imagePath.value.isNotEmpty ||
-                    addImageViewController.imageUrl.isNotEmpty
+                    addImageViewController.imageUrl.value.isNotEmpty
                 ? addImageViewController.imagePath.value.isNotEmpty
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(14),
