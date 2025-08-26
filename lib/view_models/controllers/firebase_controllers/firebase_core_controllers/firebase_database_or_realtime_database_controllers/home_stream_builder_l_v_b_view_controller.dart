@@ -38,8 +38,8 @@ class HomeStreamBuilderLVBViewController extends GetxController {
     );
   }
 
-  Future<void> addPicture(int index) async {
-    bool response = await Get.toNamed(RoutNames.addImageView, arguments: index);
+  Future<void> addPicture(PictureModel? model) async {
+    bool response = await Get.toNamed(RoutNames.addImageView, arguments: model);
     if (response) {
       loadProductsData();
     }

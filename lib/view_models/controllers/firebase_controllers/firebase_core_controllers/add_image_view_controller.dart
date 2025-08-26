@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
@@ -13,13 +14,16 @@ class AddImageViewController extends GetxController {
   RxString imageName = ''.obs;
   RxString imagePath = ''.obs;
   RxString imageUrl = ''.obs;
-  late int index;
+  late PictureModel? pictureModel;
 
   AddImageViewController() {
-    index = Get.arguments as int;
-    if (index > -1) {
-      imageUrl.value = AppUtils.picturesList[index].imageUrl;
-      imageName.value = AppUtils.picturesList[index].name;
+    final args = Get.arguments;
+    if (args != null && args is PictureModel) {
+      pictureModel = args;
+      imageUrl.value = pictureModel!.imageUrl;
+      imageName.value = pictureModel!.name;
+    } else {
+      pictureModel = null;
     }
   }
 
@@ -27,6 +31,7 @@ class AddImageViewController extends GetxController {
     AppUtils.mySnackBar(title: 'Alert', message: 'Please choose an image');
     final ImagePicker picker = ImagePicker();
     final XFile? image;
+
     if (isCameraImage) {
       image = await picker.pickImage(source: ImageSource.camera);
     } else {
@@ -34,28 +39,8 @@ class AddImageViewController extends GetxController {
     }
 
     if (image != null) {
-      //Get String of Image File from Gallery or Camera
-      imagePath.value = image.path;
-      print('ABC ${imagePath.value}');
-      imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-      isImageSet.value = true;
-    }
-  }
-  /* Future<void> getImageFromGalleryOrCamera(bool isCameraImage) async {
-    AppUtils.mySnackBar(title: 'Alert', message: 'Please choose an image');
-    final ImagePicker picker = ImagePicker();
-    final XFile? image;
-    if (isCameraImage) {
-      image = await picker.pickImage(source: ImageSource.camera);
-    } else {
-      image = await picker.pickImage(source: ImageSource.gallery);
-    }
-
-    if (image != null) {
-      */ /*File originalFile = File(image.path);
+      File originalFile = File(image.path);
       int originalSize = await originalFile.length();
-
-      print("📷 ABC Original Image Size: ${originalSize / 1024} KB");
 
       late XFile? finalFile = XFile(originalFile.path);
 
@@ -63,25 +48,22 @@ class AddImageViewController extends GetxController {
       if (originalSize > 100 * 1024) {
         finalFile = await compressImage(originalFile);
       }
-*/ /*
-      // if (finalFile != null)
-      // {
-      //Get String of Image File from Gallery or Camera
-      // imagePath.value = finalFile.path;
-      imagePath.value = image.path;
-      imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-      isImageSet.value = true;
-    } else {
-      clearData();
-      AppUtils.mySnackBar(
-          title: 'Error',
-          message:
-              'Image size is large and image not compressed successfully. So try another image');
-    }
-  }*/
-  // }
 
-  /*/// ✅ Helper function to compress the image
+      if (finalFile != null) {
+        imagePath.value = finalFile.path;
+        imageName.value = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+        isImageSet.value = true;
+      } else {
+        clearData();
+        AppUtils.mySnackBar(
+            title: 'Error',
+            message:
+                'Image size is large and image not compressed successfully. So try another image');
+      }
+    }
+  }
+
+  /// ✅ Helper function to compress the image
   Future<XFile?> compressImage(File file) async {
     final String targetPath = "${file.parent.path}.jpg";
 
@@ -90,69 +72,57 @@ class AddImageViewController extends GetxController {
       targetPath,
       quality: 70, // adjust compression quality (0-100)
     );
-
-    */ /*print(
-        "📉 ABC Compressed Image Size: ${(await compressedFile!.length()) / 1024} KB");*/ /*
-
     return compressedFile;
-  }*/
-  Future<void> addPicture() async {
-    isLoading.value = !isLoading.value;
+  }
+
+  Future<void> addUpdatePictureModel() async {
+    isLoading.value = true;
     //Each time it will work as u choose a new image from gallery
     if (imagePath.value.isNotEmpty) {
-      await FirebaseServices.uploadImage(imagePath.value, imageUrl.value)
+      await FirebaseServices.checkImageStatusOnFirebaseStorage(
+              imagePath.value, imageUrl.value)
           .then((value) {
         if (value != null) {
           imageUrl.value = value;
-          saveMedicine();
+          savePictureModel();
         } else {
           isLoading.value = !isLoading.value;
-          AppUtils.mySnackBar(
-              title: 'Error', message: 'Failed to upload image');
+          /*AppUtils.mySnackBar(
+              title: 'Error', message: 'Failed to upload image');*/
         }
       });
-    } else {
-      saveMedicine();
     }
   }
-  /*Future<void> addPicture() async {
-    isLoading.value = !isLoading.value;
-    //Each time it will work as u choose a new image from gallery
-    if (imagePath.value.isNotEmpty) {
-      await FirebaseServices.uploadImage(imagePath.value, imageUrl.value)
-          .then((value) {
-        if (value != null) {
-          imageUrl.value = value;
-          saveMedicine();
-        } else {
-          isLoading.value = !isLoading.value;
-          AppUtils.mySnackBar(
-              title: 'Error', message: 'Failed to upload image');
-        }
-      }).onError(
-        (error, stackTrace) {
-          isLoading.value = !isLoading.value;
-          Get.snackbar('Error', error.toString());
-        },
-      );
-    } else {
-      saveMedicine();
-    }
-  }*/
 
-  Future<void> saveMedicine() async {
-    //Add new Pet
-    PictureModel pictureModel = PictureModel(
-        name: imageName.value, imageUrl: imageUrl.value, processed: false);
-
-    if (await FirebaseServices.addPicture(pictureModel)) {
-      isLoading.value = !isLoading.value;
-      openHomeScreen();
-      AppUtils.mySnackBar(
-          title: 'Success', message: 'Picture added successfully');
+  Future<void> savePictureModel() async {
+    if (pictureModel != null) {
+      //Update PictureModel
+      pictureModel!.imageUrl = imageUrl.value;
+      pictureModel!.name = imageName.value;
+      if (await FirebaseServices.updatePicture(pictureModel!)) {
+        isLoading.value = false;
+        openHomeScreen();
+        AppUtils.mySnackBar(
+            title: 'Success', message: 'Picture Model updated successfully');
+      } else {
+        isLoading.value = false;
+        AppUtils.mySnackBar(
+            title: 'Error', message: 'Failed to update Picture Model');
+      }
     } else {
-      isLoading.value = !isLoading.value;
-      AppUtils.mySnackBar(title: 'Error', message: 'Picture not saved');
+      //Add new PictureModel
+      PictureModel model = PictureModel(
+          name: imageName.value, imageUrl: imageUrl.value, processed: false);
+      if (await FirebaseServices.addPicture(model)) {
+        isLoading.value = false;
+        openHomeScreen();
+        AppUtils.mySnackBar(
+            title: 'Success', message: 'Picture Model saved successfully');
+      } else {
+        isLoading.value = false;
+        AppUtils.mySnackBar(
+            title: 'Error', message: 'Failed to save Picture Model');
+      }
     }
   }
 

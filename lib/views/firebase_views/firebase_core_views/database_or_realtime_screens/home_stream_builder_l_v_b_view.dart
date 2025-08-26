@@ -43,7 +43,7 @@ class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
             logo: 'assets/images/logo.png',
             icon: 'assets/icons/ic_add.svg',
             onTap: () =>
-                homeStreamAndListViewBuilderViewController.addPicture(-1),
+                homeStreamAndListViewBuilderViewController.addPicture(null),
           ),
           CustomCategoryWidget(
             homeStreamAndListViewBuilderViewController:

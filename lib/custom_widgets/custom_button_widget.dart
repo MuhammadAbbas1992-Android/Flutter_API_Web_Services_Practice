@@ -33,7 +33,7 @@ class CustomButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          onPressed: () => addImageViewController.addPicture(),
+          onPressed: () => addImageViewController.addUpdatePictureModel(),
           child: addImageViewController.isLoading.value
               ? const SizedBox(
                   width: 50,

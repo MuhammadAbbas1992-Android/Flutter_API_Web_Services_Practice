@@ -42,9 +42,7 @@ class CustomImageWidget extends StatelessWidget {
                         ),
                       )
                     : CachedNetworkImage(
-                        imageUrl: AppUtils
-                            .picturesList[addImageViewController.index]
-                            .imageUrl,
+                        imageUrl: addImageViewController.pictureModel!.imageUrl,
                         placeholder: (context, url) => const Center(
                             child: SizedBox(
                                 width: 30,

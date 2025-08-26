@@ -45,7 +45,9 @@ class CustomRowViewWidget extends StatelessWidget {
                           InkWell(
                             onTap: () =>
                                 homeStreamAndListViewBuilderViewController
-                                    .addPicture(index),
+                                    .addPicture(
+                                        homeStreamAndListViewBuilderViewController
+                                            .picturesList[index]),
                             child: SvgPicture.asset(
                               'assets/icons/ic_edit.svg',
                               width: 20,

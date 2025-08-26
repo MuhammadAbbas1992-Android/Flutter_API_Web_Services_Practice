@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 class PictureModel {
   String? id;
   String name;
