@@ -99,6 +99,67 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                     child: Column(
                       children: [
                         const CustomTextWidget(
+                          text: 'Data Views Types',
+                          color: AppColors.black,
+                          size: 30,
+                          fontFamily: AppFonts.poppinsBold,
+                        ),
+                        const CustomTextWidget(
+                          text: '(Realtime Database as children)',
+                          color: AppColors.black,
+                          size: 20,
+                          fontFamily: AppFonts.poppinsBold,
+                        ),
+                        const SizedBox(height: 10),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 4,
+                          btnText: 'Home1',
+                          categoryText: 'GridView.builder',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 5,
+                          btnText: 'Home2',
+                          categoryText: 'ListView.builder',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 6,
+                          btnText: 'Home3',
+                          categoryText: 'ListView.separator',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 7,
+                          btnText: 'Home4',
+                          categoryText: 'ListView.custom',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 8,
+                          btnText: 'Home5',
+                          categoryText: 'ListView.builder (Horizontal)',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Card(
+                  color: AppColors.tinGrey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        const CustomTextWidget(
                           text: 'Firebase_database',
                           color: AppColors.black,
                           size: 30,

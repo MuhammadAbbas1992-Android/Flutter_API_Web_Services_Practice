@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/custom_data_list_view_builder_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../custom_widgets/custom_category_widget.dart';
-import '../../../../custom_widgets/custom_data_widget.dart';
+import '../../../../custom_widgets/custom_data_grid_view_builder_widget.dart';
 import '../../../../custom_widgets/custom_header_widget.dart';
 
-class HomeStreamBuilderLVBView extends StatefulWidget {
-  const HomeStreamBuilderLVBView({super.key});
+class HomeLVBuilderView extends StatefulWidget {
+  const HomeLVBuilderView({super.key});
 
   @override
-  State<HomeStreamBuilderLVBView> createState() =>
-      _HomeStreamBuilderLVBViewState();
+  State<HomeLVBuilderView> createState() => _HomeLVBuilderViewState();
 }
 
-class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
+class _HomeLVBuilderViewState extends State<HomeLVBuilderView> {
   late final HomeStreamBuilderLVBViewController
       homeStreamAndListViewBuilderViewController;
   @override
@@ -52,7 +52,7 @@ class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
           const SizedBox(
             height: 10,
           ),
-          CustomDataWidget(
+          CustomDataListViewBuilderWidget(
               homeStreamAndListViewBuilderViewController:
                   homeStreamAndListViewBuilderViewController)
         ],

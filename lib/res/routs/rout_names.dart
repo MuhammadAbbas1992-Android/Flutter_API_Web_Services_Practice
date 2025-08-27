@@ -24,6 +24,14 @@ class RoutNames {
   static const String homeStreamBuilderLVBView =
       '/home_stream_builder_l_v_b_view';
 
+  //Firebase Data View Types
+  static const String homeGVBuilderView = '/home_g_v_builder_view';
+  static const String homeLVBuilderView = '/home_l_v_builder_view';
+  static const String homeLVSeparatorView = '/home_l_v_separator_view';
+  static const String homeLVCustomView = '/home_l_v_custom_view';
+  static const String homeLVBuilderWithHorizontalView =
+      '/home_l_v_builder_with_horizontal_view';
+
   //Google Maps RoutNames
   static const String mapTypesView = '/map_types_view';
   static const String mapsIntegrationViews = '/maps_integration_view';

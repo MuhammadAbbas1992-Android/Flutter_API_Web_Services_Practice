@@ -7,8 +7,8 @@ import '../res/app_utils.dart';
 import '../res/constants/app_colors.dart';
 import 'custom_row_view_widget.dart';
 
-class CustomDataWidget extends StatelessWidget {
-  const CustomDataWidget({
+class CustomDataGridViewBuilderWidget extends StatelessWidget {
+  const CustomDataGridViewBuilderWidget({
     super.key,
     required this.homeStreamAndListViewBuilderViewController,
   });
@@ -52,9 +52,6 @@ class CustomDataWidget extends StatelessWidget {
                               .picturesList.length
                           : homeStreamAndListViewBuilderViewController
                               .processedUnprocessedList.length,
-                      // itemCount: homeViewController.isAllData.value
-                      //     ? AppUtils.picturesList.length
-                      //     : AppUtils.processedUnprocessedList.length,
                       itemBuilder: (context, index) {
                         return CustomRowViewWidget(
                           index: index,

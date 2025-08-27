@@ -1,10 +1,14 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/all_in_one_category_controller/coordinates_all_category_view_controller.dart';
 import 'package:flutter_api_web_services_practice/views/dashboard_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/add_image_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_l_v_b_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_g_v_builder_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_builder_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_builder_with_horizontal_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_custom_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_separator_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
-import 'package:flutter_api_web_services_practice/views/go_maps_views/go_maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/all_in_one_category/address_all_category_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/circles/address_circle_view.dart';
@@ -28,7 +32,6 @@ import '../../views/firebase_views/firebase_authentications_views/login_view.dar
 import '../../views/firebase_views/firebase_authentications_views/sign_up_view.dart';
 import '../../views/firebase_views/firebase_authentications_views/signin_with_email_link_view.dart';
 import '../../views/firebase_views/firebase_authentications_views/welcome_view.dart';
-import '../../views/firebase_views/firebase_core_views/database_or_realtime_screens/home_stream_builder_l_v_b_view.dart';
 import '../../views/firebase_views/firebase_integration_view.dart';
 import '../../views/rest_apis_views/get_list_view.dart';
 import '../../views/rest_apis_views/get_single_view.dart';
@@ -112,6 +115,33 @@ class AppRouts {
     GetPage(
         name: RoutNames.homeStreamBuilderLVBView,
         page: () => const HomeStreamBuilderLVBView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
+    //Firebase Data View Types
+    GetPage(
+        name: RoutNames.homeGVBuilderView,
+        page: () => const HomeGVBuilderView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeLVBuilderView,
+        page: () => const HomeLVBuilderView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeLVSeparatorView,
+        page: () => const HomeLVSeparatorView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeLVCustomView,
+        page: () => const HomeLVCustomView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeLVBuilderWithHorizontalView,
+        page: () => const HomeLVBuilderWithHorizontalView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 
