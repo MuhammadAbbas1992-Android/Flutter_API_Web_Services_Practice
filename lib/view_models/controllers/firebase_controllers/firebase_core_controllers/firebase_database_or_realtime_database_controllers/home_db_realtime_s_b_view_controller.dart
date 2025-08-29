@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_api_web_services_practice/view_models/services/firebase_services/firebase_services_stream_builder.dart';
 import 'package:get/get.dart';
 
 import '../../../../../models/picture_model.dart';
@@ -7,42 +10,57 @@ import '../../../../../res/app_utils.dart';
 import '../../../../../res/routs/rout_names.dart';
 import '../../../../services/firebase_services/firebase_services.dart';
 
-class HomeStreamBuilderLVBViewController extends GetxController {
+class HomeDbRealtimeSBViewController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isAllData = true.obs;
   RxList<PictureModel> picturesList = <PictureModel>[].obs;
   RxList<PictureModel> processedUnprocessedList = <PictureModel>[].obs;
+  DatabaseReference? _dbRef;
 
-  HomeStreamBuilderLVBViewController() {
-    loadProductsData();
+  HomeDbRealtimeSBViewController() {
+    loadProductsDataPath();
   }
 
-  Future<void> loadProductsData() async {
+  // Expose the stream so UI can use it
+  Stream<DatabaseEvent>? get dbRefStream => _dbRef?.onValue;
+
+  Future<void> loadProductsDataPath() async {
     isLoading.value = true;
-    await FirebaseServices.getPictureData().then(
+    await FirebaseServicesStreamBuilder.getFirebaseDBPath().then(
       (value) {
-        isLoading.value = !isLoading.value;
+        isLoading.value = false;
         if (value != null) {
-          AppUtils.picturesList.clear();
-          AppUtils.picturesList = value;
-          picturesList.clear();
-          picturesList.value = value;
+          _dbRef = value;
+          print('ABC Path loaded $_dbRef');
         }
       },
     ).onError(
       (error, stackTrace) {
-        isLoading.value = !isLoading.value;
+        isLoading.value = false;
         AppUtils.mySnackBar(
-            title: 'Error', message: 'Failed to load Pictures data');
+            title: 'Error', message: 'Failed to get Firebase DB path');
       },
     );
   }
 
+  void getPicturesData(AsyncSnapshot<DatabaseEvent> snapshot) {
+    if (snapshot.hasData) {
+      picturesList.clear();
+      for (var childSnapshot in snapshot.data!.snapshot.children) {
+        final pictureModel = PictureModel.fromMap(
+            Map<String, dynamic>.from(childSnapshot.value as Map));
+        picturesList.add(pictureModel);
+      }
+    }
+    isLoading.value = false;
+  }
+
   Future<void> addPicture(PictureModel? model) async {
     bool response = await Get.toNamed(RoutNames.addImageView, arguments: model);
-    if (response) {
-      loadProductsData();
-    }
+    print('ABC New Picture added');
+    /*if (response) {
+      loadProductsDataPath();
+    }*/
   }
 
   void toggle(bool value, int index) {
@@ -95,7 +113,7 @@ class HomeStreamBuilderLVBViewController extends GetxController {
   Future<void> deleteItem(int index) async {
     isLoading.value = true;
     if (await FirebaseServices.deletePicture(index)) {
-      await loadProductsData();
+      await loadProductsDataPath();
       isLoading.value = false;
       AppUtils.mySnackBar(
           title: 'Message', message: 'Picture item deleted successfully');

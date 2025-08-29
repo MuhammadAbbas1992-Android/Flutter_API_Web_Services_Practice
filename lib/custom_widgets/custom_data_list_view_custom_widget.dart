@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../common/common_text_widget.dart';
 import '../res/constants/app_colors.dart';
-import 'custom_row_view_widget.dart';
+import '../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
+import 'row_view_widgets/custom_firebase_list_row_view_widget.dart';
 
 class CustomDataListViewCustomWidget extends StatelessWidget {
   const CustomDataListViewCustomWidget({
     super.key,
-    required this.homeStreamAndListViewBuilderViewController,
+    required this.homeListViewController,
   });
 
-  final HomeStreamBuilderLVBViewController
-      homeStreamAndListViewBuilderViewController;
+  final HomeListViewController homeListViewController;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Expanded(
-          child: homeStreamAndListViewBuilderViewController.isLoading.value
+          child: homeListViewController.isLoading.value
               ? const Center(
                   child: SizedBox(
                     width: 50,
@@ -31,7 +31,7 @@ class CustomDataListViewCustomWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : homeStreamAndListViewBuilderViewController.picturesList.isEmpty
+              : homeListViewController.picturesList.isEmpty
                   ? const Center(
                       child: CommonTextWidget(
                         text: 'No data found',
@@ -43,17 +43,15 @@ class CustomDataListViewCustomWidget extends StatelessWidget {
                           (context, index) => Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 1.0),
-                                child: CustomRowViewWidget(
+                                child: CustomFirebaseListRowViewWidget(
                                   index: index,
-                                  homeStreamAndListViewBuilderViewController:
-                                      homeStreamAndListViewBuilderViewController,
+                                  homeListViewController:
+                                      homeListViewController,
                                 ),
                               ),
-                          childCount: homeStreamAndListViewBuilderViewController
-                                  .isAllData.value
-                              ? homeStreamAndListViewBuilderViewController
-                                  .picturesList.length
-                              : homeStreamAndListViewBuilderViewController
+                          childCount: homeListViewController.isAllData.value
+                              ? homeListViewController.picturesList.length
+                              : homeListViewController
                                   .processedUnprocessedList.length),
                     ),
         ));

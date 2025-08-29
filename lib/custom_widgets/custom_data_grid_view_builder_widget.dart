@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/row_view_widgets/custom_realtime_row_view_widget.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../common/common_text_widget.dart';
 import '../res/app_utils.dart';
 import '../res/constants/app_colors.dart';
-import 'custom_row_view_widget.dart';
+import '../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
+import 'row_view_widgets/custom_firebase_list_row_view_widget.dart';
 
 class CustomDataGridViewBuilderWidget extends StatelessWidget {
   const CustomDataGridViewBuilderWidget({
     super.key,
-    required this.homeStreamAndListViewBuilderViewController,
+    required this.homeListViewController,
   });
 
-  final HomeStreamBuilderLVBViewController
-      homeStreamAndListViewBuilderViewController;
+  final HomeListViewController homeListViewController;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Expanded(
-          child: homeStreamAndListViewBuilderViewController.isLoading.value
+          child: homeListViewController.isLoading.value
               ? const Center(
                   child: SizedBox(
                     width: 50,
@@ -32,7 +33,7 @@ class CustomDataGridViewBuilderWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : homeStreamAndListViewBuilderViewController.picturesList.isEmpty
+              : homeListViewController.picturesList.isEmpty
                   ? const Center(
                       child: CommonTextWidget(
                         text: 'No data found',
@@ -46,17 +47,14 @@ class CustomDataGridViewBuilderWidget extends StatelessWidget {
                               mainAxisSpacing: 15,
                               crossAxisSpacing: 20,
                               mainAxisExtent: 250),
-                      itemCount: homeStreamAndListViewBuilderViewController
-                              .isAllData.value
-                          ? homeStreamAndListViewBuilderViewController
-                              .picturesList.length
-                          : homeStreamAndListViewBuilderViewController
+                      itemCount: homeListViewController.isAllData.value
+                          ? homeListViewController.picturesList.length
+                          : homeListViewController
                               .processedUnprocessedList.length,
                       itemBuilder: (context, index) {
-                        return CustomRowViewWidget(
+                        return CustomFirebaseListRowViewWidget(
                           index: index,
-                          homeStreamAndListViewBuilderViewController:
-                              homeStreamAndListViewBuilderViewController,
+                          homeListViewController: homeListViewController,
                         );
                       },
                     ),

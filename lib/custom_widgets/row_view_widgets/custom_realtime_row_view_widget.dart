@@ -1,25 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../common/common_text_widget.dart';
-import '../res/constants/app_colors.dart';
-import '../res/constants/app_fonts.dart';
-import 'custom_dialog_box_widget.dart';
+import '../../common/common_text_widget.dart';
+import '../../res/constants/app_colors.dart';
+import '../../res/constants/app_fonts.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
+import '../custom_dialog_box_widget.dart';
 
-class CustomRowViewWidget extends StatelessWidget {
-  const CustomRowViewWidget({
+class CustomRealtimeRowViewWidget extends StatelessWidget {
+  const CustomRealtimeRowViewWidget({
     super.key,
     required this.index,
-    required this.homeStreamAndListViewBuilderViewController,
+    required this.homeDbRealtimeSBViewController,
   });
 
   final int index;
-  final HomeStreamBuilderLVBViewController
-      homeStreamAndListViewBuilderViewController;
+  final HomeDbRealtimeSBViewController homeDbRealtimeSBViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +37,14 @@ class CustomRowViewWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                child: homeStreamAndListViewBuilderViewController
-                        .isAllData.value
+                child: homeDbRealtimeSBViewController.isAllData.value
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-                            onTap: () =>
-                                homeStreamAndListViewBuilderViewController
-                                    .addPicture(
-                                        homeStreamAndListViewBuilderViewController
-                                            .picturesList[index]),
+                            onTap: () => homeDbRealtimeSBViewController
+                                .addPicture(homeDbRealtimeSBViewController
+                                    .picturesList[index]),
                             child: SvgPicture.asset(
                               'assets/icons/ic_edit.svg',
                               width: 20,
@@ -60,7 +57,7 @@ class CustomRowViewWidget extends StatelessWidget {
                               bool shouldDelete =
                                   await showDeleteConfirmationDialog(context);
                               if (shouldDelete) {
-                                await homeStreamAndListViewBuilderViewController
+                                await homeDbRealtimeSBViewController
                                     .deleteItem(index);
                               }
                             },
@@ -79,14 +76,13 @@ class CustomRowViewWidget extends StatelessWidget {
                 height: 10,
               ),
               InkWell(
-                  onTap: () => homeStreamAndListViewBuilderViewController
-                      .openFullPictureView(index),
+                  onTap: () =>
+                      homeDbRealtimeSBViewController.openFullPictureView(index),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(7),
-                    child: homeStreamAndListViewBuilderViewController
-                            .isAllData.value
+                    child: homeDbRealtimeSBViewController.isAllData.value
                         ? CachedNetworkImage(
-                            imageUrl: homeStreamAndListViewBuilderViewController
+                            imageUrl: homeDbRealtimeSBViewController
                                 .picturesList[index].imageUrl,
                             placeholder: (context, url) => const Center(
                                 child: SizedBox(
@@ -100,7 +96,7 @@ class CustomRowViewWidget extends StatelessWidget {
                             width: 156,
                           )
                         : CachedNetworkImage(
-                            imageUrl: homeStreamAndListViewBuilderViewController
+                            imageUrl: homeDbRealtimeSBViewController
                                 .processedUnprocessedList[index].imageUrl,
                             placeholder: (context, url) => const Center(
                                 child: SizedBox(
@@ -121,14 +117,13 @@ class CustomRowViewWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CommonTextWidget(
-                    text: homeStreamAndListViewBuilderViewController
-                            .isAllData.value
-                        ? homeStreamAndListViewBuilderViewController
+                    text: homeDbRealtimeSBViewController.isAllData.value
+                        ? homeDbRealtimeSBViewController
                                     .picturesList[index].processed ==
                                 true
                             ? 'Processed'
                             : 'Unprocessed'
-                        : homeStreamAndListViewBuilderViewController
+                        : homeDbRealtimeSBViewController
                                     .processedUnprocessedList[index]
                                     .processed ==
                                 true
@@ -140,25 +135,22 @@ class CustomRowViewWidget extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   FlutterSwitch(
-                    value: homeStreamAndListViewBuilderViewController
-                            .isAllData.value
-                        ? homeStreamAndListViewBuilderViewController
+                    value: homeDbRealtimeSBViewController.isAllData.value
+                        ? homeDbRealtimeSBViewController
                             .picturesList[index].processed!
-                        : homeStreamAndListViewBuilderViewController
+                        : homeDbRealtimeSBViewController
                             .processedUnprocessedList[index].processed!,
                     onToggle: (value) =>
-                        homeStreamAndListViewBuilderViewController.toggle(
-                            value, index),
+                        homeDbRealtimeSBViewController.toggle(value, index),
                     activeColor: AppColors.lightPink,
                     inactiveColor: AppColors.mediumGrey,
-                    toggleColor: homeStreamAndListViewBuilderViewController
-                            .isAllData.value
-                        ? homeStreamAndListViewBuilderViewController
+                    toggleColor: homeDbRealtimeSBViewController.isAllData.value
+                        ? homeDbRealtimeSBViewController
                                     .picturesList[index].processed ==
                                 true
                             ? AppColors.pink
                             : AppColors.lightGrey
-                        : homeStreamAndListViewBuilderViewController
+                        : homeDbRealtimeSBViewController
                                     .processedUnprocessedList[index]
                                     .processed ==
                                 true
@@ -177,10 +169,9 @@ class CustomRowViewWidget extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               CommonTextWidget(
-                text: homeStreamAndListViewBuilderViewController.isAllData.value
-                    ? homeStreamAndListViewBuilderViewController
-                        .picturesList[index].name
-                    : homeStreamAndListViewBuilderViewController
+                text: homeDbRealtimeSBViewController.isAllData.value
+                    ? homeDbRealtimeSBViewController.picturesList[index].name
+                    : homeDbRealtimeSBViewController
                         .processedUnprocessedList[index].name,
                 size: 10,
                 color: AppColors.pink,

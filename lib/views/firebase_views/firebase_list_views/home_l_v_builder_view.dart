@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/custom_data_list_view_builder_widget.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../custom_widgets/custom_category_widget.dart';
 import '../../../../custom_widgets/custom_data_grid_view_builder_widget.dart';
 import '../../../../custom_widgets/custom_header_widget.dart';
+import '../../../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
 
 class HomeLVBuilderView extends StatefulWidget {
   const HomeLVBuilderView({super.key});
@@ -15,14 +16,12 @@ class HomeLVBuilderView extends StatefulWidget {
 }
 
 class _HomeLVBuilderViewState extends State<HomeLVBuilderView> {
-  late final HomeStreamBuilderLVBViewController
-      homeStreamAndListViewBuilderViewController;
+  late final HomeListViewController homeListViewController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeStreamAndListViewBuilderViewController =
-        Get.put(HomeStreamBuilderLVBViewController());
+    homeListViewController = Get.put(HomeListViewController());
   }
 
   @override
@@ -42,19 +41,16 @@ class _HomeLVBuilderViewState extends State<HomeLVBuilderView> {
           CommonHeaderWidget(
             logo: 'assets/images/logo.png',
             icon: 'assets/icons/ic_add.svg',
-            onTap: () =>
-                homeStreamAndListViewBuilderViewController.addPicture(null),
+            onTap: () => homeListViewController.addPicture(null),
           ),
           CustomCategoryWidget(
-            homeStreamAndListViewBuilderViewController:
-                homeStreamAndListViewBuilderViewController,
+            homeListViewController: homeListViewController,
           ),
           const SizedBox(
             height: 10,
           ),
           CustomDataListViewBuilderWidget(
-              homeStreamAndListViewBuilderViewController:
-                  homeStreamAndListViewBuilderViewController)
+              homeListViewController: homeListViewController)
         ],
       ),
     )));

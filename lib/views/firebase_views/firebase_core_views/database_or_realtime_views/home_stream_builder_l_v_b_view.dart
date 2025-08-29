@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/database_realtime_view_widgets/custom_home_db_realtime_s_b_grid_view_widget.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../custom_widgets/custom_category_widget.dart';
@@ -15,14 +16,12 @@ class HomeStreamBuilderLVBView extends StatefulWidget {
 }
 
 class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
-  late final HomeStreamBuilderLVBViewController
-      homeStreamAndListViewBuilderViewController;
+  late final HomeDbRealtimeSBViewController homeDbRealtimeSBViewController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeStreamAndListViewBuilderViewController =
-        Get.put(HomeStreamBuilderLVBViewController());
+    homeDbRealtimeSBViewController = Get.put(HomeDbRealtimeSBViewController());
   }
 
   @override
@@ -42,19 +41,16 @@ class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
           CommonHeaderWidget(
             logo: 'assets/images/logo.png',
             icon: 'assets/icons/ic_add.svg',
-            onTap: () =>
-                homeStreamAndListViewBuilderViewController.addPicture(null),
+            onTap: () => homeDbRealtimeSBViewController.addPicture(null),
           ),
           CustomCategoryWidget(
-            homeStreamAndListViewBuilderViewController:
-                homeStreamAndListViewBuilderViewController,
+            homeDbRealtimeSBViewController: homeDbRealtimeSBViewController,
           ),
           const SizedBox(
             height: 10,
           ),
-          CustomDataGridViewBuilderWidget(
-              homeStreamAndListViewBuilderViewController:
-                  homeStreamAndListViewBuilderViewController)
+          CustomHomeDbRealtimeSBGridViewWidget(
+              homeDbRealtimeSBViewController: homeDbRealtimeSBViewController)
         ],
       ),
     )));

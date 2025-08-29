@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_stream_builder_l_v_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../common/common_text_widget.dart';
 import '../res/constants/app_colors.dart';
 import '../res/constants/app_fonts.dart';
+import '../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
 
 class CustomCategoryWidget extends StatelessWidget {
   const CustomCategoryWidget({
     super.key,
-    required this.homeStreamAndListViewBuilderViewController,
+    this.homeListViewController,
+    this.homeDbRealtimeSBViewController,
   });
 
-  final HomeStreamBuilderLVBViewController
-      homeStreamAndListViewBuilderViewController;
+  final HomeListViewController? homeListViewController;
+  final HomeDbRealtimeSBViewController? homeDbRealtimeSBViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,9 @@ class CustomCategoryWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          onTap: () =>
-              homeStreamAndListViewBuilderViewController.selectAllPictures(),
+          onTap: () => homeListViewController != null
+              ? homeListViewController?.selectAllPictures()
+              : homeDbRealtimeSBViewController?.selectAllPictures(),
           child: Container(
             height: 20,
             width: Get.width * .15,
@@ -40,8 +43,9 @@ class CustomCategoryWidget extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         InkWell(
-          onTap: () => homeStreamAndListViewBuilderViewController
-              .selectUnprocessedPictures(0),
+          onTap: () => homeListViewController != null
+              ? homeListViewController?.selectUnprocessedPictures(0)
+              : homeDbRealtimeSBViewController?.selectUnprocessedPictures(0),
           child: Container(
             height: 20,
             width: Get.width * .18,
@@ -60,8 +64,9 @@ class CustomCategoryWidget extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         InkWell(
-          onTap: () => homeStreamAndListViewBuilderViewController
-              .selectUnprocessedPictures(1),
+          onTap: () => homeListViewController != null
+              ? homeListViewController?.selectUnprocessedPictures(1)
+              : homeDbRealtimeSBViewController?.selectUnprocessedPictures(1),
           child: Container(
             height: 20,
             width: Get.width * .18,
