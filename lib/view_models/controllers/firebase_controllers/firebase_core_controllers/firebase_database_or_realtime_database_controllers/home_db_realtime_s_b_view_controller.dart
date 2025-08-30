@@ -13,9 +13,11 @@ import '../../../../services/firebase_services/firebase_services.dart';
 class HomeDbRealtimeSBViewController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isAllData = true.obs;
+  RxBool isDatabaseAccessed = true.obs;
   RxList<PictureModel> picturesList = <PictureModel>[].obs;
   RxList<PictureModel> processedUnprocessedList = <PictureModel>[].obs;
   DatabaseReference? _dbRef;
+  StreamSubscription<DatabaseEvent>? _dbListener;
 
   HomeDbRealtimeSBViewController() {
     loadProductsDataPath();
@@ -44,23 +46,38 @@ class HomeDbRealtimeSBViewController extends GetxController {
   }
 
   void getPicturesData(AsyncSnapshot<DatabaseEvent> snapshot) {
-    if (snapshot.hasData) {
-      picturesList.clear();
-      for (var childSnapshot in snapshot.data!.snapshot.children) {
-        final pictureModel = PictureModel.fromMap(
-            Map<String, dynamic>.from(childSnapshot.value as Map));
-        picturesList.add(pictureModel);
+    // Listen for writes/changes at root node
+    _dbRef!.onChildAdded.listen((event) {
+      isDatabaseAccessed.value = true;
+      print("Child Added at root: ${event.snapshot.key}");
+    });
+
+    _dbRef!.onChildChanged.listen((event) {
+      isDatabaseAccessed.value = true;
+      print("Child Changed at root: ${event.snapshot.key}");
+    });
+
+    _dbRef!.onChildRemoved.listen((event) {
+      isDatabaseAccessed.value = true;
+      print("Child Removed at root: ${event.snapshot.key}");
+    });
+    if (isDatabaseAccessed.value) {
+      if (snapshot.hasData) {
+        picturesList.clear();
+        AppUtils.picturesList.clear();
+        for (var childSnapshot in snapshot.data!.snapshot.children) {
+          final pictureModel = PictureModel.fromMap(
+              Map<String, dynamic>.from(childSnapshot.value as Map));
+          picturesList.add(pictureModel);
+          AppUtils.picturesList = picturesList;
+        }
       }
+      isDatabaseAccessed.value = false;
     }
-    isLoading.value = false;
   }
 
   Future<void> addPicture(PictureModel? model) async {
     bool response = await Get.toNamed(RoutNames.addImageView, arguments: model);
-    print('ABC New Picture added');
-    /*if (response) {
-      loadProductsDataPath();
-    }*/
   }
 
   void toggle(bool value, int index) {

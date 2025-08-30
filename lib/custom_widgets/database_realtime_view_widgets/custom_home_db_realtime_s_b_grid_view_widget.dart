@@ -36,25 +36,6 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
                 stream: homeDbRealtimeSBViewController
                     .dbRefStream, // Listens to changes in the 'users' node
                 builder: (context, snapshot) {
-                  // Loading state
-                  /* print('ABC before connectionState ${snapshot.connectionState}');
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              const Center(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Padding(
-                    padding: EdgeInsets.all(3.0),
-                    child: CircularProgressIndicator(
-                      color: AppColors.lightBlue,
-                    ),
-                  ),
-                ),
-              );
-            }*/
-
-                  print('ABC after ${snapshot.connectionState}');
-
                   // Error handling
                   if (snapshot.hasError) {
                     return Center(
@@ -64,8 +45,6 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
                       ),
                     );
                   }
-                  print('ABC after ${snapshot.hasError}');
-
                   // If no data
                   if (!snapshot.hasData ||
                       snapshot.data!.snapshot.value == null) {
@@ -76,15 +55,16 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
                       ),
                     );
                   }
-                  print('ABC after hasData');
-
                   //called this method to load latest list of
                   homeDbRealtimeSBViewController.getPicturesData(snapshot);
-                  print('ABC after getPictureData()');
+
+                  print('ABC listview.builder() called');
                   // Building ListView
                   return ListView.builder(
-                    itemCount:
-                        homeDbRealtimeSBViewController.picturesList.length,
+                    itemCount: homeDbRealtimeSBViewController.isAllData.value
+                        ? homeDbRealtimeSBViewController.picturesList.length
+                        : homeDbRealtimeSBViewController
+                            .processedUnprocessedList.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
