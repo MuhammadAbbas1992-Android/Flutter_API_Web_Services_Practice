@@ -17,68 +17,68 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => homeDbRealtimeSBViewController.isLoading.value
-          ? const Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: Padding(
-                  padding: EdgeInsets.all(3.0),
-                  child: CircularProgressIndicator(
-                    color: AppColors.lightBlue,
-                  ),
-                ),
+    return Expanded(
+      child: StreamBuilder<DatabaseEvent>(
+        stream: homeDbRealtimeSBViewController
+            .dbRefStream, // Listens to changes in the 'users' node
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              print('ABC No stream connected');
+              return Text('No stream connected');
+            case ConnectionState.waiting:
+              print('ABC Steam waiting');
+              return CircularProgressIndicator();
+            case ConnectionState.active:
+              print('ABC Active: ${snapshot.data}');
+              return Text('Active: ${snapshot.data}');
+            case ConnectionState.done:
+              print('ABC Stream closed');
+              return Text('Stream closed');
+          }
+          // Error handling
+          if (snapshot.hasError) {
+            return Center(
+              child: CommonTextWidget(
+                text: 'Error: ${snapshot.error}',
+                color: AppColors.lightBlue,
               ),
-            )
-          : Expanded(
-              child: StreamBuilder<DatabaseEvent>(
-                stream: homeDbRealtimeSBViewController
-                    .dbRefStream, // Listens to changes in the 'users' node
-                builder: (context, snapshot) {
-                  // Error handling
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: CommonTextWidget(
-                        text: 'Error: ${snapshot.error}',
-                        color: AppColors.lightBlue,
-                      ),
-                    );
-                  }
-                  // If no data
-                  if (!snapshot.hasData ||
-                      snapshot.data!.snapshot.value == null) {
-                    return const Center(
-                      child: CommonTextWidget(
-                        text: 'No data found',
-                        color: AppColors.lightBlue,
-                      ),
-                    );
-                  }
-                  //called this method to load latest list of
-                  homeDbRealtimeSBViewController.getPicturesData(snapshot);
+            );
+          }
 
-                  print('ABC listview.builder() called');
-                  // Building ListView
-                  return ListView.builder(
-                    itemCount: homeDbRealtimeSBViewController.isAllData.value
-                        ? homeDbRealtimeSBViewController.picturesList.length
-                        : homeDbRealtimeSBViewController
-                            .processedUnprocessedList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: CustomRealtimeRowViewWidget(
-                          index: index,
-                          homeDbRealtimeSBViewController:
-                              homeDbRealtimeSBViewController,
-                        ),
-                      );
-                    },
-                  );
-                },
+          // If no data
+          if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+            return const Center(
+              child: CommonTextWidget(
+                text: 'No data found',
+                color: AppColors.lightBlue,
               ),
-            ),
+            );
+          }
+          print('ABC calling getPicturesData(snapshot)');
+          //called this method to load latest list of
+          homeDbRealtimeSBViewController.getPicturesData(snapshot);
+
+          print('ABC listview.builder() called');
+          // Building ListView
+          return ListView.builder(
+            itemCount: homeDbRealtimeSBViewController.isAllData.value
+                ? homeDbRealtimeSBViewController.picturesList.length
+                : homeDbRealtimeSBViewController
+                    .processedUnprocessedList.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: CustomRealtimeRowViewWidget(
+                  index: index,
+                  homeDbRealtimeSBViewController:
+                      homeDbRealtimeSBViewController,
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

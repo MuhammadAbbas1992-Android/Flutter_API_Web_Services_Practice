@@ -11,7 +11,7 @@ import '../../../../../res/routs/rout_names.dart';
 import '../../../../services/firebase_services/firebase_services.dart';
 
 class HomeDbRealtimeSBViewController extends GetxController {
-  RxBool isLoading = false.obs;
+  // RxBool isLoading = false.obs;
   RxBool isAllData = true.obs;
   RxBool isDatabaseAccessed = true.obs;
   RxList<PictureModel> picturesList = <PictureModel>[].obs;
@@ -27,10 +27,11 @@ class HomeDbRealtimeSBViewController extends GetxController {
   Stream<DatabaseEvent>? get dbRefStream => _dbRef?.onValue;
 
   Future<void> loadProductsDataPath() async {
-    isLoading.value = true;
+    print('ABC called once');
+    // isLoading.value = true;
     await FirebaseServicesStreamBuilder.getFirebaseDBPath().then(
       (value) {
-        isLoading.value = false;
+        // isLoading.value = false;
         if (value != null) {
           _dbRef = value;
           print('ABC Path loaded $_dbRef');
@@ -38,7 +39,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
       },
     ).onError(
       (error, stackTrace) {
-        isLoading.value = false;
+        // isLoading.value = false;
         AppUtils.mySnackBar(
             title: 'Error', message: 'Failed to get Firebase DB path');
       },
@@ -63,15 +64,15 @@ class HomeDbRealtimeSBViewController extends GetxController {
     });
     if (isDatabaseAccessed.value) {
       if (snapshot.hasData) {
-        picturesList.clear();
-        AppUtils.picturesList.clear();
         for (var childSnapshot in snapshot.data!.snapshot.children) {
           final pictureModel = PictureModel.fromMap(
               Map<String, dynamic>.from(childSnapshot.value as Map));
           picturesList.add(pictureModel);
-          AppUtils.picturesList = picturesList;
+          print('ABC PictureList Size ${picturesList.length}');
         }
       }
+      AppUtils.picturesList = picturesList;
+      print('ABC AppUtils.PictureList Size ${AppUtils.picturesList.length}');
       isDatabaseAccessed.value = false;
     }
   }
@@ -96,7 +97,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
 
   void selectUnprocessedPictures(int category) {
     isAllData.value = false;
-    isLoading.value = !isLoading.value;
+    // isLoading.value = !isLoading.value;
     processedUnprocessedList.clear();
 
     switch (category) {
@@ -120,7 +121,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
         }
         break;
     }
-    isLoading.value = !isLoading.value;
+    // isLoading.value = !isLoading.value;
   }
 
   Future<void> openFullPictureView(int id) async {
@@ -128,14 +129,14 @@ class HomeDbRealtimeSBViewController extends GetxController {
   }
 
   Future<void> deleteItem(int index) async {
-    isLoading.value = true;
+    // isLoading.value = true;
     if (await FirebaseServices.deletePicture(index)) {
       await loadProductsDataPath();
-      isLoading.value = false;
+      // isLoading.value = false;
       AppUtils.mySnackBar(
           title: 'Message', message: 'Picture item deleted successfully');
     } else {
-      isLoading.value = false;
+      // isLoading.value = false;
       AppUtils.mySnackBar(
           title: 'Error', message: 'Failed to delete picture item');
     }
