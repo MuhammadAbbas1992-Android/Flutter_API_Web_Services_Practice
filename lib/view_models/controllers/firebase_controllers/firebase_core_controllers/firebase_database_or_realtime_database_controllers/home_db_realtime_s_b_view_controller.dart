@@ -11,7 +11,7 @@ import '../../../../../res/routs/rout_names.dart';
 import '../../../../services/firebase_services/firebase_services.dart';
 
 class HomeDbRealtimeSBViewController extends GetxController {
-  // RxBool isLoading = false.obs;
+  RxBool isPathLoaded = false.obs;
   RxBool isAllData = true.obs;
   RxBool isDatabaseAccessed = true.obs;
   RxList<PictureModel> picturesList = <PictureModel>[].obs;
@@ -19,7 +19,9 @@ class HomeDbRealtimeSBViewController extends GetxController {
   DatabaseReference? _dbRef;
   StreamSubscription<DatabaseEvent>? _dbListener;
 
-  HomeDbRealtimeSBViewController() {
+  @override
+  void onInit() {
+    super.onInit();
     loadProductsDataPath();
   }
 
@@ -28,52 +30,54 @@ class HomeDbRealtimeSBViewController extends GetxController {
 
   Future<void> loadProductsDataPath() async {
     print('ABC called once');
-    // isLoading.value = true;
-    await FirebaseServicesStreamBuilder.getFirebaseDBPath().then(
-      (value) {
-        // isLoading.value = false;
-        if (value != null) {
-          _dbRef = value;
-          print('ABC Path loaded $_dbRef');
+    final dbRef = await FirebaseServicesStreamBuilder.getFirebaseDBPath();
+
+    if (dbRef != null) {
+      _dbRef = dbRef;
+
+      // Listen for database changes incrementally
+      _dbRef!.onChildAdded.listen((event) {
+        final pictureModel = PictureModel.fromMap(
+            Map<String, dynamic>.from(event.snapshot.value as Map));
+        // Add only if not already present
+        if (!picturesList.any((p) => p.id == pictureModel.id)) {
+          picturesList.add(pictureModel);
+          picturesList.refresh();
+          print('ABC: Child added → ${pictureModel.name}');
         }
-      },
-    ).onError(
-      (error, stackTrace) {
-        // isLoading.value = false;
-        AppUtils.mySnackBar(
-            title: 'Error', message: 'Failed to get Firebase DB path');
-      },
-    );
+      });
+
+      _dbRef!.onChildChanged.listen((event) {
+        final updatedModel = PictureModel.fromMap(
+            Map<String, dynamic>.from(event.snapshot.value as Map));
+        final index = picturesList.indexWhere((p) => p.id == updatedModel.id);
+        if (index != -1) {
+          picturesList[index] = updatedModel;
+          picturesList.refresh();
+          print('ABC: Child updated → ${updatedModel.name}');
+        }
+      });
+
+      _dbRef!.onChildRemoved.listen((event) {
+        final removedId = event.snapshot.key;
+        picturesList.removeWhere((p) => p.id == removedId);
+        picturesList.refresh();
+        print('ABC: Child removed → $removedId');
+      });
+    }
   }
 
+  // We no longer need to rebuild the whole list inside StreamBuilder
   void getPicturesData(AsyncSnapshot<DatabaseEvent> snapshot) {
-    // Listen for writes/changes at root node
-    _dbRef!.onChildAdded.listen((event) {
-      isDatabaseAccessed.value = true;
-      print("Child Added at root: ${event.snapshot.key}");
-    });
-
-    _dbRef!.onChildChanged.listen((event) {
-      isDatabaseAccessed.value = true;
-      print("Child Changed at root: ${event.snapshot.key}");
-    });
-
-    _dbRef!.onChildRemoved.listen((event) {
-      isDatabaseAccessed.value = true;
-      print("Child Removed at root: ${event.snapshot.key}");
-    });
-    if (isDatabaseAccessed.value) {
-      if (snapshot.hasData) {
-        for (var childSnapshot in snapshot.data!.snapshot.children) {
-          final pictureModel = PictureModel.fromMap(
-              Map<String, dynamic>.from(childSnapshot.value as Map));
-          picturesList.add(pictureModel);
-          print('ABC PictureList Size ${picturesList.length}');
-        }
+    // Optional: Only used for initial snapshot if list is empty
+    if (picturesList.isEmpty && snapshot.hasData) {
+      picturesList.clear();
+      for (var childSnapshot in snapshot.data!.snapshot.children) {
+        final pictureModel = PictureModel.fromMap(
+            Map<String, dynamic>.from(childSnapshot.value as Map));
+        picturesList.add(pictureModel);
       }
-      AppUtils.picturesList = picturesList;
-      print('ABC AppUtils.PictureList Size ${AppUtils.picturesList.length}');
-      isDatabaseAccessed.value = false;
+      picturesList.refresh();
     }
   }
 
@@ -131,7 +135,6 @@ class HomeDbRealtimeSBViewController extends GetxController {
   Future<void> deleteItem(int index) async {
     // isLoading.value = true;
     if (await FirebaseServices.deletePicture(index)) {
-      await loadProductsDataPath();
       // isLoading.value = false;
       AppUtils.mySnackBar(
           title: 'Message', message: 'Picture item deleted successfully');

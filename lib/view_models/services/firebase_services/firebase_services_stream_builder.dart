@@ -4,7 +4,7 @@ import '../../../res/constants/app_constants.dart';
 
 class FirebaseServicesStreamBuilder {
   // Get Firebase or realtime database path for Stream Builder
-  static Future<DatabaseReference?> getFirebaseDBPath() async {
+  static DatabaseReference? getFirebaseDBPath() {
     try {
       final DatabaseReference databaseReference =
           FirebaseDatabase.instance.ref(AppConstants.firebaseDBName);

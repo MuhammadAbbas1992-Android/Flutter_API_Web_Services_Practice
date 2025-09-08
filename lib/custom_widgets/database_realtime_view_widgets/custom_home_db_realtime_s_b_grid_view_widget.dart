@@ -1,11 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/row_view_widgets/custom_realtime_row_view_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../common/common_text_widget.dart';
-import '../../res/constants/app_colors.dart';
+import '../row_view_widgets/custom_realtime_row_view_widget.dart';
 
 class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
   const CustomHomeDbRealtimeSBGridViewWidget({
@@ -19,64 +17,36 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder<DatabaseEvent>(
-        stream: homeDbRealtimeSBViewController
-            .dbRefStream, // Listens to changes in the 'users' node
+        stream: homeDbRealtimeSBViewController.dbRefStream,
         builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              print('ABC No stream connected');
-              return Text('No stream connected');
-            case ConnectionState.waiting:
-              print('ABC Steam waiting');
-              return CircularProgressIndicator();
-            case ConnectionState.active:
-              print('ABC Active: ${snapshot.data}');
-              return Text('Active: ${snapshot.data}');
-            case ConnectionState.done:
-              print('ABC Stream closed');
-              return Text('Stream closed');
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
           }
-          // Error handling
           if (snapshot.hasError) {
-            return Center(
-              child: CommonTextWidget(
-                text: 'Error: ${snapshot.error}',
-                color: AppColors.lightBlue,
-              ),
-            );
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+          if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+            return const Center(child: Text('No data found'));
           }
 
-          // If no data
-          if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
-            return const Center(
-              child: CommonTextWidget(
-                text: 'No data found',
-                color: AppColors.lightBlue,
-              ),
-            );
-          }
-          print('ABC calling getPicturesData(snapshot)');
-          //called this method to load latest list of
+          // Only for initial data load (not every time)
           homeDbRealtimeSBViewController.getPicturesData(snapshot);
 
-          print('ABC listview.builder() called');
-          // Building ListView
-          return ListView.builder(
-            itemCount: homeDbRealtimeSBViewController.isAllData.value
-                ? homeDbRealtimeSBViewController.picturesList.length
-                : homeDbRealtimeSBViewController
-                    .processedUnprocessedList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: CustomRealtimeRowViewWidget(
-                  index: index,
-                  homeDbRealtimeSBViewController:
-                      homeDbRealtimeSBViewController,
-                ),
-              );
-            },
-          );
+          print(
+              'ABC called and pictureList is ${homeDbRealtimeSBViewController.picturesList.length}');
+          return Obx(() => ListView.builder(
+                itemCount: homeDbRealtimeSBViewController.picturesList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: CustomRealtimeRowViewWidget(
+                      index: index,
+                      homeDbRealtimeSBViewController:
+                          homeDbRealtimeSBViewController,
+                    ),
+                  );
+                },
+              ));
         },
       ),
     );
