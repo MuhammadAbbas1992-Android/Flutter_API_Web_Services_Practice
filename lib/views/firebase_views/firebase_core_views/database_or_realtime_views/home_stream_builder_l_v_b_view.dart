@@ -21,6 +21,7 @@ class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('ABC initialization of controller.....');
     homeDbRealtimeSBViewController = Get.put(HomeDbRealtimeSBViewController());
   }
 

@@ -11,13 +11,10 @@ import '../../../../../res/routs/rout_names.dart';
 import '../../../../services/firebase_services/firebase_services.dart';
 
 class HomeDbRealtimeSBViewController extends GetxController {
-  RxBool isPathLoaded = false.obs;
   RxBool isAllData = true.obs;
-  RxBool isDatabaseAccessed = true.obs;
   RxList<PictureModel> picturesList = <PictureModel>[].obs;
   RxList<PictureModel> processedUnprocessedList = <PictureModel>[].obs;
   DatabaseReference? _dbRef;
-  StreamSubscription<DatabaseEvent>? _dbListener;
 
   @override
   void onInit() {
@@ -28,12 +25,15 @@ class HomeDbRealtimeSBViewController extends GetxController {
   // Expose the stream so UI can use it
   Stream<DatabaseEvent>? get dbRefStream => _dbRef?.onValue;
 
-  Future<void> loadProductsDataPath() async {
+  void loadProductsDataPath() {
     print('ABC called once');
-    final dbRef = await FirebaseServicesStreamBuilder.getFirebaseDBPath();
+    picturesList.clear();
+    AppUtils.picturesList.clear();
+    final dbRef = FirebaseServicesStreamBuilder.getFirebaseDBPath();
 
     if (dbRef != null) {
       _dbRef = dbRef;
+      print('ABC Path ${_dbRef}');
 
       // Listen for database changes incrementally
       _dbRef!.onChildAdded.listen((event) {
@@ -42,7 +42,8 @@ class HomeDbRealtimeSBViewController extends GetxController {
         // Add only if not already present
         if (!picturesList.any((p) => p.id == pictureModel.id)) {
           picturesList.add(pictureModel);
-          picturesList.refresh();
+          AppUtils.picturesList.add(pictureModel);
+          // picturesList.refresh();
           print('ABC: Child added → ${pictureModel.name}');
         }
       });
@@ -53,7 +54,8 @@ class HomeDbRealtimeSBViewController extends GetxController {
         final index = picturesList.indexWhere((p) => p.id == updatedModel.id);
         if (index != -1) {
           picturesList[index] = updatedModel;
-          picturesList.refresh();
+          AppUtils.picturesList[index] = updatedModel;
+          // picturesList.refresh();
           print('ABC: Child updated → ${updatedModel.name}');
         }
       });
@@ -61,7 +63,8 @@ class HomeDbRealtimeSBViewController extends GetxController {
       _dbRef!.onChildRemoved.listen((event) {
         final removedId = event.snapshot.key;
         picturesList.removeWhere((p) => p.id == removedId);
-        picturesList.refresh();
+        AppUtils.picturesList.removeWhere((p) => p.id == removedId);
+        // picturesList.refresh();
         print('ABC: Child removed → $removedId');
       });
     }
@@ -69,15 +72,18 @@ class HomeDbRealtimeSBViewController extends GetxController {
 
   // We no longer need to rebuild the whole list inside StreamBuilder
   void getPicturesData(AsyncSnapshot<DatabaseEvent> snapshot) {
+    print('ABC inside getPictureData()');
     // Optional: Only used for initial snapshot if list is empty
     if (picturesList.isEmpty && snapshot.hasData) {
-      picturesList.clear();
+      print('ABC only once called');
+      // picturesList.clear();
       for (var childSnapshot in snapshot.data!.snapshot.children) {
         final pictureModel = PictureModel.fromMap(
             Map<String, dynamic>.from(childSnapshot.value as Map));
         picturesList.add(pictureModel);
+        AppUtils.picturesList.add(pictureModel);
       }
-      picturesList.refresh();
+      // picturesList.refresh();
     }
   }
 
@@ -91,7 +97,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
       picturesList.refresh();
     } else {
       processedUnprocessedList[index].processed = value;
-      picturesList.refresh();
+      processedUnprocessedList.refresh();
     }
   }
 
@@ -111,8 +117,12 @@ class HomeDbRealtimeSBViewController extends GetxController {
           if (picture.processed == true) {
             processedUnprocessedList.add(picture);
             print(processedUnprocessedList[i++].name);
-            picturesList.refresh();
+            // picturesList.refresh();
           }
+        }
+        //Display message if picture list is not empty but no processed data
+        if (picturesList.isNotEmpty && processedUnprocessedList.isEmpty) {
+          AppUtils.mySnackBar(title: 'Message', message: 'No processed data');
         }
         break;
       case 1:
@@ -122,6 +132,10 @@ class HomeDbRealtimeSBViewController extends GetxController {
             processedUnprocessedList.add(picture);
             print(processedUnprocessedList[i++].name);
           }
+        }
+        //Display message if picture list is not empty but no unprocessed data
+        if (picturesList.isNotEmpty && processedUnprocessedList.isEmpty) {
+          AppUtils.mySnackBar(title: 'Message', message: 'No unprocessed data');
         }
         break;
     }

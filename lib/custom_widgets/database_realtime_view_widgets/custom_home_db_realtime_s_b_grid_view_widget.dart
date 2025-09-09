@@ -20,14 +20,20 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
         stream: homeDbRealtimeSBViewController.dbRefStream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
+            print('ABC in connectionState condition');
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
+            print('ABC in hasError');
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+            print('ABC in has noData');
             return const Center(child: Text('No data found'));
           }
+
+          print(
+              'ABC before and pictureList is ${homeDbRealtimeSBViewController.picturesList.length}');
 
           // Only for initial data load (not every time)
           homeDbRealtimeSBViewController.getPicturesData(snapshot);
@@ -35,7 +41,10 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
           print(
               'ABC called and pictureList is ${homeDbRealtimeSBViewController.picturesList.length}');
           return Obx(() => ListView.builder(
-                itemCount: homeDbRealtimeSBViewController.picturesList.length,
+                itemCount: homeDbRealtimeSBViewController.isAllData.value
+                    ? homeDbRealtimeSBViewController.picturesList.length
+                    : homeDbRealtimeSBViewController
+                        .processedUnprocessedList.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5.0),
