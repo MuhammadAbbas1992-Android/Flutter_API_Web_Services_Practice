@@ -52,4 +52,19 @@ class FirebaseIntegrationViewController extends GetxController {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.homeStreamBuilderLVBView);
   }
+
+  void showHomeStreamBuilderWithListViewBuilderSeparatorView(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.homeStreamBuilderLVBSeparatorView);
+  }
+
+  void showHomeStreamBuilderWithListViewBuilderCustomView(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.homeStreamBuilderLVBCustomView);
+  }
+
+  void showHomeStreamBuilderWithListViewBuilderWithHorizontalView(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.homeStreamBuilderLVBWithHorizontalView);
+  }
 }

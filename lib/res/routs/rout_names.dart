@@ -25,6 +25,12 @@ class RoutNames {
       '/home_stream_builder_g_v_b_view';
   static const String homeStreamBuilderLVBView =
       '/home_stream_builder_l_v_b_view';
+  static const String homeStreamBuilderLVBSeparatorView =
+      '/home_stream_builder_l_v_b_separator_view';
+  static const String homeStreamBuilderLVBCustomView =
+      '/home_stream_builder_l_v_b_custom_view';
+  static const String homeStreamBuilderLVBWithHorizontalView =
+      '/home_stream_builder_l_v_b_with_horizontal_view';
 
   //Firebase Data View Types
   static const String homeGVBuilderView = '/home_g_v_builder_view';

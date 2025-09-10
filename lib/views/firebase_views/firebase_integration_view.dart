@@ -189,21 +189,21 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         CustomIntegrationButtonWidget(
                           caseNo: 11,
                           btnText: 'Home3',
-                          categoryText: 'StreamBuilder by ListView.custom',
+                          categoryText: 'StreamBuilder by ListView.separator',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 12,
                           btnText: 'Home4',
-                          categoryText: 'ListView(Static Data)',
+                          categoryText: 'StreamBuilder by ListView.custom',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 13,
-                          btnText: 'Home4',
-                          categoryText: 'ListView(Static Data)',
+                          btnText: 'Home5',
+                          categoryText: 'StreamBuilder by ListView.builder(H)',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),

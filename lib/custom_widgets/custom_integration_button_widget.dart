@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import '../view_models/controllers/firebase_controllers/firebase_integration_view_controller.dart';
 import 'custom_text_widget.dart';
 
@@ -63,6 +62,21 @@ class CustomIntegrationButtonWidget extends StatelessWidget {
                 case 10:
                   firebaseIntegrationViewController
                       ?.showHomeStreamBuilderWithListViewBuilderView(caseNo);
+                  break;
+                case 11:
+                  firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithListViewBuilderSeparatorView(
+                          caseNo);
+                  break;
+                case 12:
+                  firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithListViewBuilderCustomView(
+                          caseNo);
+                  break;
+                case 13:
+                  firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithListViewBuilderWithHorizontalView(
+                          caseNo);
                   break;
               }
             },
