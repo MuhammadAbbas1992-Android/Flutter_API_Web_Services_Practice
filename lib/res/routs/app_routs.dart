@@ -1,6 +1,7 @@
 import 'package:flutter_api_web_services_practice/res/routs/rout_names.dart';
 import 'package:flutter_api_web_services_practice/views/dashboard_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/add_image_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_g_v_b_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_l_v_b_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_g_v_builder_view.dart';
@@ -112,6 +113,11 @@ class AppRouts {
         transition: Transition.leftToRightWithFade),
 
     //Firebase Database or Realtime Database Routs
+    GetPage(
+        name: RoutNames.homeStreamBuilderGVBView,
+        page: () => const HomeStreamBuilderGVBView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
     GetPage(
         name: RoutNames.homeStreamBuilderLVBView,
         page: () => const HomeStreamBuilderLVBView(),

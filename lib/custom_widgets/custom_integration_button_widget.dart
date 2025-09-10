@@ -58,6 +58,10 @@ class CustomIntegrationButtonWidget extends StatelessWidget {
                   break;
                 case 9:
                   firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithGridViewBuilderView(caseNo);
+                  break;
+                case 10:
+                  firebaseIntegrationViewController
                       ?.showHomeStreamBuilderWithListViewBuilderView(caseNo);
                   break;
               }

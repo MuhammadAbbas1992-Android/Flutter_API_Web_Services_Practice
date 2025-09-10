@@ -3,7 +3,7 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/fireba
 import 'package:get/get.dart';
 
 import '../../../../custom_widgets/custom_category_widget.dart';
-import '../../../../custom_widgets/custom_data_grid_view_builder_widget.dart';
+import '../../../custom_widgets/firebase_list_view_widgets/custom_data_grid_view_builder_widget.dart';
 import '../../../../custom_widgets/custom_header_widget.dart';
 import '../../../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
 

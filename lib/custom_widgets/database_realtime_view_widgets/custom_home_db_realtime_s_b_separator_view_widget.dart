@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
+import '../../res/constants/app_colors.dart';
 import '../row_view_widgets/custom_realtime_row_view_widget.dart';
 
-class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
-  const CustomHomeDbRealtimeSBGridViewWidget({
+class CustomHomeDbRealtimeSBSeparatorViewWidget extends StatelessWidget {
+  const CustomHomeDbRealtimeSBSeparatorViewWidget({
     super.key,
     required this.homeDbRealtimeSBViewController,
   });
@@ -32,15 +33,7 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
           // Only for initial data load (not every time)
           homeDbRealtimeSBViewController.getPicturesData(snapshot);
 
-          return Obx(() => GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 20,
-                    mainAxisExtent:
-                        homeDbRealtimeSBViewController.isAllData.value
-                            ? 260
-                            : 250),
+          return Obx(() => ListView.separated(
                 itemCount: homeDbRealtimeSBViewController.isAllData.value
                     ? homeDbRealtimeSBViewController.picturesList.length
                     : homeDbRealtimeSBViewController
@@ -55,6 +48,12 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
                     ),
                   );
                 },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  color: AppColors.blue,
+                  height: 10,
+                  thickness: 10,
+                ),
               ));
         },
       ),

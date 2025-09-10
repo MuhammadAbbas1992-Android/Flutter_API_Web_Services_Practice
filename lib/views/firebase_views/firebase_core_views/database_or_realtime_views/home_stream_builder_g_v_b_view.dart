@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/database_realtime_view_widgets/custom_home_db_realtime_s_b_grid_view_widget.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/database_realtime_view_widgets/custom_home_db_realtime_s_b_list_view_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get.dart';
 
@@ -8,15 +7,15 @@ import '../../../../custom_widgets/custom_category_widget.dart';
 import '../../../../custom_widgets/firebase_list_view_widgets/custom_data_grid_view_builder_widget.dart';
 import '../../../../custom_widgets/custom_header_widget.dart';
 
-class HomeStreamBuilderLVBView extends StatefulWidget {
-  const HomeStreamBuilderLVBView({super.key});
+class HomeStreamBuilderGVBView extends StatefulWidget {
+  const HomeStreamBuilderGVBView({super.key});
 
   @override
-  State<HomeStreamBuilderLVBView> createState() =>
-      _HomeStreamBuilderLVBViewState();
+  State<HomeStreamBuilderGVBView> createState() =>
+      _HomeStreamBuilderGVBViewState();
 }
 
-class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
+class _HomeStreamBuilderGVBViewState extends State<HomeStreamBuilderGVBView> {
   late final HomeDbRealtimeSBViewController homeDbRealtimeSBViewController;
   @override
   void initState() {
@@ -50,7 +49,7 @@ class _HomeStreamBuilderLVBViewState extends State<HomeStreamBuilderLVBView> {
           const SizedBox(
             height: 10,
           ),
-          CustomHomeDbRealtimeSBListViewWidget(
+          CustomHomeDbRealtimeSBGridViewWidget(
               homeDbRealtimeSBViewController: homeDbRealtimeSBViewController)
         ],
       ),

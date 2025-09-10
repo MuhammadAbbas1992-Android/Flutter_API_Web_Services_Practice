@@ -26,14 +26,12 @@ class HomeDbRealtimeSBViewController extends GetxController {
   Stream<DatabaseEvent>? get dbRefStream => _dbRef?.onValue;
 
   void loadProductsDataPath() {
-    print('ABC called once');
     picturesList.clear();
     AppUtils.picturesList.clear();
     final dbRef = FirebaseServicesStreamBuilder.getFirebaseDBPath();
 
     if (dbRef != null) {
       _dbRef = dbRef;
-      print('ABC Path ${_dbRef}');
 
       // Listen for database changes incrementally
       _dbRef!.onChildAdded.listen((event) {
@@ -43,8 +41,6 @@ class HomeDbRealtimeSBViewController extends GetxController {
         if (!picturesList.any((p) => p.id == pictureModel.id)) {
           picturesList.add(pictureModel);
           AppUtils.picturesList.add(pictureModel);
-          // picturesList.refresh();
-          print('ABC: Child added → ${pictureModel.name}');
         }
       });
 
@@ -55,8 +51,6 @@ class HomeDbRealtimeSBViewController extends GetxController {
         if (index != -1) {
           picturesList[index] = updatedModel;
           AppUtils.picturesList[index] = updatedModel;
-          // picturesList.refresh();
-          print('ABC: Child updated → ${updatedModel.name}');
         }
       });
 
@@ -64,26 +58,20 @@ class HomeDbRealtimeSBViewController extends GetxController {
         final removedId = event.snapshot.key;
         picturesList.removeWhere((p) => p.id == removedId);
         AppUtils.picturesList.removeWhere((p) => p.id == removedId);
-        // picturesList.refresh();
-        print('ABC: Child removed → $removedId');
       });
     }
   }
 
   // We no longer need to rebuild the whole list inside StreamBuilder
   void getPicturesData(AsyncSnapshot<DatabaseEvent> snapshot) {
-    print('ABC inside getPictureData()');
     // Optional: Only used for initial snapshot if list is empty
     if (picturesList.isEmpty && snapshot.hasData) {
-      print('ABC only once called');
-      // picturesList.clear();
       for (var childSnapshot in snapshot.data!.snapshot.children) {
         final pictureModel = PictureModel.fromMap(
             Map<String, dynamic>.from(childSnapshot.value as Map));
         picturesList.add(pictureModel);
         AppUtils.picturesList.add(pictureModel);
       }
-      // picturesList.refresh();
     }
   }
 

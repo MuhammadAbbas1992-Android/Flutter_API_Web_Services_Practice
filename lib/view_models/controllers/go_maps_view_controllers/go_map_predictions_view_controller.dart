@@ -26,14 +26,11 @@ class GoMapPredictionsViewController extends GetxController {
           predictionsList.clear();
           var data = json.decode(response.body);
           predictionsList.assignAll(data['predictions']);
-          print("ABC Places API Response: $predictionsList");
         } else {
-          print("ABC Error: ${response.statusCode}");
           throw Exception('Failed to load Predictions ${response.statusCode}');
         }
       });
     } catch (e) {
-      print("ABC Error: $e");
       AppUtils.mySnackBar(title: 'Error', message: '$e');
     }
   }

@@ -3,11 +3,11 @@ import 'package:flutter_api_web_services_practice/custom_widgets/row_view_widget
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../common/common_text_widget.dart';
-import '../res/app_utils.dart';
-import '../res/constants/app_colors.dart';
-import '../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
-import 'row_view_widgets/custom_firebase_list_row_view_widget.dart';
+import '../../common/common_text_widget.dart';
+import '../../res/app_utils.dart';
+import '../../res/constants/app_colors.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
+import '../row_view_widgets/custom_firebase_list_row_view_widget.dart';
 
 class CustomDataGridViewBuilderWidget extends StatelessWidget {
   const CustomDataGridViewBuilderWidget({
@@ -41,12 +41,13 @@ class CustomDataGridViewBuilderWidget extends StatelessWidget {
                       ),
                     )
                   : GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 15,
-                              crossAxisSpacing: 20,
-                              mainAxisExtent: 250),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 20,
+                          mainAxisExtent: homeListViewController.isAllData.value
+                              ? 260
+                              : 250),
                       itemCount: homeListViewController.isAllData.value
                           ? homeListViewController.picturesList.length
                           : homeListViewController

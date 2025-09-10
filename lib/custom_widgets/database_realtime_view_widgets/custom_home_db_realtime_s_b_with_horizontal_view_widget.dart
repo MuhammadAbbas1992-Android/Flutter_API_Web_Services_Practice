@@ -5,8 +5,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../row_view_widgets/custom_realtime_row_view_widget.dart';
 
-class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
-  const CustomHomeDbRealtimeSBGridViewWidget({
+class CustomHomeDbRealtimeSBWithHorizontalViewWidget extends StatelessWidget {
+  const CustomHomeDbRealtimeSBWithHorizontalViewWidget({
     super.key,
     required this.homeDbRealtimeSBViewController,
   });
@@ -32,15 +32,8 @@ class CustomHomeDbRealtimeSBGridViewWidget extends StatelessWidget {
           // Only for initial data load (not every time)
           homeDbRealtimeSBViewController.getPicturesData(snapshot);
 
-          return Obx(() => GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 20,
-                    mainAxisExtent:
-                        homeDbRealtimeSBViewController.isAllData.value
-                            ? 260
-                            : 250),
+          return Obx(() => ListView.builder(
+                scrollDirection: Axis.horizontal,
                 itemCount: homeDbRealtimeSBViewController.isAllData.value
                     ? homeDbRealtimeSBViewController.picturesList.length
                     : homeDbRealtimeSBViewController
