@@ -41,39 +41,51 @@ class CustomIntegrationButtonWidget extends StatelessWidget {
                   break;
                 case 5:
                   firebaseIntegrationViewController
-                      ?.showHomeListViewBuilderView(caseNo);
+                      ?.showHomeGridViewCountView(caseNo);
                   break;
                 case 6:
                   firebaseIntegrationViewController
-                      ?.showHomeListViewSeparatorView(caseNo);
+                      ?.showHomeGridViewExtendView(caseNo);
                   break;
                 case 7:
                   firebaseIntegrationViewController
-                      ?.showHomeListViewCustomView(caseNo);
+                      ?.showHomeGridViewBuilderView(caseNo);
                   break;
                 case 8:
                   firebaseIntegrationViewController
-                      ?.showHomeListViewWithHorizontalView(caseNo);
+                      ?.showHomeListViewBuilderView(caseNo);
                   break;
                 case 9:
                   firebaseIntegrationViewController
-                      ?.showHomeStreamBuilderWithGridViewBuilderView(caseNo);
+                      ?.showHomeListViewSeparatorView(caseNo);
                   break;
                 case 10:
                   firebaseIntegrationViewController
-                      ?.showHomeStreamBuilderWithListViewBuilderView(caseNo);
+                      ?.showHomeListViewCustomView(caseNo);
                   break;
                 case 11:
+                  firebaseIntegrationViewController
+                      ?.showHomeListViewWithHorizontalView(caseNo);
+                  break;
+                case 12:
+                  firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithGridViewBuilderView(caseNo);
+                  break;
+                case 13:
+                  firebaseIntegrationViewController
+                      ?.showHomeStreamBuilderWithListViewBuilderView(caseNo);
+                  break;
+                case 14:
                   firebaseIntegrationViewController
                       ?.showHomeStreamBuilderWithListViewBuilderSeparatorView(
                           caseNo);
                   break;
-                case 12:
+                case 15:
                   firebaseIntegrationViewController
                       ?.showHomeStreamBuilderWithListViewBuilderCustomView(
                           caseNo);
                   break;
-                case 13:
+                case 16:
                   firebaseIntegrationViewController
                       ?.showHomeStreamBuilderWithListViewBuilderWithHorizontalView(
                           caseNo);

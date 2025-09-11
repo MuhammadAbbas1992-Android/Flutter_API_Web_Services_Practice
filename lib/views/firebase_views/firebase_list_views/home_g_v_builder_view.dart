@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/firebase_list_view_widgets/custom_data_grid_view_count_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
+import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_list_controllers/home_grid_view_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../custom_widgets/custom_category_widget.dart';
@@ -15,12 +17,12 @@ class HomeGVBuilderView extends StatefulWidget {
 }
 
 class _HomeGVBuilderViewState extends State<HomeGVBuilderView> {
-  late final HomeListViewController homeListViewController;
+  late final HomeGridViewController homeGridViewController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeListViewController = Get.put(HomeListViewController());
+    homeGridViewController = Get.put(HomeGridViewController());
   }
 
   @override
@@ -31,25 +33,35 @@ class _HomeGVBuilderViewState extends State<HomeGVBuilderView> {
 
   @override
   Widget build(BuildContext context) {
+    int? selectedValue;
     return Scaffold(
         body: SafeArea(
             child: Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: Column(
         children: [
-          CommonHeaderWidget(
-            logo: 'assets/images/logo.png',
-            icon: 'assets/icons/ic_add.svg',
-            onTap: () => homeListViewController.addPicture(null),
-          ),
-          CustomCategoryWidget(
-            homeListViewController: homeListViewController,
-          ),
-          const SizedBox(
-            height: 10,
+          Center(
+            child: Obx(
+              () => DropdownButton<int>(
+                hint: Text(homeGridViewController.hintText.value),
+                value: selectedValue, // can be null at first
+                items: List.generate(10, (index) {
+                  int value = index + 1;
+                  return DropdownMenuItem<int>(
+                    value: value,
+                    child: Text(value.toString()),
+                  );
+                }),
+                onChanged: (int? value) {
+                  homeGridViewController.selectedValue.value = value!;
+                  homeGridViewController.hintText.value = value.toString();
+                },
+              ),
+            ),
           ),
           CustomDataGridViewBuilderWidget(
-              homeListViewController: homeListViewController)
+            homeGridViewController: homeGridViewController,
+          )
         ],
       ),
     )));

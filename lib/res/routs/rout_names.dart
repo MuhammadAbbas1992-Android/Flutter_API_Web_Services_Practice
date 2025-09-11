@@ -34,6 +34,8 @@ class RoutNames {
 
   //Firebase Data View Types
   static const String homeGVBuilderView = '/home_g_v_builder_view';
+  static const String homeGVCountView = '/home_g_v_count_view';
+  static const String homeGVExtendView = '/home_g_v_extend_view';
   static const String homeLVBuilderView = '/home_l_v_builder_view';
   static const String homeLVSeparatorView = '/home_l_v_separator_view';
   static const String homeLVCustomView = '/home_l_v_custom_view';

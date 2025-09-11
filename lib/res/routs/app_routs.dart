@@ -8,6 +8,8 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_l_v_b_with_horizontal_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_g_v_builder_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_g_v_count_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_g_v_extend_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_builder_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_builder_with_horizontal_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_custom_view.dart';
@@ -148,6 +150,17 @@ class AppRouts {
         page: () => const HomeGVBuilderView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeGVCountView,
+        page: () => const HomeGVCountView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeGVExtendView,
+        page: () => const HomeGVExtendView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
     GetPage(
         name: RoutNames.homeLVBuilderView,
         page: () => const HomeLVBuilderView(),
