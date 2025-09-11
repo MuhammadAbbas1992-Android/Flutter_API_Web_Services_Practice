@@ -12,8 +12,8 @@ class CustomDataGridViewExtendWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /*GridView.extent → Fixed maximum width of tiles
-Instead of specifying column count, you specify max tile width,
- and Flutter automatically calculates how many tiles fit per row.*/
+    Instead of specifying column count, you specify max tile width,
+    and Flutter automatically calculates how many tiles fit per row.*/
     return Expanded(
       child: GridView.extent(
         maxCrossAxisExtent: 200, // each tile’s max width

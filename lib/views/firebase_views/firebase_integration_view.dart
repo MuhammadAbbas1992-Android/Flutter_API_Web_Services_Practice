@@ -140,23 +140,51 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 6,
+                          caseNo: 8,
                           btnText: 'Home5',
                           categoryText: 'ListView.separator',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 7,
+                          caseNo: 9,
                           btnText: 'Home6',
                           categoryText: 'ListView.custom',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 8,
+                          caseNo: 10,
                           btnText: 'Home7',
                           categoryText: 'ListView.builder (Horizontal)',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 11,
+                          btnText: 'Home8',
+                          categoryText: 'ListWheelScrollView',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 12,
+                          btnText: 'Home9',
+                          categoryText: 'ReorderableListView',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 13,
+                          btnText: 'Home10',
+                          categoryText: 'CustomScrollView + Slivers',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 14,
+                          btnText: 'Home11',
+                          categoryText: 'PaginatedListView',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
@@ -187,35 +215,35 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         ),
                         const SizedBox(height: 10),
                         CustomIntegrationButtonWidget(
-                          caseNo: 9,
+                          caseNo: 14,
                           btnText: 'Home1',
                           categoryText: 'StreamBuilder by GridView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 10,
+                          caseNo: 15,
                           btnText: 'Home2',
                           categoryText: 'StreamBuilder by ListView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 11,
+                          caseNo: 16,
                           btnText: 'Home3',
                           categoryText: 'StreamBuilder by ListView.separator',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 12,
+                          caseNo: 17,
                           btnText: 'Home4',
                           categoryText: 'StreamBuilder by ListView.custom',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 13,
+                          caseNo: 18,
                           btnText: 'Home5',
                           categoryText: 'StreamBuilder by ListView.builder(H)',
                           firebaseIntegrationViewController:

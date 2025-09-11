@@ -10,8 +10,8 @@ import '../../res/constants/app_colors.dart';
 import '../../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
 import '../row_view_widgets/custom_firebase_list_row_view_widget.dart';
 
-class CustomDataGridViewBuilderWidget extends StatelessWidget {
-  const CustomDataGridViewBuilderWidget({
+class CustomDataListWheelScrollViewWidget extends StatelessWidget {
+  const CustomDataListWheelScrollViewWidget({
     super.key,
     required this.homeGridViewController,
   });
@@ -20,27 +20,24 @@ class CustomDataGridViewBuilderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Expanded(
-        /*GridView.builder → Dynamically builds grid items
-        Best when you have a large or infinite list of items.*/
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount:
-                homeGridViewController.selectedValue.value, // number of columns
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          itemCount: homeGridViewController.countries.length, // total items
-          itemBuilder: (context, index) {
-            return Container(
-              color: Colors.blue[100 * ((index % 8) + 1)],
-              child:
-                  Center(child: Text(homeGridViewController.countries[index])),
-            );
-          },
-        ),
+    return Expanded(
+        child: ListWheelScrollView.useDelegate(
+      itemExtent: 100, // max expected card height
+      childDelegate: ListWheelChildBuilderDelegate(
+        builder: (context, index) {
+          if (index < 0 || index >= homeGridViewController.countries.length) {
+            return null;
+          }
+          return Card(
+            child: Center(
+              child: Text(
+                homeGridViewController.countries[index],
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+          );
+        },
       ),
-    );
+    ));
   }
 }

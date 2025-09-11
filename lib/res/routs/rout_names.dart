@@ -41,6 +41,10 @@ class RoutNames {
   static const String homeLVCustomView = '/home_l_v_custom_view';
   static const String homeLVBuilderWithHorizontalView =
       '/home_l_v_builder_with_horizontal_view';
+  static const String homeListWheelScrollView = '/home_list_wheel_scroll_view';
+  static const String homeReorderableListView = '/home_reorderable_list_view';
+  static const String homeCustomScrollViewAndSlivers =
+      '/home_custom_scroll_view_and_slivers';
 
   //Google Maps RoutNames
   static const String mapTypesView = '/map_types_view';
