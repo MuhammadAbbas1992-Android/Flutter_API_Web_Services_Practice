@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_maps_integration_view_controller.dart';
-import 'custom_text_widget.dart';
+
+import '../other_custom_widgets/custom_text_widget.dart';
 
 class CustomGoogleMapsButtonWidget extends StatelessWidget {
   const CustomGoogleMapsButtonWidget({

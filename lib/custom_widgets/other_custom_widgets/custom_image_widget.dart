@@ -7,8 +7,8 @@ import 'package:flutter_api_web_services_practice/res/app_utils.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../res/constants/app_colors.dart';
-import '../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
+import '../../res/constants/app_colors.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
 
 class CustomImageWidget extends StatelessWidget {
   const CustomImageWidget({

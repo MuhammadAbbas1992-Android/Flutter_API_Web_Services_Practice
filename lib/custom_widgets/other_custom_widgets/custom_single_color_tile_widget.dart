@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
+import '../../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 
 class CustomSingleColorTileWidget extends StatelessWidget {
   const CustomSingleColorTileWidget({super.key, required this.controller});

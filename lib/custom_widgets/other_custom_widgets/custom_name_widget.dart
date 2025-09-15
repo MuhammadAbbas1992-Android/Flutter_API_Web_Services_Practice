@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import '../common/common_text_widget.dart';
-import '../res/constants/app_colors.dart';
-import '../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
+
+import '../../common/common_text_widget.dart';
+import '../../res/constants/app_colors.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
 
 class CustomNameWidget extends StatelessWidget {
   const CustomNameWidget({

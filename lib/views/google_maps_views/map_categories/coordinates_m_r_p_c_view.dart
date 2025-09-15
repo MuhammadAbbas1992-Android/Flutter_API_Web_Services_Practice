@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/routs_map_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../../../custom_widgets/custom_text_widget.dart';
 import '../../../../res/constants/app_colors.dart';
+import '../../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 
 class RoutsMapView extends StatefulWidget {
   const RoutsMapView({super.key});

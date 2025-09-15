@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/database_realtime_view_widgets/custom_home_db_realtime_s_b_grid_view_widget.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/database_realtime_view_widgets/custom_home_db_realtime_s_b_list_view_widget.dart';
 import 'package:flutter_api_web_services_practice/custom_widgets/database_realtime_view_widgets/custom_home_db_realtime_s_b_separator_view_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/firebase_controllers/firebase_core_controllers/firebase_database_or_realtime_database_controllers/home_db_realtime_s_b_view_controller.dart';
 import 'package:get/get.dart';
 
-import '../../../../custom_widgets/custom_category_widget.dart';
-import '../../../../custom_widgets/firebase_list_view_widgets/custom_data_grid_view_builder_widget.dart';
-import '../../../../custom_widgets/custom_header_widget.dart';
+import '../../../../custom_widgets/other_custom_widgets/custom_category_widget.dart';
+import '../../../../custom_widgets/other_custom_widgets/custom_header_widget.dart';
 
 class HomeStreamBuilderLVBSeparatorView extends StatefulWidget {
   const HomeStreamBuilderLVBSeparatorView({super.key});

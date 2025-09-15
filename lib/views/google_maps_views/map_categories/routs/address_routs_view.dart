@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/map_categories_controllers/routs_controllers/address_routs_view_controller.dart';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 
 class AddressRoutsView extends StatefulWidget {
   const AddressRoutsView({super.key});

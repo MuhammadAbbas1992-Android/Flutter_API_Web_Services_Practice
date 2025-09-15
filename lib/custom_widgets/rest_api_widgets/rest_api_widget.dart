@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
-import 'custom_text_widget.dart';
+import '../../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
+import '../other_custom_widgets/custom_text_widget.dart';
 
 class RestApiWidget extends StatelessWidget {
   const RestApiWidget({

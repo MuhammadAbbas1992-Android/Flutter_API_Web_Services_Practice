@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_header_widget.dart';
-import '../../../custom_widgets/custom_text_widget.dart';
+import '../../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 import '../../../res/app_utils.dart';
 import '../../../view_models/controllers/firebase_controllers/firebase_authentications_controllers/welcome_screen_controller.dart';
 

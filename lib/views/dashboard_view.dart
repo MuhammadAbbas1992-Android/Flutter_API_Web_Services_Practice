@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/custom_elevated_button_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/dashboard_view_controller.dart';
 import 'package:get/get.dart';
 
-import '../custom_widgets/custom_text_widget.dart';
+import '../custom_widgets/other_custom_widgets/custom_elevated_button_widget.dart';
+import '../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
+import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 
 class CustomSinglePostDeleteObjectTileWidget extends StatelessWidget {
   const CustomSinglePostDeleteObjectTileWidget(

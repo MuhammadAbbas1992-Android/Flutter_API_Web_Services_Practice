@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../custom_widgets/rest_api_widget.dart';
-import '../../custom_widgets/custom_text_widget.dart';
+import '../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
+import '../../custom_widgets/rest_api_widgets/rest_api_widget.dart';
 import '../../res/app_utils.dart';
 import '../../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';

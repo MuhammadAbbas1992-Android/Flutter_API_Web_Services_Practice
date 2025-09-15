@@ -9,7 +9,7 @@ import '../../common/common_text_widget.dart';
 import '../../res/constants/app_colors.dart';
 import '../../res/constants/app_fonts.dart';
 import '../../view_models/controllers/firebase_controllers/firebase_list_controllers/home_list_view_controller.dart';
-import '../custom_dialog_box_widget.dart';
+import '../other_custom_widgets/custom_dialog_box_widget.dart';
 
 class CustomRealtimeRowViewWidget extends StatelessWidget {
   const CustomRealtimeRowViewWidget({

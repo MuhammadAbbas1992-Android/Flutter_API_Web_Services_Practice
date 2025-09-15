@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/custom_text_widget.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/go_maps_view_controllers/go_map_predictions_view_controller.dart';
-import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_map_view_controller.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:get/get_core/src/get_main.dart';
 
-import '../../../custom_widgets/custom_button_widget.dart';
-import '../../../custom_widgets/custom_elevation_button_widget.dart';
-import '../../../custom_widgets/custom_header_widget.dart';
-import '../../../custom_widgets/custom_image_widget.dart';
-import '../../../custom_widgets/custom_name_widget.dart';
-import '../../../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
-import '../../common/common_text_form_field_widget.dart';
-import '../../res/app_utils.dart';
+import '../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
+import '../../view_models/controllers/go_maps_view_controllers/go_map_predictions_view_controller.dart';
 
 class GoMapPredictionsView extends StatefulWidget {
   const GoMapPredictionsView({super.key});

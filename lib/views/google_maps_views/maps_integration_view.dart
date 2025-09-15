@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_web_services_practice/custom_widgets/custom_google_maps_button_widget.dart';
+import 'package:flutter_api_web_services_practice/custom_widgets/google_map_widgets/custom_google_maps_button_widget.dart';
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_maps_integration_view_controller.dart';
 import 'package:get/get.dart';
 
-import '../../custom_widgets/custom_text_widget.dart';
+import '../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 
 class MapsIntegrationView extends StatefulWidget {
   const MapsIntegrationView({super.key});

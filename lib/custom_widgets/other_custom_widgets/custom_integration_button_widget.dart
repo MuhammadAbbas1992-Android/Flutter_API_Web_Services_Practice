@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../view_models/controllers/firebase_controllers/firebase_integration_view_controller.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_integration_view_controller.dart';
 import 'custom_text_widget.dart';
 
 class CustomIntegrationButtonWidget extends StatelessWidget {

@@ -3,7 +3,8 @@ import 'package:flutter_api_web_services_practice/res/constants/app_colors.dart'
 import 'package:flutter_api_web_services_practice/view_models/controllers/google_maps_controllers/google_map_view_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../custom_widgets/custom_text_widget.dart';
+
+import '../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 
 class CurrentLocationView extends StatefulWidget {
   const CurrentLocationView({super.key});

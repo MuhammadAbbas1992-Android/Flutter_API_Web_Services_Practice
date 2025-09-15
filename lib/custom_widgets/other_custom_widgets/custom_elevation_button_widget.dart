@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../common/common_text_widget.dart';
-import '../res/constants/app_colors.dart';
-import '../res/constants/app_fonts.dart';
-import '../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
+import '../../common/common_text_widget.dart';
+import '../../res/constants/app_colors.dart';
+import '../../res/constants/app_fonts.dart';
+import '../../view_models/controllers/firebase_controllers/firebase_core_controllers/add_image_view_controller.dart';
 
 class CommonElevationButtonWidget extends StatelessWidget {
   final String text;
