@@ -12,6 +12,17 @@ import '../../../models/picture_model.dart';
 import '../../../res/app_utils.dart';
 
 class FirebaseServices {
+  // Get Firebase or realtime database path for Stream Builder
+  static DatabaseReference? getFirebaseDBPath() {
+    try {
+      final DatabaseReference databaseReference =
+          FirebaseDatabase.instance.ref(AppConstants.firebaseDBName);
+      return databaseReference;
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Add a new Picture items into Firebase
   static Future<bool> addPicture(PictureModel pictureModel) async {
     final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();

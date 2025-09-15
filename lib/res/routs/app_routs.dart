@@ -16,6 +16,7 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_custom_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_l_v_separator_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_list_wheel_scroll_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_paginated_list_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_reorderable_list_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
@@ -197,6 +198,11 @@ class AppRouts {
     GetPage(
         name: RoutNames.homeCustomScrollViewAndSlivers,
         page: () => const HomeCustomScrollViewAndSlivers(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homePaginatedListView,
+        page: () => const HomePaginatedListView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 

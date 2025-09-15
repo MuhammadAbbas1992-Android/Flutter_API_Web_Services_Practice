@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_api_web_services_practice/view_models/services/firebase_services/firebase_services_stream_builder.dart';
 import 'package:get/get.dart';
 
 import '../../../../../models/picture_model.dart';
@@ -28,7 +27,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
   void loadProductsDataPath() {
     picturesList.clear();
     AppUtils.picturesList.clear();
-    final dbRef = FirebaseServicesStreamBuilder.getFirebaseDBPath();
+    final dbRef = FirebaseServices.getFirebaseDBPath();
 
     if (dbRef != null) {
       _dbRef = dbRef;

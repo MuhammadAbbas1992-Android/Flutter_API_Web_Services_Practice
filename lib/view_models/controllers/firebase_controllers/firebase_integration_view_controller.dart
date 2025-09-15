@@ -68,6 +68,11 @@ class FirebaseIntegrationViewController extends GetxController {
     Get.toNamed(RoutNames.homeCustomScrollViewAndSlivers);
   }
 
+  void showHomePaginatedListView(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.homePaginatedListView);
+  }
+
   void showHomeStreamBuilderWithGridViewBuilderView(int caseNo) {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.homeStreamBuilderGVBView);

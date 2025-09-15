@@ -215,35 +215,35 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         ),
                         const SizedBox(height: 10),
                         CustomIntegrationButtonWidget(
-                          caseNo: 14,
+                          caseNo: 15,
                           btnText: 'Home1',
                           categoryText: 'StreamBuilder by GridView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 15,
+                          caseNo: 16,
                           btnText: 'Home2',
                           categoryText: 'StreamBuilder by ListView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 16,
+                          caseNo: 17,
                           btnText: 'Home3',
                           categoryText: 'StreamBuilder by ListView.separator',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 17,
+                          caseNo: 18,
                           btnText: 'Home4',
                           categoryText: 'StreamBuilder by ListView.custom',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 18,
+                          caseNo: 19,
                           btnText: 'Home5',
                           categoryText: 'StreamBuilder by ListView.builder(H)',
                           firebaseIntegrationViewController:

@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-
+import 'package:flutter_api_web_services_practice/models/picture_model.dart';
 import 'package:get/get.dart';
-
 import '../../../../res/constants/app_constants.dart';
 
 class HomeGridViewController extends GetxController {
@@ -207,10 +206,11 @@ class HomeGridViewController extends GetxController {
     "Zambia",
     "Zimbabwe",
   ].obs;
-  RxList<dynamic> items = [].obs;
+  RxList<PictureModel> items = <PictureModel>[].obs;
   RxBool isLoading = false.obs;
   String? lastKey; // To keep track of pagination
   final int limit = 3; // Number of items per page
+  final int pageSize = 10;
 
   // Method to reorder items locally (and you can push update to Firebase here)
   void reorderCountries(int oldIndex, int newIndex) {
@@ -223,46 +223,38 @@ class HomeGridViewController extends GetxController {
     // print("ABC Reordered list: $countries");
   }
 
+  void toggle(bool value, int index) {
+    items[index].processed = value;
+    // items.refresh();
+  }
+
   Future<void> loadMoreData() async {
+    if (isLoading.value) return;
     isLoading.value = true;
 
-    print('ABC its working');
-    Query query = dbRef.orderByKey().limitToFirst(limit);
+    Query query = dbRef.orderByKey().limitToFirst(pageSize + 1);
+
     if (lastKey != null) {
-      // fetch from the last key onward
-      query = dbRef.orderByKey().startAt(lastKey).limitToFirst(limit + 1);
-      print('ABC inside if');
+      query = dbRef.orderByKey().startAfter(lastKey!).limitToFirst(pageSize);
     }
 
-    print('ABC outside if');
+    final snapshot = await query.get();
 
-    DatabaseEvent event = await query.once();
-    final snapshot = event.snapshot;
+    if (snapshot.exists) {
+      List<PictureModel> tempList = [];
 
-    print('ABC one');
-    if (snapshot.exists && snapshot.value is Map) {
-      final map = Map<String, dynamic>.from(snapshot.value as Map);
-      print('ABC one');
-
-      // Convert to list
-      final fetchedItems = map.entries.map((e) => e.value.toString()).toList();
-      print('ABC Two');
-
-      // If we already have items, skip the first one (duplicate of last page)
-      if (lastKey != null && fetchedItems.isNotEmpty) {
-        fetchedItems.removeAt(0);
-        print('ABC Three');
+      for (var childSnapshot in snapshot.children) {
+        final pictureModel = PictureModel.fromMap(
+            Map<String, dynamic>.from(childSnapshot.value as Map));
+        tempList.add(pictureModel);
       }
-      print('ABC Four');
 
-      items.addAll(fetchedItems);
-      print('ABC Five');
-
-      // update last key
-      lastKey = map.keys.last;
-      print('ABC Six');
+      if (tempList.isNotEmpty) {
+        lastKey = tempList.last.id;
+        items.addAll(tempList);
+      }
     }
-    print('ABC Seven');
+
     isLoading.value = false;
   }
 }

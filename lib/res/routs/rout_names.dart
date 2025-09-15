@@ -45,6 +45,7 @@ class RoutNames {
   static const String homeReorderableListView = '/home_reorderable_list_view';
   static const String homeCustomScrollViewAndSlivers =
       '/home_custom_scroll_view_and_slivers';
+  static const String homePaginatedListView = '/home_paginated_list_view';
 
   //Google Maps RoutNames
   static const String mapTypesView = '/map_types_view';
