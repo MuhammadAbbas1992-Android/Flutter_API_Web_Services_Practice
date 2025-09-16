@@ -33,7 +33,9 @@ class CustomButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          onPressed: () => addImageViewController.addUpdatePictureModel(),
+          onPressed: () => addImageViewController.firebaseDBType == 'realtimeDB'
+              ? addImageViewController.addUpdatePictureModelOnRealtimeDb()
+              : addImageViewController.addUpdatePictureModelOnCloudDb(),
           child: addImageViewController.isLoading.value
               ? const SizedBox(
                   width: 50,

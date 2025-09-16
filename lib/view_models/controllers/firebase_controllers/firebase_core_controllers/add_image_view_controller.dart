@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter_api_web_services_practice/view_models/services/firebase_services/firebase_services_for_cloud_db.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../models/picture_model.dart';
 import '../../../../res/app_utils.dart';
-import '../../../services/firebase_services/firebase_services.dart';
+import '../../../services/firebase_services/firebase_services_for_realtime_db.dart';
 
 class AddImageViewController extends GetxController {
   RxBool isLoading = false.obs;
@@ -15,13 +16,32 @@ class AddImageViewController extends GetxController {
   RxString imagePath = ''.obs;
   RxString imageUrl = ''.obs;
   late PictureModel? pictureModel;
+  String firebaseDBType = '';
 
   AddImageViewController() {
     final args = Get.arguments;
-    if (args != null && args is PictureModel) {
-      pictureModel = args;
-      imageUrl.value = pictureModel!.imageUrl;
-      imageName.value = pictureModel!.name;
+
+    if (args != null && args is Map<String, dynamic>) {
+      print('ABC arguments $args');
+      // Extract model
+      if (args['model'] != null && args['model'] is PictureModel) {
+        pictureModel = args['model'] as PictureModel;
+        imageUrl.value = pictureModel!.imageUrl;
+        imageName.value = pictureModel!.name;
+      } else {
+        pictureModel = null;
+      }
+
+      // Extract extra arguments
+      if (args.containsKey('realtimeDB')) {
+        firebaseDBType = args['realtimeDB'];
+        print('ABC FirebaseDB Type $firebaseDBType');
+      }
+
+      if (args.containsKey('cloudDB')) {
+        firebaseDBType = args['cloudDB'];
+        print('ABC FirebaseDB Type $firebaseDBType');
+      }
     } else {
       pictureModel = null;
     }
@@ -75,31 +95,50 @@ class AddImageViewController extends GetxController {
     return compressedFile;
   }
 
-  Future<void> addUpdatePictureModel() async {
+  //Firebase DB
+  Future<void> addUpdatePictureModelOnRealtimeDb() async {
     isLoading.value = true;
     //Each time it will work as u choose a new image from gallery
     if (imagePath.value.isNotEmpty) {
-      await FirebaseServices.checkImageStatusOnFirebaseStorage(
+      await FirebaseServicesForRealtimeDb.checkImageStatusOnFirebaseStorage(
               imagePath.value, imageUrl.value)
           .then((value) {
         if (value != null) {
           imageUrl.value = value;
-          savePictureModel();
+          savePictureModelOnRealtimeDb();
         } else {
           isLoading.value = !isLoading.value;
-          /*AppUtils.mySnackBar(
-              title: 'Error', message: 'Failed to upload image');*/
         }
       });
     }
   }
 
-  Future<void> savePictureModel() async {
+  //Cloud DB
+  Future<void> addUpdatePictureModelOnCloudDb() async {
+    isLoading.value = true;
+    //Each time it will work as u choose a new image from gallery
+    if (imagePath.value.isNotEmpty) {
+      await FirebaseServicesForCloudDb.checkImageStatusOnFirebaseStorage(
+              imagePath.value, imageUrl.value)
+          .then((value) {
+        if (value != null) {
+          print('ABC only picture uploaded');
+          imageUrl.value = value;
+          savePictureModelOnCloudDb();
+        } else {
+          isLoading.value = !isLoading.value;
+        }
+      });
+    }
+  }
+
+//Firebase DB
+  Future<void> savePictureModelOnRealtimeDb() async {
     if (pictureModel != null) {
       //Update PictureModel
       pictureModel!.imageUrl = imageUrl.value;
       pictureModel!.name = imageName.value;
-      if (await FirebaseServices.updatePicture(pictureModel!)) {
+      if (await FirebaseServicesForRealtimeDb.updatePicture(pictureModel!)) {
         isLoading.value = false;
         openHomeScreen();
         AppUtils.mySnackBar(
@@ -113,7 +152,40 @@ class AddImageViewController extends GetxController {
       //Add new PictureModel
       PictureModel model = PictureModel(
           name: imageName.value, imageUrl: imageUrl.value, processed: false);
-      if (await FirebaseServices.addPicture(model)) {
+      if (await FirebaseServicesForCloudDb.addPicture(model)) {
+        isLoading.value = false;
+        openHomeScreen();
+        AppUtils.mySnackBar(
+            title: 'Success', message: 'Picture Model saved successfully');
+      } else {
+        isLoading.value = false;
+        AppUtils.mySnackBar(
+            title: 'Error', message: 'Failed to save Picture Model');
+      }
+    }
+  }
+
+  //Cloud DB
+  Future<void> savePictureModelOnCloudDb() async {
+    if (pictureModel != null) {
+      //Update PictureModel
+      pictureModel!.imageUrl = imageUrl.value;
+      pictureModel!.name = imageName.value;
+      if (await FirebaseServicesForCloudDb.updatePicture(pictureModel!)) {
+        isLoading.value = false;
+        openHomeScreen();
+        AppUtils.mySnackBar(
+            title: 'Success', message: 'Picture Model updated successfully');
+      } else {
+        isLoading.value = false;
+        AppUtils.mySnackBar(
+            title: 'Error', message: 'Failed to update Picture Model');
+      }
+    } else {
+      //Add new PictureModel
+      PictureModel model = PictureModel(
+          name: imageName.value, imageUrl: imageUrl.value, processed: false);
+      if (await FirebaseServicesForCloudDb.addPicture(model)) {
         isLoading.value = false;
         openHomeScreen();
         AppUtils.mySnackBar(

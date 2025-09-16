@@ -1,19 +1,19 @@
 import 'dart:async';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_api_web_services_practice/view_models/services/firebase_services/firebase_services_for_cloud_db.dart';
 import 'package:get/get.dart';
 
 import '../../../../../models/picture_model.dart';
 import '../../../../../res/app_utils.dart';
 import '../../../../../res/routs/rout_names.dart';
-import '../../../../services/firebase_services/firebase_services_for_realtime_db.dart';
 
-class HomeDbRealtimeSBViewController extends GetxController {
+class HomeDbCloudSBViewController extends GetxController {
   RxBool isAllData = true.obs;
   RxList<PictureModel> picturesList = <PictureModel>[].obs;
   RxList<PictureModel> processedUnprocessedList = <PictureModel>[].obs;
-  DatabaseReference? _dbRef;
+  CollectionReference<Map<String, dynamic>>? _collectionRef;
 
   @override
   void onInit() {
@@ -21,53 +21,51 @@ class HomeDbRealtimeSBViewController extends GetxController {
     loadProductsDataPath();
   }
 
-  // Expose the stream so UI can use it
-  Stream<DatabaseEvent>? get dbRefStream => _dbRef?.onValue;
+  Stream<QuerySnapshot<Map<String, dynamic>>>? get collectionRef =>
+      _collectionRef?.snapshots();
 
   void loadProductsDataPath() {
     picturesList.clear();
     AppUtils.picturesList.clear();
-    final dbRef = FirebaseServicesForRealtimeDb.getFirebaseDBRef();
+    final collectionRef =
+        FirebaseServicesForCloudDb.getFirestoreCollectionRef();
 
-    if (dbRef != null) {
-      _dbRef = dbRef;
+    if (collectionRef != null) {
+      _collectionRef = collectionRef;
+      // Listen for firestore or Cloud DB changes incrementally, modified or removed
+      _collectionRef!.snapshots().listen((snapshot) {
+        for (var change in snapshot.docChanges) {
+          final data = change.doc.data() as Map<String, dynamic>;
+          final pictureModel = PictureModel.fromMap(data)..id = change.doc.id;
 
-      // Listen for database changes incrementally
-      _dbRef!.onChildAdded.listen((event) {
-        final pictureModel = PictureModel.fromMap(
-            Map<String, dynamic>.from(event.snapshot.value as Map));
-        // Add only if not already present
-        if (!picturesList.any((p) => p.id == pictureModel.id)) {
-          picturesList.add(pictureModel);
-          AppUtils.picturesList.add(pictureModel);
+          if (change.type == DocumentChangeType.added) {
+            if (!picturesList.any((p) => p.id == pictureModel.id)) {
+              picturesList.add(pictureModel);
+              AppUtils.picturesList.add(pictureModel);
+            }
+          } else if (change.type == DocumentChangeType.modified) {
+            final index =
+                picturesList.indexWhere((p) => p.id == pictureModel.id);
+            if (index != -1) {
+              picturesList[index] = pictureModel;
+              AppUtils.picturesList[index] = pictureModel;
+            }
+          } else if (change.type == DocumentChangeType.removed) {
+            picturesList.removeWhere((p) => p.id == pictureModel.id);
+            AppUtils.picturesList.removeWhere((p) => p.id == pictureModel.id);
+          }
         }
-      });
-
-      _dbRef!.onChildChanged.listen((event) {
-        final updatedModel = PictureModel.fromMap(
-            Map<String, dynamic>.from(event.snapshot.value as Map));
-        final index = picturesList.indexWhere((p) => p.id == updatedModel.id);
-        if (index != -1) {
-          picturesList[index] = updatedModel;
-          AppUtils.picturesList[index] = updatedModel;
-        }
-      });
-
-      _dbRef!.onChildRemoved.listen((event) {
-        final removedId = event.snapshot.key;
-        picturesList.removeWhere((p) => p.id == removedId);
-        AppUtils.picturesList.removeWhere((p) => p.id == removedId);
       });
     }
   }
 
   // We no longer need to rebuild the whole list inside StreamBuilder
-  void getPicturesData(AsyncSnapshot<DatabaseEvent> snapshot) {
+  void getPicturesData(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
     // Optional: Only used for initial snapshot if list is empty
     if (picturesList.isEmpty && snapshot.hasData) {
-      for (var childSnapshot in snapshot.data!.snapshot.children) {
+      for (var childSnapshot in snapshot.data!.docs) {
         final pictureModel = PictureModel.fromMap(
-            Map<String, dynamic>.from(childSnapshot.value as Map));
+            Map<String, dynamic>.from(childSnapshot as Map));
         picturesList.add(pictureModel);
         AppUtils.picturesList.add(pictureModel);
       }
@@ -77,7 +75,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
   Future<void> addPicture(PictureModel? model) async {
     bool response = await Get.toNamed(RoutNames.addImageView, arguments: {
       'model': model,
-      'realtimeDB': 'realtimeDB',
+      'cloudDB': 'cloudDB',
     });
   }
 
@@ -129,7 +127,6 @@ class HomeDbRealtimeSBViewController extends GetxController {
         }
         break;
     }
-    // isLoading.value = !isLoading.value;
   }
 
   Future<void> openFullPictureView(int id) async {
@@ -138,7 +135,7 @@ class HomeDbRealtimeSBViewController extends GetxController {
 
   Future<void> deleteItem(int index) async {
     // isLoading.value = true;
-    if (await FirebaseServicesForRealtimeDb.deletePicture(index)) {
+    if (await FirebaseServicesForCloudDb.deletePicture(index)) {
       // isLoading.value = false;
       AppUtils.mySnackBar(
           title: 'Message', message: 'Picture item deleted successfully');

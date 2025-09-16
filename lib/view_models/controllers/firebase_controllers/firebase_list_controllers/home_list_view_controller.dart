@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../models/picture_model.dart';
 import '../../../../../res/app_utils.dart';
 import '../../../../../res/routs/rout_names.dart';
-import '../../../services/firebase_services/firebase_services.dart';
+import '../../../services/firebase_services/firebase_services_for_realtime_db.dart';
 
 class HomeListViewController extends GetxController {
   RxBool isLoading = false.obs;
@@ -19,7 +19,7 @@ class HomeListViewController extends GetxController {
 
   Future<void> loadProductsData() async {
     isLoading.value = true;
-    await FirebaseServices.getPictureData().then(
+    await FirebaseServicesForRealtimeDb.getPictureData().then(
       (value) {
         isLoading.value = !isLoading.value;
         if (value != null) {
@@ -94,7 +94,7 @@ class HomeListViewController extends GetxController {
 
   Future<void> deleteItem(int index) async {
     isLoading.value = true;
-    if (await FirebaseServices.deletePicture(index)) {
+    if (await FirebaseServicesForRealtimeDb.deletePicture(index)) {
       await loadProductsData();
       isLoading.value = false;
       AppUtils.mySnackBar(

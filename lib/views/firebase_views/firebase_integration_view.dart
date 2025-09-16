@@ -275,23 +275,37 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         ),
                         const SizedBox(height: 10),
                         CustomIntegrationButtonWidget(
-                          caseNo: 1,
-                          btnText: 'Login',
-                          categoryText: 'Login User',
+                          caseNo: 20,
+                          btnText: 'Home1',
+                          categoryText: 'StreamBuilder by GridView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 2,
-                          btnText: 'Sing up',
-                          categoryText: 'Sign up user',
+                          caseNo: 21,
+                          btnText: 'Home2',
+                          categoryText: 'StreamBuilder by ListView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
-                          caseNo: 3,
-                          btnText: 'Sign in with email link',
-                          categoryText: 'Sign in with email link',
+                          caseNo: 22,
+                          btnText: 'Home3',
+                          categoryText: 'StreamBuilder by ListView.separator',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 23,
+                          btnText: 'Home4',
+                          categoryText: 'StreamBuilder by ListView.custom',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 24,
+                          btnText: 'Home5',
+                          categoryText: 'StreamBuilder by ListView.builder(H)',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),

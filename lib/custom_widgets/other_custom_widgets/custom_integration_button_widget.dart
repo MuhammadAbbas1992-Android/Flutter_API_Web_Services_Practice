@@ -102,6 +102,31 @@ class CustomIntegrationButtonWidget extends StatelessWidget {
                       ?.showHomeStreamBuilderWithListViewBuilderWithHorizontalView(
                           caseNo);
                   break;
+                case 20:
+                  firebaseIntegrationViewController
+                      ?.showHomeCloudStreamBuilderWithGridViewBuilderView(
+                          caseNo);
+                  break;
+                case 21:
+                  firebaseIntegrationViewController
+                      ?.showHomeCloudStreamBuilderWithListViewBuilderView(
+                          caseNo);
+                  break;
+                case 22:
+                  firebaseIntegrationViewController
+                      ?.showHomeCloudStreamBuilderWithListViewBuilderSeparatorView(
+                          caseNo);
+                  break;
+                case 23:
+                  firebaseIntegrationViewController
+                      ?.showHomeCloudStreamBuilderWithListViewBuilderCustomView(
+                          caseNo);
+                  break;
+                case 24:
+                  firebaseIntegrationViewController
+                      ?.showHomeCloudStreamBuilderWithListViewBuilderWithHorizontalView(
+                          caseNo);
+                  break;
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

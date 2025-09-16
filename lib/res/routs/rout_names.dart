@@ -20,19 +20,7 @@ class RoutNames {
   static const String addImageView = '/add_image_view';
   static const String fullPictureView = '/full_picture_view';
 
-  //Firebase Database or Realtime Database RoutNames
-  static const String homeStreamBuilderGVBView =
-      '/home_stream_builder_g_v_b_view';
-  static const String homeStreamBuilderLVBView =
-      '/home_stream_builder_l_v_b_view';
-  static const String homeStreamBuilderLVBSeparatorView =
-      '/home_stream_builder_l_v_b_separator_view';
-  static const String homeStreamBuilderLVBCustomView =
-      '/home_stream_builder_l_v_b_custom_view';
-  static const String homeStreamBuilderLVBWithHorizontalView =
-      '/home_stream_builder_l_v_b_with_horizontal_view';
-
-  //Firebase Data View Types
+//Firebase Data View Types
   static const String homeGVBuilderView = '/home_g_v_builder_view';
   static const String homeGVCountView = '/home_g_v_count_view';
   static const String homeGVExtendView = '/home_g_v_extend_view';
@@ -46,6 +34,30 @@ class RoutNames {
   static const String homeCustomScrollViewAndSlivers =
       '/home_custom_scroll_view_and_slivers';
   static const String homePaginatedListView = '/home_paginated_list_view';
+
+  //Firebase Database or Realtime Database RoutNames
+  static const String homeStreamBuilderGVBView =
+      '/home_stream_builder_g_v_b_view';
+  static const String homeStreamBuilderLVBView =
+      '/home_stream_builder_l_v_b_view';
+  static const String homeStreamBuilderLVBSeparatorView =
+      '/home_stream_builder_l_v_b_separator_view';
+  static const String homeStreamBuilderLVBCustomView =
+      '/home_stream_builder_l_v_b_custom_view';
+  static const String homeStreamBuilderLVBWithHorizontalView =
+      '/home_stream_builder_l_v_b_with_horizontal_view';
+
+  //Firebase Firestore or Cloud Collection RoutNames
+  static const String homeCloudStreamBuilderGVBView =
+      '/home_cloud_stream_builder_g_v_b_view';
+  static const String homeCloudStreamBuilderLVBView =
+      '/home_cloud_stream_builder_l_v_b_view';
+  static const String homeCloudStreamBuilderLVBSeparatorView =
+      '/home_cloud_stream_builder_l_v_b_separator_view';
+  static const String homeCloudStreamBuilderLVBCustomView =
+      '/home_cloud_stream_builder_l_v_b_custom_view';
+  static const String homeCloudStreamBuilderLVBWithHorizontalView =
+      '/home_cloud_stream_builder_l_v_b_with_horizontal_view';
 
   //Google Maps RoutNames
   static const String mapTypesView = '/map_types_view';

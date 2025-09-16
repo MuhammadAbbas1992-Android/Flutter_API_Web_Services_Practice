@@ -6,6 +6,11 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_l_v_b_separator_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_l_v_b_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/database_or_realtime_views/home_stream_builder_l_v_b_with_horizontal_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/firestore_or_cloud_views/home_cloud_stream_builder_g_v_b_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/firestore_or_cloud_views/home_cloud_stream_builder_l_v_b_custom_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/firestore_or_cloud_views/home_cloud_stream_builder_l_v_b_separator_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/firestore_or_cloud_views/home_cloud_stream_builder_l_v_b_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/firestore_or_cloud_views/home_cloud_stream_builder_l_v_b_with_horizontal_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_core_views/full_picture_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_custom_scroll_view_and_slivers.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_g_v_builder_view.dart';
@@ -121,33 +126,6 @@ class AppRouts {
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 
-    //Firebase Database or Realtime Database Routs
-    GetPage(
-        name: RoutNames.homeStreamBuilderGVBView,
-        page: () => const HomeStreamBuilderGVBView(),
-        transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
-    GetPage(
-        name: RoutNames.homeStreamBuilderLVBView,
-        page: () => const HomeStreamBuilderLVBView(),
-        transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
-    GetPage(
-        name: RoutNames.homeStreamBuilderLVBSeparatorView,
-        page: () => const HomeStreamBuilderLVBSeparatorView(),
-        transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
-    GetPage(
-        name: RoutNames.homeStreamBuilderLVBCustomView,
-        page: () => const HomeStreamBuilderLVBCustomView(),
-        transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
-    GetPage(
-        name: RoutNames.homeStreamBuilderLVBWithHorizontalView,
-        page: () => const HomeStreamBuilderLVBWithHorizontalView(),
-        transitionDuration: const Duration(milliseconds: 250),
-        transition: Transition.leftToRightWithFade),
-
     //Firebase Data View Types
     GetPage(
         name: RoutNames.homeGVBuilderView,
@@ -203,6 +181,60 @@ class AppRouts {
     GetPage(
         name: RoutNames.homePaginatedListView,
         page: () => const HomePaginatedListView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
+    //Firebase Database or Realtime Database Routs
+    GetPage(
+        name: RoutNames.homeStreamBuilderGVBView,
+        page: () => const HomeStreamBuilderGVBView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeStreamBuilderLVBView,
+        page: () => const HomeStreamBuilderLVBView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeStreamBuilderLVBSeparatorView,
+        page: () => const HomeStreamBuilderLVBSeparatorView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeStreamBuilderLVBCustomView,
+        page: () => const HomeStreamBuilderLVBCustomView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeStreamBuilderLVBWithHorizontalView,
+        page: () => const HomeStreamBuilderLVBWithHorizontalView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
+    //Firebase Firestore or Cloud Collection RoutNames
+    GetPage(
+        name: RoutNames.homeCloudStreamBuilderGVBView,
+        page: () => const HomeCloudStreamBuilderGVBView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeCloudStreamBuilderLVBView,
+        page: () => const HomeCloudStreamBuilderLVBView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeCloudStreamBuilderLVBSeparatorView,
+        page: () => const HomeCloudStreamBuilderLVBSeparatorView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeCloudStreamBuilderLVBCustomView,
+        page: () => const HomeCloudStreamBuilderLVBCustomView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+    GetPage(
+        name: RoutNames.homeCloudStreamBuilderLVBWithHorizontalView,
+        page: () => const HomeCloudStreamBuilderLVBWithHorizontalView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 

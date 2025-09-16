@@ -1,92 +1,51 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_api_web_services_practice/res/constants/app_constants.dart';
 
-import '../../../data/exceptions/app_exceptions.dart';
 import '../../../models/picture_model.dart';
 import '../../../res/app_utils.dart';
 
-class FirebaseServices {
-  // Get Firebase or realtime database path for Stream Builder
-  static DatabaseReference? getFirebaseDBPath() {
+class FirebaseServicesForCloudDb {
+  // Get Firestore collection reference for StreamBuilder
+  static CollectionReference<Map<String, dynamic>>?
+      getFirestoreCollectionRef() {
     try {
-      final DatabaseReference databaseReference =
-          FirebaseDatabase.instance.ref(AppConstants.firebaseDBName);
-      return databaseReference;
+      final CollectionReference<Map<String, dynamic>> collectionReference =
+          FirebaseFirestore.instance
+              .collection(AppConstants.firestoreReferenceName);
+      return collectionReference;
     } catch (e) {
       return null;
     }
   }
 
-  // Add a new Picture items into Firebase
+  // Add a new Picture item into Firestore or on Cloud database
   static Future<bool> addPicture(PictureModel pictureModel) async {
-    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
-
     try {
-      final pictureModelRef =
-          databaseReference.child(AppConstants.firebaseDBName).push();
-      pictureModel.id = pictureModelRef.key!;
-      await pictureModelRef.set(pictureModel.toMap());
+      final collectionRef = FirebaseFirestore.instance
+          .collection(AppConstants.firestoreReferenceName);
+
+      // Create a new document with auto-generated ID
+      final docRef = collectionRef.doc();
+      pictureModel.id = docRef.id; // assign generated ID
+      await docRef.set(pictureModel.toMap());
       return true;
     } catch (e) {
       return false;
-    }
-  }
-
-  // Retrieve all Picture items from Firebase
-  static Future<List<PictureModel>?> getPictureData() async {
-    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
-    List<PictureModel> pictureList = <PictureModel>[];
-    try {
-      await databaseReference.child(AppConstants.firebaseDBName).get().then(
-        (value) {
-          if (value.exists) {
-            for (var childSnapshot in value.children) {
-              final pictureModel = PictureModel.fromMap(
-                  Map<String, dynamic>.from(childSnapshot.value as Map));
-              pictureList.add(pictureModel);
-            }
-          }
-        },
-      );
-      return pictureList;
-    } catch (e) {
-      return null;
     }
   }
 
   // Update Picture item into Firebase
   static Future<bool> updatePicture(PictureModel pictureModel) async {
-    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
-
+    final CollectionReference<Map<String, dynamic>> collectionRef =
+        FirebaseFirestore.instance
+            .collection(AppConstants.firestoreReferenceName);
     try {
-      await databaseReference
-          .child(AppConstants.firebaseDBName)
-          .child(pictureModel.id!)
-          .update(pictureModel.toMap());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  // Delete Picture item from Firebase
-  static Future<bool> deletePicture(int index) async {
-    String imageUrl = AppUtils.picturesList[index].imageUrl;
-    if (imageUrl.isNotEmpty) {
-      _deleteImage(imageUrl);
-    }
-    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
-    try {
-      await databaseReference
-          .child(AppConstants.firebaseDBName)
-          .child(AppUtils.picturesList[index].id!)
-          .remove();
+      // Update document by id
+      await collectionRef.doc(pictureModel.id).update(pictureModel.toMap());
       return true;
     } catch (e) {
       return false;
@@ -115,6 +74,24 @@ class FirebaseServices {
       } else {
         return null;
       }
+    }
+  }
+
+  // Delete Picture item from Firebase
+  static Future<bool> deletePicture(int index) async {
+    String imageUrl = AppUtils.picturesList[index].imageUrl;
+    if (imageUrl.isNotEmpty) {
+      _deleteImage(imageUrl);
+    }
+    final CollectionReference<Map<String, dynamic>> collectionRef =
+        FirebaseFirestore.instance
+            .collection(AppConstants.firestoreReferenceName);
+    try {
+      // Delete document by id
+      await collectionRef.doc(AppUtils.picturesList[index].id).delete();
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
