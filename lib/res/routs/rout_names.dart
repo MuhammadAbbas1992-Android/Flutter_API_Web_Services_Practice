@@ -1,4 +1,5 @@
 class RoutNames {
+  static const String splashView = '/splash_view';
   static const String dashboardView = '/dashboard_view';
 
   //REST APIs Integration RoutNames

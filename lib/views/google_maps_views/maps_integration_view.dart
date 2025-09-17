@@ -4,6 +4,7 @@ import 'package:flutter_api_web_services_practice/view_models/controllers/google
 import 'package:get/get.dart';
 
 import '../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
+import '../../res/constants/app_colors.dart';
 
 class MapsIntegrationView extends StatefulWidget {
   const MapsIntegrationView({super.key});
@@ -40,6 +41,7 @@ class _MapsIntegrationViewState extends State<MapsIntegrationView> {
             text: 'Google Maps Integration',
           )),
           backgroundColor: Colors.blue.shade500,
+          iconTheme: IconThemeData(color: AppColors.white),
         ),
         body: SingleChildScrollView(
           child: Padding(

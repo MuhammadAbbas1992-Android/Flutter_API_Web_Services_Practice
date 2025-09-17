@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../custom_widgets/other_custom_widgets/custom_text_widget.dart';
 import '../../custom_widgets/rest_api_widgets/rest_api_widget.dart';
 import '../../res/app_utils.dart';
+import '../../res/constants/app_colors.dart';
 import '../../view_models/controllers/rest_apis_controllers/get_api_controller.dart';
 import '../../view_models/controllers/rest_apis_controllers/post_put_patch_delete_api_controller.dart';
 import '../../view_models/controllers/rest_apis_controllers/rest_api_integration_view_controller.dart';
@@ -50,6 +51,7 @@ class _RestApiIntegrationViewState extends State<RestApiIntegrationView> {
             text: 'REST APIs Integration',
           )),
           backgroundColor: Colors.blue.shade500,
+          iconTheme: IconThemeData(color: AppColors.white),
         ),
         body: SingleChildScrollView(
           child: Padding(

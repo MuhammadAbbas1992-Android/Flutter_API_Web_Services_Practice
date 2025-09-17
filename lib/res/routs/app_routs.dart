@@ -40,6 +40,7 @@ import 'package:flutter_api_web_services_practice/views/google_maps_views/map_ca
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_types/map_types_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/maps_integration_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/share_current_location_view.dart';
+import 'package:flutter_api_web_services_practice/views/splash_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import '../../views/firebase_views/firebase_authentications_views/forgot_reset_password_view.dart';
@@ -55,8 +56,13 @@ import '../../views/rest_apis_views/rest_api_integration_view.dart';
 
 class AppRouts {
   AppRouts._();
-  static String initial = RoutNames.dashboardView;
+  static String initial = RoutNames.splashView;
   static final appRouts = [
+    GetPage(
+        name: RoutNames.splashView,
+        page: () => const SplashView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
     GetPage(
         name: RoutNames.dashboardView,
         page: () => const DashboardView(),

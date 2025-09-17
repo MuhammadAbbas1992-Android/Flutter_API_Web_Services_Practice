@@ -44,16 +44,18 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
             text: 'Firebase Integration',
           )),
           backgroundColor: Colors.blue.shade500,
+          iconTheme: IconThemeData(color: AppColors.white),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.all(5),
             child: Column(
               children: [
                 Card(
                   color: AppColors.tinGrey,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 10.0),
                     child: Column(
                       children: [
                         const CustomTextWidget(
@@ -79,7 +81,7 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 3,
-                          btnText: 'Sign in with email link',
+                          btnText: 'Sign in',
                           categoryText: 'Sign in with email link',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
@@ -94,7 +96,8 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                 Card(
                   color: AppColors.tinGrey,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 10.0),
                     child: Column(
                       children: [
                         const CustomTextWidget(
@@ -104,7 +107,8 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           fontFamily: AppFonts.poppinsBold,
                         ),
                         const CustomTextWidget(
-                          text: '(Realtime Database as children)',
+                          text: '(Realtime Database \nas children)',
+                          textAlign: TextAlign.center,
                           color: AppColors.black,
                           size: 20,
                           fontFamily: AppFonts.poppinsBold,
@@ -197,7 +201,8 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                 Card(
                   color: AppColors.tinGrey,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 10.0),
                     child: Column(
                       children: [
                         const CustomTextWidget(
@@ -207,7 +212,9 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           fontFamily: AppFonts.poppinsBold,
                         ),
                         const CustomTextWidget(
-                          text: '(Realtime Database as children)',
+                          text:
+                              '(Realtime Database \nas children)\n using StreamBuilder',
+                          textAlign: TextAlign.center,
                           color: AppColors.black,
                           size: 20,
                           fontFamily: AppFonts.poppinsBold,
@@ -216,35 +223,36 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         CustomIntegrationButtonWidget(
                           caseNo: 15,
                           btnText: 'Home1',
-                          categoryText: 'StreamBuilder by GridView.builder',
+                          categoryText: 'GridView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 16,
                           btnText: 'Home2',
-                          categoryText: 'StreamBuilder by ListView.builder',
+                          categoryText: ''
+                              'ListView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 17,
                           btnText: 'Home3',
-                          categoryText: 'StreamBuilder by ListView.separator',
+                          categoryText: 'ListView.separator',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 18,
                           btnText: 'Home4',
-                          categoryText: 'StreamBuilder by ListView.custom',
+                          categoryText: 'ListView.custom',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 19,
                           btnText: 'Home5',
-                          categoryText: 'StreamBuilder by ListView.builder(H)',
+                          categoryText: 'ListView.builder(H)',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
@@ -258,7 +266,8 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                 Card(
                   color: AppColors.tinGrey,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 10.0),
                     child: Column(
                       children: [
                         const CustomTextWidget(
@@ -268,7 +277,9 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           fontFamily: AppFonts.poppinsBold,
                         ),
                         const CustomTextWidget(
-                          text: '(Cloud Firestore as collection)',
+                          text:
+                              '(Cloud Firestore \nas collection)\nusing StreamBuilder',
+                          textAlign: TextAlign.center,
                           color: AppColors.black,
                           size: 20,
                           fontFamily: AppFonts.poppinsBold,
@@ -277,35 +288,35 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                         CustomIntegrationButtonWidget(
                           caseNo: 20,
                           btnText: 'Home1',
-                          categoryText: 'StreamBuilder by GridView.builder',
+                          categoryText: 'GridView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 21,
                           btnText: 'Home2',
-                          categoryText: 'StreamBuilder by ListView.builder',
+                          categoryText: 'ListView.builder',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 22,
                           btnText: 'Home3',
-                          categoryText: 'StreamBuilder by ListView.separator',
+                          categoryText: 'ListView.separator',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 23,
                           btnText: 'Home4',
-                          categoryText: 'StreamBuilder by ListView.custom',
+                          categoryText: 'ListView.custom',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
                         CustomIntegrationButtonWidget(
                           caseNo: 24,
                           btnText: 'Home5',
-                          categoryText: 'StreamBuilder by ListView.builder(H)',
+                          categoryText: 'ListView.builder(H)',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
