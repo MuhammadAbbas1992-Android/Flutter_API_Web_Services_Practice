@@ -60,6 +60,9 @@ class RoutNames {
   static const String homeCloudStreamBuilderLVBWithHorizontalView =
       '/home_cloud_stream_builder_l_v_b_with_horizontal_view';
 
+  //Firebase Messaging or Cloud Messaging RoutNames
+  static const String messagingExampleView = '/messaging_example_view';
+
   //Google Maps RoutNames
   static const String mapTypesView = '/map_types_view';
   static const String mapsIntegrationViews = '/maps_integration_view';

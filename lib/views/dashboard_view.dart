@@ -74,7 +74,7 @@ class _DashboardViewState extends State<DashboardView> {
                             btnText: 'Go Maps',
                             integrationType: 4,
                             dashboardViewController: homeScreenController,
-                          )
+                          ),
                         ])))));
   }
 }

@@ -59,30 +59,23 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                     child: Column(
                       children: [
                         const CustomTextWidget(
-                          text: 'Firebase Auth',
+                          text: 'Firebase Messaging',
                           color: AppColors.black,
                           size: 30,
                           fontFamily: AppFonts.poppinsBold,
                         ),
+                        const CustomTextWidget(
+                          text: '(Firebase Notification\nMessages',
+                          textAlign: TextAlign.center,
+                          color: AppColors.black,
+                          size: 20,
+                          fontFamily: AppFonts.poppinsBold,
+                        ),
                         const SizedBox(height: 10),
                         CustomIntegrationButtonWidget(
-                          caseNo: 1,
-                          btnText: 'Login',
-                          categoryText: 'Login User',
-                          firebaseIntegrationViewController:
-                              firebaseIntegrationScreenController,
-                        ),
-                        CustomIntegrationButtonWidget(
-                          caseNo: 2,
-                          btnText: 'Sing up',
-                          categoryText: 'Sign up user',
-                          firebaseIntegrationViewController:
-                              firebaseIntegrationScreenController,
-                        ),
-                        CustomIntegrationButtonWidget(
-                          caseNo: 3,
-                          btnText: 'Sign in',
-                          categoryText: 'Sign in with email link',
+                          caseNo: 25,
+                          btnText: 'Home1',
+                          categoryText: 'Notification Example',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),
@@ -317,6 +310,48 @@ class _FirebaseIntegrationViewState extends State<FirebaseIntegrationView> {
                           caseNo: 24,
                           btnText: 'Home5',
                           categoryText: 'ListView.builder(H)',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Card(
+                  color: AppColors.tinGrey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 10.0),
+                    child: Column(
+                      children: [
+                        const CustomTextWidget(
+                          text: 'Firebase Auth',
+                          color: AppColors.black,
+                          size: 30,
+                          fontFamily: AppFonts.poppinsBold,
+                        ),
+                        const SizedBox(height: 10),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 1,
+                          btnText: 'Login',
+                          categoryText: 'Login User',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 2,
+                          btnText: 'Sing up',
+                          categoryText: 'Sign up user',
+                          firebaseIntegrationViewController:
+                              firebaseIntegrationScreenController,
+                        ),
+                        CustomIntegrationButtonWidget(
+                          caseNo: 3,
+                          btnText: 'Sign in',
+                          categoryText: 'Sign in with email link',
                           firebaseIntegrationViewController:
                               firebaseIntegrationScreenController,
                         ),

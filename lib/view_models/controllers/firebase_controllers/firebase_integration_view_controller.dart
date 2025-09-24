@@ -123,4 +123,9 @@ class FirebaseIntegrationViewController extends GetxController {
     AppUtils.caseNo = caseNo;
     Get.toNamed(RoutNames.homeCloudStreamBuilderLVBWithHorizontalView);
   }
+
+  void showMessagingExampleView(int caseNo) {
+    AppUtils.caseNo = caseNo;
+    Get.toNamed(RoutNames.messagingExampleView);
+  }
 }

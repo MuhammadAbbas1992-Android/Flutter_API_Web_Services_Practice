@@ -23,6 +23,7 @@ import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_list_wheel_scroll_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_paginated_list_view.dart';
 import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_list_views/home_reorderable_list_view.dart';
+import 'package:flutter_api_web_services_practice/views/firebase_views/firebase_messaging_views/messaging_example_view.dart';
 import 'package:flutter_api_web_services_practice/views/go_maps_views/go_map_predictions_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/current_location_view.dart';
 import 'package:flutter_api_web_services_practice/views/google_maps_views/map_categories/all_in_one_category/address_all_category_view.dart';
@@ -241,6 +242,13 @@ class AppRouts {
     GetPage(
         name: RoutNames.homeCloudStreamBuilderLVBWithHorizontalView,
         page: () => const HomeCloudStreamBuilderLVBWithHorizontalView(),
+        transitionDuration: const Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade),
+
+    //Firebase Messaging or Cloud Messaging RoutNames
+    GetPage(
+        name: RoutNames.messagingExampleView,
+        page: () => const MessagingExampleView(),
         transitionDuration: const Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade),
 
